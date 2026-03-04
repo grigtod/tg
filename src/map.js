@@ -326,7 +326,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   const infoPages = {
     credits: "./embeds/info-credits.html",
-    coffee: "./embeds/info-coffee.html",
     feature: "./embeds/info-feature.html"
   };
   let activeInfoPage = "credits";
@@ -334,7 +333,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   function setInfoTab(activeKey) {
     const tabMap = {
       credits: ui.infoCreditsBtn,
-      coffee: ui.infoCoffeeBtn,
       feature: ui.infoFeatureBtn
     };
 
@@ -386,7 +384,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     ui.poiOverlayClose.textContent = i18n.t("app.poi.cancel", "Cancel");
     ui.infoOverlayClose.textContent = i18n.t("app.info.close", "Close");
     ui.infoCreditsBtn.textContent = i18n.t("app.info.tabs.credits", "Credits");
-    ui.infoCoffeeBtn.textContent = i18n.t("app.info.tabs.coffee", "Donate");
     ui.infoFeatureBtn.textContent = i18n.t("app.info.tabs.feature", "Contact");
     ui.dismissBannerBtn.textContent = i18n.t("app.location.dismiss", "Dismiss");
 
@@ -425,7 +422,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   ui.infoOverlayClose.addEventListener("click", closeInfoOverlay);
   ui.infoCreditsBtn.addEventListener("click", () => openInfoPage("credits"));
-  ui.infoCoffeeBtn.addEventListener("click", () => openInfoPage("coffee"));
   ui.infoFeatureBtn.addEventListener("click", () => openInfoPage("feature"));
 
   ui.toggleImageOverlayBtn.addEventListener("click", () => {

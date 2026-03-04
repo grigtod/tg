@@ -41,7 +41,6 @@
       "close": "Schließen",
       "tabs": {
         "credits": "Credits",
-        "coffee": "Spenden",
         "feature": "Kontakt"
       }
     }
@@ -93,15 +92,6 @@
       "asset3": "Asset 03: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum lacus at purus auctor, ut molestie purus vulputate.",
       "asset4": "Asset 04: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel est et metus volutpat commodo at eget felis.",
       "asset5": "Asset 05: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas bibendum risus ac ligula ultrices, nec consequat justo pharetra."
-    },
-    "coffee": {
-      "title": "Spenden",
-      "body": "Wenn dir diese Karten-Erfahrung gefällt und du zukünftige Updates unterstützen möchtest, kannst du über die Optionen unten beitragen.",
-      "hint": "Diese Buttons sind aktuell Platzhalter und noch nicht verbunden.",
-      "donate2": "2 $ spenden",
-      "donate5": "5 $ spenden",
-      "donate10": "10 $ spenden",
-      "custom": "Eigener Betrag"
     },
     "feature": {
       "title": "Funktion vorschlagen",

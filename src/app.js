@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     infoOverlayFrame: id("infoOverlayFrame"),
     infoOverlayClose: id("infoOverlayClose"),
     infoCreditsBtn: id("infoCreditsBtn"),
-    infoCoffeeBtn: id("infoCoffeeBtn"),
     infoFeatureBtn: id("infoFeatureBtn"),
 
     // banners
