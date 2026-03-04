@@ -41,7 +41,6 @@
       "close": "Zamknij",
       "tabs": {
         "credits": "Podziękowania",
-        "coffee": "Wesprzyj",
         "feature": "Kontakt"
       }
     }
@@ -93,15 +92,6 @@
       "asset3": "Zasób 03: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum lacus at purus auctor, ut molestie purus vulputate.",
       "asset4": "Zasób 04: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel est et metus volutpat commodo at eget felis.",
       "asset5": "Zasób 05: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas bibendum risus ac ligula ultrices, nec consequat justo pharetra."
-    },
-    "coffee": {
-      "title": "Wesprzyj",
-      "body": "Jeśli podoba Ci się to mapowe doświadczenie i chcesz wesprzeć kolejne aktualizacje, możesz skorzystać z opcji poniżej.",
-      "hint": "Te przyciski są na razie poglądowe i nie są jeszcze podłączone.",
-      "donate2": "Wpłać 2 $",
-      "donate5": "Wpłać 5 $",
-      "donate10": "Wpłać 10 $",
-      "custom": "Własna kwota"
     },
     "feature": {
       "title": "Zaproponuj funkcję",

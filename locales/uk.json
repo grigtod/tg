@@ -41,7 +41,6 @@
       "close": "Закрити",
       "tabs": {
         "credits": "Подяки",
-        "coffee": "Пожертвувати",
         "feature": "Контакт"
       }
     }
@@ -93,15 +92,6 @@
       "asset3": "Ресурс 03: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In rutrum lacus at purus auctor, ut molestie purus vulputate.",
       "asset4": "Ресурс 04: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel est et metus volutpat commodo at eget felis.",
       "asset5": "Ресурс 05: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas bibendum risus ac ligula ultrices, nec consequat justo pharetra."
-    },
-    "coffee": {
-      "title": "Пожертвувати",
-      "body": "Якщо вам подобається цей маповий досвід і ви хочете підтримати майбутні оновлення, скористайтеся одним із варіантів донату нижче.",
-      "hint": "Ці кнопки поки що є заглушками і ще не підключені.",
-      "donate2": "Пожертвувати 2 $",
-      "donate5": "Пожертвувати 5 $",
-      "donate10": "Пожертвувати 10 $",
-      "custom": "Власна сума"
     },
     "feature": {
       "title": "Запросити функцію",
