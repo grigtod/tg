@@ -37,6 +37,25 @@ function collectLineStringsFromKml(kmlText) {
   return lineStrings;
 }
 
+function ensureRouteFlowClock(map) {
+  if (!map?._container) return;
+  if (map._routeFlowClockStarted) return;
+  map._routeFlowClockStarted = true;
+
+  const speedPxPerSecond = 25;
+  const dashPeriodPx = 30;
+  const start = performance.now();
+
+  const tick = (now) => {
+    const elapsedSeconds = (now - start) / 1000;
+    const offset = (elapsedSeconds * speedPxPerSecond) % dashPeriodPx;
+    map._container.style.setProperty("--route-dash-offset", String(offset));
+    requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+}
+
 export async function addKmzPathLayer({
   map,
   url,
@@ -62,6 +81,7 @@ export async function addKmzPathLayer({
 
   const kmlText = await kmlFile.async("string");
   const lineStrings = collectLineStringsFromKml(kmlText);
+  ensureRouteFlowClock(map);
 
   const layers = [];
 
