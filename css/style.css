@@ -321,9 +321,10 @@ body {
 }
 
 .poi-marker {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   transform: translate(-50%, -100%);
   user-select: none;
   pointer-events: auto;
@@ -353,6 +354,10 @@ body {
 
 .poi-label {
   display: none;
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.96);
