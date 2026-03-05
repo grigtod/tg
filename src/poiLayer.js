@@ -1,4 +1,4 @@
-export function createPoiLayer({
+﻿export function createPoiLayer({
   map,
   overlay,
   labelZoomThreshold = 18,
@@ -16,7 +16,8 @@ export function createPoiLayer({
       miner: "#495057",
       "ℹ️": "#1971c2",
       "🏛️": "#5f3dc4",
-      "⛏️": "#2b8a3e"
+      "⛏️": "#2b8a3e",
+      house: "#e67700"
     };
 
     return colorsByEmoji[emoji] ?? "#0078ff";
@@ -40,7 +41,8 @@ export function createPoiLayer({
 
     const isCompleted = overlay.isCompleted(poi.id);
     const showLabel = zoomLevel >= labelZoomThreshold;
-    const showDotOnly = zoomLevel < dotZoomThreshold;
+    const usesCustomImage = poi.emoji === "miner" || poi.emoji === "house";
+    const showDotOnly = zoomLevel < dotZoomThreshold && !usesCustomImage;
 
     const classNameParts = ["poi-marker"];
     if (showLabel) classNameParts.push("show-label");
@@ -49,8 +51,10 @@ export function createPoiLayer({
     const markerVisual = showDotOnly
       ? `<span class="poi-dot" style="--poi-dot-color: ${getDotColor(poi.emoji)}" aria-hidden="true"></span>`
       : poi.emoji === "miner"
-        ? `<img class="poi-image" src="./embeds/assets/miner-marker.png" alt="" aria-hidden="true" onerror="this.onerror=null;this.src='./embeds/assets/miner-marker.svg';" />`
-        : `<span class="poi-emoji">${poi.emoji}</span>`;
+        ? `<img class="poi-image" src="./embeds/assets/miner-marker.svg" alt="" aria-hidden="true" />`
+        : poi.emoji === "house"
+          ? `<img class="poi-image" src="./embeds/assets/house-marker.svg" alt="" aria-hidden="true" />`
+          : `<span class="poi-emoji">${poi.emoji}</span>`;
 
     const html = `
       <div class="${classNameParts.join(" ")}" role="button" aria-label="${safeLabel}">

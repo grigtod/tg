@@ -735,6 +735,11 @@ body {
     font-size: 34px;
   }
 
+  .poi-image {
+    width: 34px;
+    height: 34px;
+  }
+
   .poi-dot {
     width: 13px;
     height: 13px;

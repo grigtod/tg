@@ -272,6 +272,9 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   let layersVisible = false;
   let languageMenuVisible = false;
+  const hasLanguageControls = Boolean(
+    ui.languageBtn && ui.languageMenu && ui.languageOptions && ui.languageMenuTitle
+  );
   const LANGUAGE_TO_COUNTRY = {
     en: "gb",
     pl: "pl",
@@ -296,11 +299,13 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   }
 
   function hideLanguageMenu() {
+    if (!ui.languageMenu) return;
     languageMenuVisible = false;
     ui.languageMenu.classList.add("language-menu-hidden");
   }
 
   function showLanguageMenu() {
+    if (!ui.languageMenu) return;
     languageMenuVisible = true;
     ui.languageMenu.classList.remove("language-menu-hidden");
   }
@@ -330,6 +335,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   }
 
   function setLanguageButtonAppearance() {
+    if (!ui.languageBtn) return;
     const language = i18n.listLanguages().find((item) => item.code === i18n.getLanguage());
     const defaultLanguage = i18n.listLanguages().find((item) => item.code === "en");
     const selectedLanguage = language || defaultLanguage || { code: "en", flag: "\u{1F1EC}\u{1F1E7}" };
@@ -344,6 +350,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   }
 
   function renderLanguageOptions() {
+    if (!ui.languageOptions) return;
     ui.languageOptions.textContent = "";
     const selected = i18n.getLanguage();
 
@@ -369,6 +376,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   const infoPages = {
     credits: "./embeds/info-credits.html",
+    about: "./embeds/info-about.html",
     feature: "./embeds/info-feature.html"
   };
   let activeInfoPage = "credits";
@@ -376,6 +384,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   function setInfoTab(activeKey) {
     const tabMap = {
       credits: ui.infoCreditsBtn,
+      about: ui.infoAboutBtn,
       feature: ui.infoFeatureBtn
     };
 
@@ -420,13 +429,16 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   }
 
   function applyStaticTranslations() {
-    ui.languageMenuTitle.textContent = i18n.t("app.language.menuTitle", "Language");
+    if (ui.languageMenuTitle) {
+      ui.languageMenuTitle.textContent = i18n.t("app.language.menuTitle", "Language");
+    }
     layersTitle.textContent = i18n.t("app.layers.title", "Map Layers");
     baseMapTitle.textContent = i18n.t("app.layers.baseMap", "Base map");
     tunnelsTitle.textContent = i18n.t("app.layers.tunnelsOverlay", "Tunnels Overlay");
     ui.poiOverlayClose.textContent = i18n.t("app.poi.cancel", "Cancel");
     ui.infoOverlayClose.textContent = i18n.t("app.info.close", "Close");
     ui.infoCreditsBtn.textContent = i18n.t("app.info.tabs.credits", "Credits");
+    ui.infoAboutBtn.textContent = i18n.t("app.info.tabs.about", "About");
     ui.infoFeatureBtn.textContent = i18n.t("app.info.tabs.feature", "Contact");
     ui.dismissBannerBtn.textContent = i18n.t("app.location.dismiss", "Dismiss");
 
@@ -434,11 +446,17 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     ui.centerBtn.setAttribute("aria-label", i18n.t("app.controls.centerCity", "Center city"));
     ui.layersShowBtn.setAttribute("aria-label", i18n.t("app.controls.layers", "Map layers"));
     ui.infoBtn.setAttribute("aria-label", i18n.t("app.controls.info", "Information"));
-    ui.languageMenu.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Language"));
-    ui.languageOptions.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Languages"));
+    if (ui.languageMenu) {
+      ui.languageMenu.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Language"));
+    }
+    if (ui.languageOptions) {
+      ui.languageOptions.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Languages"));
+    }
 
-    setLanguageButtonAppearance();
-    renderLanguageOptions();
+    if (hasLanguageControls) {
+      setLanguageButtonAppearance();
+      renderLanguageOptions();
+    }
     updateLayerSubtitles();
     refreshLocationBanner();
     overlay.syncCompleteUi();
@@ -451,10 +469,12 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     else hideLayers();
   });
 
-  ui.languageBtn.addEventListener("click", () => {
-    tryHideLayers();
-    languageMenuVisible ? hideLanguageMenu() : showLanguageMenu();
-  });
+  if (ui.languageBtn) {
+    ui.languageBtn.addEventListener("click", () => {
+      tryHideLayers();
+      languageMenuVisible ? hideLanguageMenu() : showLanguageMenu();
+    });
+  }
 
   ui.infoBtn.addEventListener("click", () => {
     hideLanguageMenu();
@@ -465,6 +485,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   ui.infoOverlayClose.addEventListener("click", closeInfoOverlay);
   ui.infoCreditsBtn.addEventListener("click", () => openInfoPage("credits"));
+  ui.infoAboutBtn.addEventListener("click", () => openInfoPage("about"));
   ui.infoFeatureBtn.addEventListener("click", () => openInfoPage("feature"));
 
   ui.toggleImageOverlayBtn.addEventListener("click", () => {
@@ -507,7 +528,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   map.getContainer().addEventListener("touchstart", onMapBackgroundInteraction, { passive: true });
 
   document.addEventListener("click", (event) => {
-    if (!languageMenuVisible) return;
+    if (!hasLanguageControls || !languageMenuVisible) return;
     const target = event.target;
     if (!(target instanceof Node)) return;
     if (ui.languageBtn.contains(target) || ui.languageMenu.contains(target)) return;

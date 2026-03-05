@@ -41,13 +41,13 @@
       "close": "Close",
       "tabs": {
         "credits": "Credits",
+        "about": "About",
         "feature": "Contact"
       }
     }
   },
   "poi": {
     "info": "Info",
-    "museum-tg": "Museum in Tarnowskie Gory",
     "kopalnia-srebra": "Historic Silver Mine",
     "gwarek-1": "Miner statue 1",
     "gwarek-2": "Miner statue 2",
@@ -109,6 +109,13 @@
       "tip": "Tip: include screenshots, expected behavior, and where in the app this feature belongs.",
       "send": "Send request",
       "clear": "Clear"
+    },
+    "about": {
+      "title": "About The City",
+      "intro": "Placeholder city history text. Replace this section with the final historical overview.",
+      "paragraph1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non finibus arcu. Morbi id nibh purus.",
+      "paragraph2": "Integer luctus viverra sapien, sed consectetur magna convallis in. Donec eget orci et dui eleifend lobortis.",
+      "paragraph3": "Sed at eros ut justo tristique mattis. Mauris cursus, leo ac interdum dapibus, augue tortor aliquet ligula."
     }
   }
 }

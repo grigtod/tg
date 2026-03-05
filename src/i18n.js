@@ -1,13 +1,8 @@
 export const LANGUAGE_STORAGE_KEY = "discoverTG.language";
-export const DEFAULT_LANGUAGE = "en";
+export const DEFAULT_LANGUAGE = "pl";
 
 export const SUPPORTED_LANGUAGES = [
-  { code: "pl", flag: "🇵🇱", name: "Polski" },
-  { code: "en", flag: "\u{1F1EC}\u{1F1E7}", name: "English" },
-  { code: "de", flag: "\u{1F1E9}\u{1F1EA}", name: "Deutsch" },
-  { code: "es", flag: "\u{1F1EA}\u{1F1F8}", name: "Espa\u00F1ol" },
-  { code: "fr", flag: "\u{1F1EB}\u{1F1F7}", name: "Fran\u00E7ais" },
-  { code: "uk", flag: "\u{1F1FA}\u{1F1E6}", name: "\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430" }
+  { code: "pl", flag: "PL", name: "Polski" }
 ];
 
 const SUPPORTED_LANGUAGE_SET = new Set(SUPPORTED_LANGUAGES.map((lang) => lang.code));
@@ -169,3 +164,4 @@ export function createI18n() {
     listLanguages
   };
 }
+

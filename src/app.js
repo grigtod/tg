@@ -9,6 +9,10 @@ function id(name) {
   return el;
 }
 
+function optionalId(name) {
+  return document.getElementById(name);
+}
+
 function hasSeenLanding() {
   try {
     return localStorage.getItem(LANDING_SEEN_KEY) === "1";
@@ -91,18 +95,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     infoOverlayFrame: id("infoOverlayFrame"),
     infoOverlayClose: id("infoOverlayClose"),
     infoCreditsBtn: id("infoCreditsBtn"),
+    infoAboutBtn: id("infoAboutBtn"),
     infoFeatureBtn: id("infoFeatureBtn"),
 
     // banners
     locationBanner: id("locationBanner"),
     bannerText: id("bannerText"),
     layersBanner: id("layersBanner"),
-    languageMenu: id("languageMenu"),
-    languageMenuTitle: id("languageMenuTitle"),
-    languageOptions: id("languageOptions"),
+    languageMenu: optionalId("languageMenu"),
+    languageMenuTitle: optionalId("languageMenuTitle"),
+    languageOptions: optionalId("languageOptions"),
 
     // buttons
-    languageBtn: id("languageBtn"),
+    languageBtn: optionalId("languageBtn"),
     myLocationBtn: id("myLocationBtn"),
     centerBtn: id("centerBtn"),
     grantLocationBtn: id("grantLocationBtn"),

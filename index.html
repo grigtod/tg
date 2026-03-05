@@ -1,6 +1,6 @@
 ﻿<!doctype html>
 
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,7 +12,7 @@
   <body>
     <div id="landingOverlay" class="landing-overlay landing-hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="landingTitle">
       <div class="landing-card">
-        <button id="landingCloseBtn" class="landing-close-btn" type="button" aria-label="Close intro">✕</button>
+        <button id="landingCloseBtn" class="landing-close-btn" type="button" aria-label="Close intro">&#10005;</button>
         <h1 id="landingTitle" class="landing-title">Discover Tarnowskie Gory</h1>
         <p id="landingLead" class="landing-lead">
           Explore points of interest, historic routes, and map layers in an interactive city guide.
@@ -58,25 +58,25 @@
     <div id="map"></div>
 
     <!-- Map buttons -->
-    <div class="map-controls-top-left" aria-label="Language controls">
+    <!--div class="map-controls-top-left" aria-label="Language controls" hidden>
       <button id="languageBtn" class="control-btn" type="button" aria-label="Language">
         &#127468;&#127463;
       </button>
-    </div>
+    </div-->
 
     <div class="map-controls" aria-label="Map controls">
       <button id="myLocationBtn" class="control-btn" type="button" disabled>
-       ⚲
+       &#9906;
       </button>
       <button id="centerBtn" class="control-btn" type="button">
-        ◎
+        &#9712;
       </button> 
       <button id="layersShowBtn" class="control-btn" type="button">
-        ☰
+        &#9776;
       </button>
     </div>
 
-    <div id="languageMenu" class="language-menu language-menu-hidden" role="dialog" aria-label="Language">
+    <div id="languageMenu" class="language-menu language-menu-hidden" role="dialog" aria-label="Language" hidden>
       <div id="languageMenuTitle" class="language-menu-title">Language</div>
       <div id="languageOptions" class="language-options" role="listbox" aria-label="Languages"></div>
     </div>
@@ -123,6 +123,9 @@
           <button id="infoCreditsBtn" class="info-nav-btn is-active" type="button" role="tab" aria-selected="true">
             Credits
           </button>
+          <button id="infoAboutBtn" class="info-nav-btn" type="button" role="tab" aria-selected="false">
+            About
+          </button>
           <button id="infoFeatureBtn" class="info-nav-btn" type="button" role="tab" aria-selected="false">
             Contact
           </button>
@@ -146,6 +149,8 @@
     <script type="module" src="src/app.js"></script>
   </body>
 </html>
+
+
 
 
 
