@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Discover TG - Welcome</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#f9d006",
+              "background-light": "#f8f8f5",
+              "background-dark": "#231f0f"
+            },
+            fontFamily: {
+              display: ["Public Sans"]
+            },
+            borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" }
+          }
+        }
+      };
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: transparent;
+      }
+
+      .landing-root {
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow: hidden;
+      }
+
+      .carousel-container {
+        scroll-behavior: smooth;
+      }
+
+      .slide-media {
+        aspect-ratio: 1 / 1;
+      }
+
+      @keyframes pulse-primary {
+        0% {
+          transform: translateY(-50%) scale(1);
+          box-shadow: 0 0 0 0 rgba(249, 208, 6, 0.7);
+        }
+        70% {
+          transform: translateY(-50%) scale(1.05);
+          box-shadow: 0 0 0 15px rgba(249, 208, 6, 0);
+        }
+        100% {
+          transform: translateY(-50%) scale(1);
+          box-shadow: 0 0 0 0 rgba(249, 208, 6, 0);
+        }
+      }
+
+      .animate-pulse-custom {
+        animation: pulse-primary 2s infinite;
+      }
+
+      @media (max-height: 820px) {
+        .header-title {
+          font-size: 1.75rem;
+        }
+
+        .header-lead {
+          padding-bottom: 1.25rem;
+        }
+
+        .slide-media {
+          aspect-ratio: 4 / 3;
+        }
+      }
+
+      @media (max-height: 680px) {
+        .card-compact {
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .slide-media {
+          aspect-ratio: 16 / 10;
+        }
+
+        .next-btn {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .next-btn-icon {
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+
+        .bottom-actions {
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+        }
+
+        .start-btn {
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-title {
+          font-size: 1.5rem;
+          padding-top: 1rem;
+        }
+
+        .header-lead {
+          font-size: 0.875rem;
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+          padding-bottom: 1rem;
+        }
+
+        .slide-pad {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .next-btn {
+          right: 0.75rem;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+
+      @media (min-aspect-ratio: 21/9) and (min-width: 1200px) {
+        .wide-card {
+          max-width: 980px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .slide-media {
+          aspect-ratio: 16 / 9;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white font-display text-slate-900">
+    <div class="landing-root relative flex w-full flex-col bg-white overflow-x-hidden">
+      <div class="relative z-20 p-4 pb-0 bg-gradient-to-b to-transparent from-primary/90">
+        <div class="flex items-center justify-center py-4 px-4 bg-white/80 backdrop-blur-md border-b border-slate-100 rounded-t-xl">
+          <h1 class="text-slate-900 text-lg font-bold leading-tight tracking-tight">Odkryj Tarnowskie Góry</h1>
+        </div>
+      </div>
+
+      <!--h2 class="header-title text-slate-900 tracking-tight text-4xl font-bold leading-tight px-6 text-center pb-2 pt-6">
+        Welcome to Discover TG App
+      </h2-->
+      <br>
+      <p class="header-lead text-slate-600 text-base text-center px-8 pb-8">
+        Odkryj ukryte perełki naszego dziedzictwa górniczego podczas interaktywnej podróży
+      </p>
+
+      <div class="flex-1 min-h-0 overflow-y-auto relative group flex items-start py-1">
+        <div class="carousel-container flex flex-nowrap overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" id="carousel-container">
+          <div class="flex-none w-full snap-center slide-pad px-6">
+            <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
+              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBj_cztmKLndCm9er7XKOmaVLlwlUeCSuaF7IpT9khO9MfGgyhLpK8tByOdVGdkTngn8p3WCRhb2UoIDgKzQU1KDk9UKrCYsIRt2gEys7pUOWBhMkfj8O_PZl4KL0EE6mZcb5NvbFWi0oZ0q7mDLk_ov1x3FUPARGrY5yKfkachaa5ZnmQ_WH3p45FtTCT7JcHo7mc581z3M6kAq32H8TTjUUYw_kmzDUUXxMvaDM2HV87TJ3FHAWrgFo7Yn1DoYolIBsypCeQfRPU");'></div>
+              <div>
+                <p class="text-slate-900 text-lg font-bold leading-normal">Interactive Walk</p>
+                <p class="text-slate-600 text-sm font-normal leading-relaxed">This is an interactive walk designed to immerse you in the local history.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-none w-full snap-center slide-pad px-6">
+            <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
+              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASv8nvUYYC7Yla7Cz4GkNXondZNrlS-Sw5kSpKw9jDyqO3OHsyKWin7vzDQpHRW5dhP6JaAKEmTaKLyBws7LjgZvERdjvDyLAZ1LlpRcEi-Yv2HnE3kh4RIXZS8JHvLEtGh6XbG0JXD2Lw1yLec8VhmdvhwSDVcLkb1gM08N6pWfVoKtWENavlmpaGGOJeE1fF0khMQVs8CT5Fb9L0WlDSJyn_b69tO5Vg6KsnJQKKqXEfI4Q-iWlF6Mm9UrYkud9Vho_biLBnBQs");'></div>
+              <div>
+                <p class="text-slate-900 text-lg font-bold leading-normal">Smart Path Tracking</p>
+                <p class="text-slate-600 text-sm font-normal leading-relaxed">Follow our path we designed and when you're close to the object click on it to unlock content.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-none w-full snap-center slide-pad px-6">
+            <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
+              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALXSIQPhT0j-tOXapfDaB9D7Gixzpn9OPEKlDGz3X3G2mbE0EqTAIlg0mCAbdWgwSvbNZMp1ClKUB4wxiEfJt08N9nxbHjkPPR1cwKpo0gTrjdWGqbSXsI6CJmTQT_oBXN5hLZOmGGPl-5SC2whY-j6TWs9JhG0leK7XeIYJeb2CM6bhaSW7D6-F8nqS59s9xSufo6ImCVAf4dzlcVwx1YJ-BAbndH1s91LjIXTtazpd_GGW5b6GUTngJ2QHolbaCfDUE9A0A1GXY");'></div>
+              <div>
+                <p class="text-slate-900 text-lg font-bold leading-normal">Architectural Insights</p>
+                <p class="text-slate-600 text-sm font-normal leading-relaxed">You can see information about the buildings, their history, and unique features.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-none w-full snap-center slide-pad px-6">
+            <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
+              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCJKW7aVe8Ulzg2Kt2Utf4wk1GK7N2w5AYpJXCPlvptIzzULByudzNHyyUPbSWxCNU9BWme-uYmHv0NkgsxZGm77GLgl5yOpEnHyDMoOmCEzRxg6XIyhD3DAMT8nMPeTXTMDLG5IibTqri52fzs6JMmR4jpXF2NelNU8-VdcItm7OQiMu_F4-X9wmsstYT6HuS7GMisgIWQO9EGeu0kHiYm7Oes6mtEen3l2RJOU27YiFQCF0tTwvvTaV4bDI5bwNcrgDaiKeTlnc");'></div>
+              <div>
+                <p class="text-slate-900 text-lg font-bold leading-normal">Talk to Gwarek</p>
+                <p class="text-slate-600 text-sm font-normal leading-relaxed">If this is Gwarek sculpture you can talk to it and hear stories from the underground!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button aria-label="Next slide" class="next-btn absolute -translate-y-1/2 z-10 bg-primary text-black w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform border-4 border-white animate-pulse-custom top-1/2 right-3" id="next-slide-btn" type="button">
+          <span class="next-btn-icon material-symbols-outlined text-3xl font-bold">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="flex w-full flex-row items-center justify-center gap-2 py-6">
+        <div class="h-2 w-6 rounded-full bg-primary transition-all duration-300" id="dot-0"></div>
+        <div class="h-2 w-2 rounded-full bg-slate-200 transition-all duration-300" id="dot-1"></div>
+        <div class="h-2 w-2 rounded-full bg-slate-200 transition-all duration-300" id="dot-2"></div>
+        <div class="h-2 w-2 rounded-full bg-slate-200 transition-all duration-300" id="dot-3"></div>
+      </div>
+
+      <div class="bottom-actions p-6 flex flex-col gap-3">
+        <button class="start-btn w-full font-bold py-4 rounded-xl shadow-lg transition-colors bg-slate-200 text-slate-400" disabled id="get-started-btn" type="button">
+          GET STARTED
+        </button>
+        <button class="w-full bg-transparent text-slate-500 font-medium py-2 rounded-xl text-sm" id="skip-intro-btn" type="button">
+          Skip Introduction
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const container = document.getElementById("carousel-container");
+      const nextBtn = document.getElementById("next-slide-btn");
+      const getStartedBtn = document.getElementById("get-started-btn");
+      const skipBtn = document.getElementById("skip-intro-btn");
+      const dots = [
+        document.getElementById("dot-0"),
+        document.getElementById("dot-1"),
+        document.getElementById("dot-2"),
+        document.getElementById("dot-3")
+      ];
+
+      function closeLanding() {
+        window.parent.postMessage({ type: "landing-close" }, window.location.origin);
+      }
+
+      function currentIndex() {
+        const width = container.offsetWidth || 1;
+        return Math.round(container.scrollLeft / width);
+      }
+
+      function updateState() {
+        const index = currentIndex();
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove("w-2", "bg-slate-200");
+            dot.classList.add("w-6", "bg-primary");
+          } else {
+            dot.classList.remove("w-6", "bg-primary");
+            dot.classList.add("w-2", "bg-slate-200");
+          }
+        });
+
+        if (index >= 3) {
+          getStartedBtn.disabled = false;
+          getStartedBtn.classList.remove("bg-slate-200", "text-slate-400");
+          getStartedBtn.classList.add("bg-primary", "text-black");
+          nextBtn.style.display = "none";
+        } else {
+          getStartedBtn.disabled = true;
+          getStartedBtn.classList.add("bg-slate-200", "text-slate-400");
+          getStartedBtn.classList.remove("bg-primary", "text-black");
+          nextBtn.style.display = "flex";
+        }
+      }
+
+      nextBtn.addEventListener("click", () => {
+        const scrollAmount = container.offsetWidth;
+        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
+
+      container.addEventListener("scroll", updateState, { passive: true });
+      window.addEventListener("resize", updateState);
+
+      getStartedBtn.addEventListener("click", () => {
+        if (!getStartedBtn.disabled) closeLanding();
+      });
+      skipBtn.addEventListener("click", closeLanding);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeLanding();
+      });
+
+      updateState();
+    </script>
+  </body>
+</html>
