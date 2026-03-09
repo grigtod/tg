@@ -41,41 +41,63 @@
 
       .carousel-container {
         scroll-behavior: smooth;
+        height: 100%;
+        align-items: stretch;
+      }
+
+      .slide-pad {
+        display: flex;
+        align-items: stretch;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
       }
 
       .slide-media {
-        aspect-ratio: 1 / 1;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        height: clamp(220px, 36vh, 420px);
+        max-height: none;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0.75rem;
+        border: 1px solid rgb(241 245 249);
+        background: #ffffff;
+        display: block;
+      }
+
+      .wide-card {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: 100%;
+      }
+
+      .card-compact {
+        gap: 1.1rem;
+        padding: 1.1rem;
       }
 
       @media (min-width: 1024px) {
         .wide-card {
-          max-width: 680px;
+          max-width: 560px;
+        }
+
+        .card-compact {
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .slide-media {
+          aspect-ratio: 16 / 10;
+          height: clamp(220px, 34vh, 340px);
+          max-width: 520px;
           margin-left: auto;
           margin-right: auto;
         }
 
-        .card-compact {
-          gap: 0.75rem;
-          padding: 0.85rem;
-        }
-
-        .slide-media {
-          aspect-ratio: 16 / 9;
-          max-height: min(24vh, 220px);
-        }
-
-        .slide-title-desktop {
-          font-size: 0.95rem;
-          line-height: 1.2;
-        }
-
-        .slide-text-desktop {
-          font-size: 0.8rem;
-          line-height: 1.35;
-        }
-
         .header-lead {
-          padding-bottom: 0.75rem;
+          padding-bottom: 0.5rem;
         }
       }
 
@@ -109,6 +131,7 @@
 
         .slide-media {
           aspect-ratio: 4 / 3;
+          height: clamp(200px, 32vh, 320px);
         }
       }
 
@@ -120,6 +143,7 @@
 
         .slide-media {
           aspect-ratio: 16 / 10;
+          height: clamp(170px, 30vh, 260px);
         }
 
         .next-btn {
@@ -166,17 +190,27 @@
           width: 3rem;
           height: 3rem;
         }
+
+        .prev-btn {
+          left: 0.75rem;
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .slide-media {
+          height: clamp(180px, 34vh, 300px);
+        }
       }
 
       @media (min-aspect-ratio: 21/9) and (min-width: 1200px) {
         .wide-card {
-          max-width: 980px;
-          margin-left: auto;
-          margin-right: auto;
+          max-width: 620px;
         }
 
         .slide-media {
           aspect-ratio: 16 / 9;
+          height: clamp(220px, 30vh, 300px);
+          max-width: 560px;
         }
       }
     </style>
@@ -200,7 +234,7 @@
         <div class="carousel-container flex flex-nowrap overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" id="carousel-container">
           <div class="flex-none w-full snap-center slide-pad px-6">
             <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
-              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBj_cztmKLndCm9er7XKOmaVLlwlUeCSuaF7IpT9khO9MfGgyhLpK8tByOdVGdkTngn8p3WCRhb2UoIDgKzQU1KDk9UKrCYsIRt2gEys7pUOWBhMkfj8O_PZl4KL0EE6mZcb5NvbFWi0oZ0q7mDLk_ov1x3FUPARGrY5yKfkachaa5ZnmQ_WH3p45FtTCT7JcHo7mc581z3M6kAq32H8TTjUUYw_kmzDUUXxMvaDM2HV87TJ3FHAWrgFo7Yn1DoYolIBsypCeQfRPU");'></div>
+              <img class="slide-media" alt="Interaktywny spacer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj_cztmKLndCm9er7XKOmaVLlwlUeCSuaF7IpT9khO9MfGgyhLpK8tByOdVGdkTngn8p3WCRhb2UoIDgKzQU1KDk9UKrCYsIRt2gEys7pUOWBhMkfj8O_PZl4KL0EE6mZcb5NvbFWi0oZ0q7mDLk_ov1x3FUPARGrY5yKfkachaa5ZnmQ_WH3p45FtTCT7JcHo7mc581z3M6kAq32H8TTjUUYw_kmzDUUXxMvaDM2HV87TJ3FHAWrgFo7Yn1DoYolIBsypCeQfRPU">
               <div>
                 <p class="text-slate-900 text-lg font-bold leading-normal">Interaktywny spacer</p>
                 <p class="text-slate-600 text-sm font-normal leading-relaxed">To interaktywny spacer zaprojektowany tak, aby zanurzyć Cię w lokalnej historii.</p>
@@ -210,7 +244,7 @@
 
           <div class="flex-none w-full snap-center slide-pad px-6">
             <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
-              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASv8nvUYYC7Yla7Cz4GkNXondZNrlS-Sw5kSpKw9jDyqO3OHsyKWin7vzDQpHRW5dhP6JaAKEmTaKLyBws7LjgZvERdjvDyLAZ1LlpRcEi-Yv2HnE3kh4RIXZS8JHvLEtGh6XbG0JXD2Lw1yLec8VhmdvhwSDVcLkb1gM08N6pWfVoKtWENavlmpaGGOJeE1fF0khMQVs8CT5Fb9L0WlDSJyn_b69tO5Vg6KsnJQKKqXEfI4Q-iWlF6Mm9UrYkud9Vho_biLBnBQs");'></div>
+              <img class="slide-media" alt="Inteligentne sledzenie trasy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASv8nvUYYC7Yla7Cz4GkNXondZNrlS-Sw5kSpKw9jDyqO3OHsyKWin7vzDQpHRW5dhP6JaAKEmTaKLyBws7LjgZvERdjvDyLAZ1LlpRcEi-Yv2HnE3kh4RIXZS8JHvLEtGh6XbG0JXD2Lw1yLec8VhmdvhwSDVcLkb1gM08N6pWfVoKtWENavlmpaGGOJeE1fF0khMQVs8CT5Fb9L0WlDSJyn_b69tO5Vg6KsnJQKKqXEfI4Q-iWlF6Mm9UrYkud9Vho_biLBnBQs">
               <div>
                 <p class="text-slate-900 text-lg font-bold leading-normal">Inteligentne śledzenie trasy</p>
                 <p class="text-slate-600 text-sm font-normal leading-relaxed">Podążaj wyznaczoną przez nas trasą, a gdy zbliżysz się do obiektu, kliknij go, aby odblokować treści.</p>
@@ -220,7 +254,7 @@
 
           <div class="flex-none w-full snap-center slide-pad px-6">
             <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
-              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALXSIQPhT0j-tOXapfDaB9D7Gixzpn9OPEKlDGz3X3G2mbE0EqTAIlg0mCAbdWgwSvbNZMp1ClKUB4wxiEfJt08N9nxbHjkPPR1cwKpo0gTrjdWGqbSXsI6CJmTQT_oBXN5hLZOmGGPl-5SC2whY-j6TWs9JhG0leK7XeIYJeb2CM6bhaSW7D6-F8nqS59s9xSufo6ImCVAf4dzlcVwx1YJ-BAbndH1s91LjIXTtazpd_GGW5b6GUTngJ2QHolbaCfDUE9A0A1GXY");'></div>
+              <img class="slide-media" alt="Architektoniczne ciekawostki" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALXSIQPhT0j-tOXapfDaB9D7Gixzpn9OPEKlDGz3X3G2mbE0EqTAIlg0mCAbdWgwSvbNZMp1ClKUB4wxiEfJt08N9nxbHjkPPR1cwKpo0gTrjdWGqbSXsI6CJmTQT_oBXN5hLZOmGGPl-5SC2whY-j6TWs9JhG0leK7XeIYJeb2CM6bhaSW7D6-F8nqS59s9xSufo6ImCVAf4dzlcVwx1YJ-BAbndH1s91LjIXTtazpd_GGW5b6GUTngJ2QHolbaCfDUE9A0A1GXY">
               <div>
                 <p class="text-slate-900 text-lg font-bold leading-normal">Architektoniczne ciekawostki</p>
                 <p class="text-slate-600 text-sm font-normal leading-relaxed">Możesz zobaczyć informacje o budynkach, ich historii oraz wyjątkowych cechach.</p>
@@ -230,7 +264,7 @@
 
           <div class="flex-none w-full snap-center slide-pad px-6">
             <div class="wide-card card-compact flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm transition-all border-4 border-primary">
-              <div class="slide-media w-full bg-center bg-no-repeat bg-cover rounded-xl border border-slate-100" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCJKW7aVe8Ulzg2Kt2Utf4wk1GK7N2w5AYpJXCPlvptIzzULByudzNHyyUPbSWxCNU9BWme-uYmHv0NkgsxZGm77GLgl5yOpEnHyDMoOmCEzRxg6XIyhD3DAMT8nMPeTXTMDLG5IibTqri52fzs6JMmR4jpXF2NelNU8-VdcItm7OQiMu_F4-X9wmsstYT6HuS7GMisgIWQO9EGeu0kHiYm7Oes6mtEen3l2RJOU27YiFQCF0tTwvvTaV4bDI5bwNcrgDaiKeTlnc");'></div>
+              <img class="slide-media" alt="Porozmawiaj z Gwarkiem" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCJKW7aVe8Ulzg2Kt2Utf4wk1GK7N2w5AYpJXCPlvptIzzULByudzNHyyUPbSWxCNU9BWme-uYmHv0NkgsxZGm77GLgl5yOpEnHyDMoOmCEzRxg6XIyhD3DAMT8nMPeTXTMDLG5IibTqri52fzs6JMmR4jpXF2NelNU8-VdcItm7OQiMu_F4-X9wmsstYT6HuS7GMisgIWQO9EGeu0kHiYm7Oes6mtEen3l2RJOU27YiFQCF0tTwvvTaV4bDI5bwNcrgDaiKeTlnc">
               <div>
                 <p class="text-slate-900 text-lg font-bold leading-normal">Porozmawiaj z Gwarkiem</p>
                 <p class="text-slate-600 text-sm font-normal leading-relaxed">Jeśli to rzeźba Gwarka, możesz z nią porozmawiać i usłyszeć opowieści z podziemi!</p>
@@ -238,6 +272,10 @@
             </div>
           </div>
         </div>
+
+        <button aria-label="Previous slide" class="prev-btn absolute -translate-y-1/2 z-10 bg-primary text-black w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform border-4 border-white top-1/2 left-3" id="prev-slide-btn" type="button">
+          <span class="next-btn-icon material-symbols-outlined text-3xl font-bold">arrow_back</span>
+        </button>
 
         <button aria-label="Next slide" class="next-btn absolute -translate-y-1/2 z-10 bg-primary text-black w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-transform border-4 border-white animate-pulse-custom top-1/2 right-3" id="next-slide-btn" type="button">
           <span class="next-btn-icon material-symbols-outlined text-3xl font-bold">arrow_forward</span>
@@ -263,6 +301,7 @@
 
     <script>
       const container = document.getElementById("carousel-container");
+      const prevBtn = document.getElementById("prev-slide-btn");
       const nextBtn = document.getElementById("next-slide-btn");
       const getStartedBtn = document.getElementById("get-started-btn");
       const skipBtn = document.getElementById("skip-intro-btn");
@@ -306,7 +345,14 @@
           getStartedBtn.classList.remove("bg-primary", "text-black");
           nextBtn.style.display = "flex";
         }
+
+        prevBtn.style.display = index <= 0 ? "none" : "flex";
       }
+
+      prevBtn.addEventListener("click", () => {
+        const scrollAmount = container.offsetWidth;
+        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      });
 
       nextBtn.addEventListener("click", () => {
         const scrollAmount = container.offsetWidth;
