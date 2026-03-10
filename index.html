@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <div id="desktopRedirectOverlay" class="desktop-redirect-overlay landing-hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Desktop redirect">
+      <iframe
+        id="desktopRedirectFrame"
+        class="desktop-redirect-frame"
+        title="Desktop redirect"
+        src="embeds/desktop-redirect.html"
+        loading="eager"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </div>
+
     <div id="landingOverlay" class="landing-overlay landing-hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Welcome">
       <iframe
         id="landingOverlayFrame"
@@ -81,15 +92,15 @@
     </div-->
 
     <!-- Full screen embedded page overlay -->
-    <div id="poiOverlay" class="poi-overlay poi-overlay-hidden" aria-hidden="true">
-      <div class="poi-overlay-bar">
+    <div id="poiOverlay" class="poi-overlay poi-overlay-hidden poi-overlay-inline-controls" aria-hidden="true">
+      <div class="poi-overlay-bar" aria-hidden="true">
       <button id="poiOverlayClose" class="poi-overlay-close" type="button" aria-label="Close">
         Cancel
       </button>
 
       <button id="poiCompleteBtn" class="poi-complete-btn" type="button" aria-pressed="false">
         <span id="poiCompleteBox" class="poi-complete-box" aria-hidden="true"></span>
-        <span id="poiCompleteLabel">Complete</span>
+        <span id="poiCompleteLabel">Zakończ</span>
       </button>
     </div>
       <iframe
@@ -98,6 +109,7 @@
         title="Point of interest"
         src="about:blank"
         loading="lazy"
+        allow="autoplay"
         referrerpolicy="no-referrer"
       ></iframe>
     </div>

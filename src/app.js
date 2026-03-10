@@ -1,5 +1,6 @@
 import { createMap } from "./map.js";
 import { applyPoiTheme } from "./poiTheme.js";
+import { isMobileExperience } from "./device.js";
 
 const APP_CONFIG = {
   // Master switch for landing overlay.
@@ -39,6 +40,11 @@ function setLandingHidden(ui, hidden) {
   ui.landingOverlay.setAttribute("aria-hidden", hidden ? "true" : "false");
 }
 
+function setDesktopRedirectHidden(ui, hidden) {
+  ui.desktopRedirectOverlay.classList.toggle("landing-hidden", hidden);
+  ui.desktopRedirectOverlay.setAttribute("aria-hidden", hidden ? "true" : "false");
+}
+
 function waitForLandingDismiss(ui, config) {
   return new Promise((resolve) => {
     const close = () => {
@@ -68,6 +74,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   applyPoiTheme();
 
   const ui = {
+    // desktop redirect
+    desktopRedirectOverlay: id("desktopRedirectOverlay"),
+
     // landing
     landingOverlay: id("landingOverlay"),
     landingOverlayFrame: id("landingOverlayFrame"),
@@ -99,6 +108,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     styleToggleBtn: id("styleToggleBtn")//,
     //toggleImageOverlayBtn: id("toggleImageOverlayBtn")
   };
+
+  if (!isMobileExperience()) {
+    setDesktopRedirectHidden(ui, false);
+    setLandingHidden(ui, true);
+    return;
+  }
+
+  setDesktopRedirectHidden(ui, true);
 
   if (!APP_CONFIG.showLanding) {
     setLandingHidden(ui, true);

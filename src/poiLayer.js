@@ -3,14 +3,36 @@ import { POI_THEME } from "./poiTheme.js";
 export function createPoiLayer({
   map,
   overlay,
+  onPoiSelect,
   labelZoomThreshold = 21,
   dotZoomThreshold = 18
 }) {
   if (!map) throw new Error("createPoiLayer requires map");
   if (!overlay) throw new Error("createPoiLayer requires overlay");
+  if (!onPoiSelect) throw new Error("createPoiLayer requires onPoiSelect");
 
   let poiMarkers = [];
   let previousZoomLevel = map.getZoom();
+  let userLatLng = null;
+
+  function getHighlightedPoiId() {
+    if (!userLatLng) return null;
+
+    let closestPoiId = null;
+    let closestDistance = Infinity;
+
+    for (const { poi } of poiMarkers) {
+      if (overlay.isCompleted(poi.id)) continue;
+
+      const distance = userLatLng.distanceTo([poi.lat, poi.lon]);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestPoiId = poi.id;
+      }
+    }
+
+    return closestPoiId;
+  }
 
   function getEffectiveThresholds() {
     return {
@@ -35,11 +57,16 @@ export function createPoiLayer({
       .replaceAll(">", "&gt;");
   }
 
-  function makePoiIcon(poi, zoomLevel, { animateLabelReveal = false } = {}) {
+  function makePoiIcon(
+    poi,
+    zoomLevel,
+    { animateLabelReveal = false, highlightedPoiId = null } = {}
+  ) {
     const label = poi?.label ?? "";
     const safeLabel = escapeHtml(label);
 
     const isCompleted = overlay.isCompleted(poi.id);
+    const isNearestActive = !isCompleted && poi.id === highlightedPoiId;
     const thresholds = getEffectiveThresholds();
     const showDotOnly = zoomLevel < thresholds.dot;
     const showLabel = !showDotOnly && zoomLevel >= thresholds.label;
@@ -51,6 +78,7 @@ export function createPoiLayer({
     }
     if (showDotOnly) classNameParts.push("dot-only");
     if (isCompleted) classNameParts.push("is-completed");
+    if (isNearestActive) classNameParts.push("is-nearest-active");
 
     const dotStyle = getDotStyle(poi.emoji);
     const markerThemeStyle = [
@@ -95,8 +123,9 @@ export function createPoiLayer({
     const zoomLevel = map.getZoom();
     const thresholds = getEffectiveThresholds();
     const animateLabelReveal = previousZoomLevel < thresholds.label && zoomLevel >= thresholds.label;
+    const highlightedPoiId = getHighlightedPoiId();
     for (const { poi, marker } of poiMarkers) {
-      marker.setIcon(makePoiIcon(poi, zoomLevel, { animateLabelReveal }));
+      marker.setIcon(makePoiIcon(poi, zoomLevel, { animateLabelReveal, highlightedPoiId }));
     }
     previousZoomLevel = zoomLevel;
   }
@@ -107,19 +136,21 @@ export function createPoiLayer({
 
     poiMarkers = pois.map((poi) => {
       const marker = L.marker([poi.lat, poi.lon], {
-        icon: makePoiIcon(poi, map.getZoom()),
+        icon: makePoiIcon(poi, map.getZoom(), {
+          highlightedPoiId: getHighlightedPoiId()
+        }),
         keyboard: true,
         riseOnHover: true
       }).addTo(map);
 
       marker.on("click", () => {
-        overlay.open({ url: poi.embedUrl, poiId: poi.id });
+        onPoiSelect(poi);
       });
 
       marker.on("keypress", (e) => {
         const key = e.originalEvent?.key;
         if (key === "Enter" || key === " ") {
-          overlay.open({ url: poi.embedUrl, poiId: poi.id });
+          onPoiSelect(poi);
         }
       });
 
@@ -133,6 +164,10 @@ export function createPoiLayer({
 
   return {
     setPois,
-    updateIcons
+    updateIcons,
+    setUserLocation(latlng) {
+      userLatLng = latlng ? L.latLng(latlng) : null;
+      updateIcons();
+    }
   };
 }

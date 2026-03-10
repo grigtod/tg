@@ -3,16 +3,18 @@ import { createPoiOverlay } from "./overlay.js";
 import { loadAllPois } from "./poiData.js";
 import { createPoiLayer } from "./poiLayer.js";
 import { addKmzPathLayer } from "./pathLayer.js";
+import { isMobileExperience } from "./device.js";
 
 export function createMap({ mapElId = "map", ui } = {}) {
   if (!ui) throw new Error("createMap requires { ui }");
+  const APP_HISTORY_STATE_KEY = "discoverTG.route";
 
   const center = L.latLng(config.targetLat, config.targetLon);
   const bounds = center.toBounds(config.radiusMeters * 2);
   const platform =
     navigator.userAgentData?.platform || navigator.platform || navigator.userAgent || "";
   const isWindows = /win/i.test(platform);
-  const isMobileViewport = window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+  const isMobileViewport = isMobileExperience();
   const cityCenterZoom = 18;
   const initialZoom = isMobileViewport ? cityCenterZoom : config.startZoom;
   const zoomSnap = isWindows ? 0.5 : 0.1;
@@ -277,6 +279,39 @@ export function createMap({ mapElId = "map", ui } = {}) {
     feature: "./embeds/info-feature.html"
   };
   let activeInfoPage = "credits";
+  let poiById = new Map();
+  let poisLoaded = false;
+
+  function readRouteFromHistory(state = window.history.state) {
+    const route = state?.[APP_HISTORY_STATE_KEY];
+    if (!route || typeof route.kind !== "string") {
+      return { kind: "map" };
+    }
+
+    if (route.kind === "poi" && typeof route.poiId === "string") {
+      return { kind: "poi", poiId: route.poiId };
+    }
+
+    if (route.kind === "info" && typeof route.pageKey === "string" && infoPages[route.pageKey]) {
+      return { kind: "info", pageKey: route.pageKey };
+    }
+
+    return { kind: "map" };
+  }
+
+  function writeRouteToHistory(route, { replace = false } = {}) {
+    const nextState = {
+      ...(window.history.state ?? {}),
+      [APP_HISTORY_STATE_KEY]: route
+    };
+    const method = replace ? "replaceState" : "pushState";
+    window.history[method](nextState, "", window.location.href);
+  }
+
+  function ensureBaseHistoryState() {
+    if (window.history.state?.[APP_HISTORY_STATE_KEY]) return;
+    writeRouteToHistory({ kind: "map" }, { replace: true });
+  }
 
   function setInfoTab(activeKey) {
     const tabMap = {
@@ -306,8 +341,78 @@ export function createMap({ mapElId = "map", ui } = {}) {
   }
 
   function closeInfoOverlay() {
-    ui.infoOverlayFrame.src = "about:blank";
     setInfoHidden(true);
+  }
+
+  function showPoiRoute(poiId) {
+    const poi = poiById.get(poiId);
+    if (!poi) return false;
+
+    closeInfoOverlay();
+    overlay.open({ url: poi.embedUrl, poiId: poi.id });
+    return true;
+  }
+
+  function showInfoRoute(pageKey) {
+    overlay.close();
+    openInfoPage(pageKey);
+  }
+
+  function showMapRoute() {
+    overlay.close();
+    closeInfoOverlay();
+  }
+
+  function syncUiToRoute() {
+    const route = readRouteFromHistory();
+
+    if (route.kind === "poi") {
+      if (!poisLoaded) {
+        showMapRoute();
+        return;
+      }
+      if (showPoiRoute(route.poiId)) return;
+      writeRouteToHistory({ kind: "map" }, { replace: true });
+    }
+
+    if (route.kind === "info") {
+      showInfoRoute(route.pageKey);
+      return;
+    }
+
+    showMapRoute();
+  }
+
+  function navigateToPoi(poiId) {
+    if (!showPoiRoute(poiId)) {
+      writeRouteToHistory({ kind: "map" }, { replace: true });
+      showMapRoute();
+      return;
+    }
+
+    writeRouteToHistory(
+      { kind: "poi", poiId },
+      { replace: readRouteFromHistory().kind !== "map" }
+    );
+  }
+
+  function navigateToInfo(pageKey = activeInfoPage) {
+    const nextKey = infoPages[pageKey] ? pageKey : "credits";
+    showInfoRoute(nextKey);
+    writeRouteToHistory(
+      { kind: "info", pageKey: nextKey },
+      { replace: readRouteFromHistory().kind !== "map" }
+    );
+  }
+
+  function navigateToMap() {
+    const route = readRouteFromHistory();
+    if (route.kind === "map") {
+      showMapRoute();
+      return;
+    }
+
+    window.history.back();
   }
 
   function updateLayerSubtitles() {
@@ -338,14 +443,14 @@ export function createMap({ mapElId = "map", ui } = {}) {
 
   ui.infoBtn.addEventListener("click", () => {
     tryHideLayers();
-    overlay.close();
-    openInfoPage(activeInfoPage);
+    navigateToInfo(activeInfoPage);
   });
 
-  ui.infoOverlayClose.addEventListener("click", closeInfoOverlay);
-  ui.infoCreditsBtn.addEventListener("click", () => openInfoPage("credits"));
-  ui.infoAboutBtn.addEventListener("click", () => openInfoPage("about"));
-  ui.infoFeatureBtn.addEventListener("click", () => openInfoPage("feature"));
+  ui.poiOverlayClose.addEventListener("click", navigateToMap);
+  ui.infoOverlayClose.addEventListener("click", navigateToMap);
+  ui.infoCreditsBtn.addEventListener("click", () => navigateToInfo("credits"));
+  ui.infoAboutBtn.addEventListener("click", () => navigateToInfo("about"));
+  ui.infoFeatureBtn.addEventListener("click", () => navigateToInfo("feature"));
 
   ui.styleToggleBtn.addEventListener("click", () => {
     if (currentBaseLayer === "minimalist") {
@@ -372,11 +477,17 @@ export function createMap({ mapElId = "map", ui } = {}) {
   const poiLayer = createPoiLayer({
     map,
     overlay,
+    onPoiSelect: (poi) => navigateToPoi(poi.id),
     labelZoomThreshold: 19
   });
 
   loadAllPois()
-    .then((pois) => poiLayer.setPois(pois))
+    .then((pois) => {
+      poiById = new Map(pois.map((poi) => [poi.id, poi]));
+      poisLoaded = true;
+      poiLayer.setPois(pois);
+      syncUiToRoute();
+    })
     .catch((err) => console.error("POI load failed:", err));
 
   addKmzPathLayer({
@@ -464,9 +575,11 @@ export function createMap({ mapElId = "map", ui } = {}) {
         fillColor: "#0078ff",
         fillOpacity: 0.95
       }).addTo(map);
+      poiLayer.setUserLocation(latlng);
       return;
     }
     userMarker.setLatLng(latlng);
+    poiLayer.setUserLocation(latlng);
   }
 
   function permissionErrorMessage(error) {
@@ -578,8 +691,16 @@ export function createMap({ mapElId = "map", ui } = {}) {
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    if (!ui.infoOverlay.classList.contains("poi-overlay-hidden")) closeInfoOverlay();
+    if (!ui.poiOverlay.classList.contains("poi-overlay-hidden")) navigateToMap();
+    if (!ui.infoOverlay.classList.contains("poi-overlay-hidden")) navigateToMap();
   });
+
+  window.addEventListener("popstate", () => {
+    syncUiToRoute();
+  });
+
+  ensureBaseHistoryState();
+  syncUiToRoute();
 
   return {
     map,

@@ -8,11 +8,11 @@ export function createPoiOverlay({
   onClose
 }) {
   if (!overlayEl || !frameEl) throw new Error("overlayEl and frameEl are required");
-
   let activePoiId = null;
   let activeBaseUrl = null;
   let pendingFrameUrl = null;
   let pendingFrameToken = null;
+  let activeFrameEl = frameEl;
 
   const COMPLETED_STORAGE_KEY = "discoverTG.completedPois.v1";
 
@@ -53,6 +53,46 @@ export function createPoiOverlay({
     }
   }
 
+  function attachFrameLoadListener(targetFrameEl) {
+    targetFrameEl.addEventListener("load", () => {
+      if (!pendingFrameUrl) return;
+      if (normalizeUrl(targetFrameEl.src) !== pendingFrameUrl) return;
+      pendingFrameUrl = null;
+      pendingFrameToken = null;
+      setLoading(false);
+      postStateToFrame();
+    });
+  }
+
+  function postMessageToFrame(message) {
+    try {
+      activeFrameEl.contentWindow?.postMessage(message, window.location.origin);
+    } catch {
+      // Ignore frames that are not ready yet.
+    }
+  }
+
+  function postStateToFrame() {
+    postMessageToFrame({
+      type: "poi-overlay-state",
+      poiId: activePoiId,
+      isComplete: activePoiId ? completedPois.has(activePoiId) : false
+    });
+  }
+
+  function stopEmbeddedMedia() {
+    postMessageToFrame({ type: "poi-overlay-stop-media" });
+  }
+
+  function replaceFrame(nextUrl) {
+    stopEmbeddedMedia();
+    const nextFrameEl = activeFrameEl.cloneNode(false);
+    nextFrameEl.src = nextUrl;
+    activeFrameEl.replaceWith(nextFrameEl);
+    activeFrameEl = nextFrameEl;
+    attachFrameLoadListener(activeFrameEl);
+  }
+
   function syncCompleteUi() {
     if (!completeBtnEl || !completeLabelEl) return;
     if (!activePoiId) return;
@@ -60,7 +100,8 @@ export function createPoiOverlay({
     const isDone = completedPois.has(activePoiId);
     completeBtnEl.classList.toggle("is-complete", isDone);
     completeBtnEl.setAttribute("aria-pressed", isDone ? "true" : "false");
-    completeLabelEl.textContent = isDone ? "Completed" : "Complete";
+    completeLabelEl.textContent = isDone ? "Ukończono" : "Zakończ";
+    postStateToFrame();
   }
 
   function buildTargetUrl(url, poiId) {
@@ -69,7 +110,7 @@ export function createPoiOverlay({
     return parsed.toString();
   }
 
-  function open({ url, poiId }) {
+  function applyOpenState({ url, poiId }) {
     activePoiId = poiId ?? null;
     activeBaseUrl = url ?? null;
 
@@ -81,29 +122,34 @@ export function createPoiOverlay({
     setLoading(true);
     setHidden(false);
     syncCompleteUi();
+    if (pendingFrameToken !== token) return;
 
-    const navigateToTarget = () => {
-      if (pendingFrameToken !== token) return;
-      frameEl.src = targetUrl;
-    };
-
-    if (normalizeUrl(frameEl.src) === "about:blank") {
-      navigateToTarget();
+    if (normalizeUrl(activeFrameEl.src) === targetUrl) {
+      pendingFrameUrl = null;
+      pendingFrameToken = null;
+      setLoading(false);
       return;
     }
 
-    frameEl.src = "about:blank";
-    setTimeout(navigateToTarget, 0);
+    replaceFrame(targetUrl);
   }
 
-  function close() {
+  function open({ url, poiId }) {
+    applyOpenState({ url, poiId });
+  }
+
+  function applyCloseState() {
+    stopEmbeddedMedia();
     pendingFrameUrl = null;
     pendingFrameToken = null;
     activeBaseUrl = null;
     activePoiId = null;
     setLoading(false);
-    frameEl.src = "about:blank";
     setHidden(true);
+  }
+
+  function close() {
+    applyCloseState();
   }
 
   function toggleComplete() {
@@ -130,19 +176,29 @@ export function createPoiOverlay({
   }
 
   function attachListeners() {
-    if (closeBtnEl) closeBtnEl.addEventListener("click", close);
     if (completeBtnEl) completeBtnEl.addEventListener("click", toggleComplete);
+    attachFrameLoadListener(activeFrameEl);
+    window.addEventListener("message", (event) => {
+      if (event.source !== activeFrameEl.contentWindow) return;
+      if (event.origin !== window.location.origin) return;
 
-    frameEl.addEventListener("load", () => {
-      if (!pendingFrameUrl) return;
-      if (normalizeUrl(frameEl.src) !== pendingFrameUrl) return;
-      pendingFrameUrl = null;
-      pendingFrameToken = null;
-      setLoading(false);
-    });
+      const { data } = event;
+      if (!data || typeof data.type !== "string") return;
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isOpen()) close();
+      if (data.type === "poi-overlay-close") {
+        if (closeBtnEl) closeBtnEl.click();
+        else close();
+        return;
+      }
+
+      if (data.type === "poi-overlay-toggle-complete") {
+        toggleComplete();
+        return;
+      }
+
+      if (data.type === "poi-overlay-request-state") {
+        postStateToFrame();
+      }
     });
   }
 

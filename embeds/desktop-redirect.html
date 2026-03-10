@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#f9d006",
+              "background-light": "#f8f8f5",
+              "background-dark": "#231f0f"
+            },
+            fontFamily: {
+              display: ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            }
+          }
+        }
+      };
+    </script>
+    <title>Discover TG - Desktop Redirect</title>
+  </head>
+  <body class="min-h-screen bg-white font-display text-slate-900 flex flex-col items-center justify-center">
+    <main class="flex w-full flex-col items-center justify-center p-6">
+      <div class="max-w-3xl w-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
+        <div class="bg-gradient-to-r from-primary via-primary to-yellow-500 px-8 py-12 text-center">
+          <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-background-dark shadow-lg">
+            <span class="material-symbols-outlined text-3xl text-primary">stay_primary_portrait</span>
+          </div>
+          <h1 class="mb-4 text-3xl font-extrabold leading-tight text-background-dark md:text-4xl">
+            This app is designed for mobile devices.
+          </h1>
+          <p class="mx-auto max-w-lg text-lg font-medium text-background-dark/80">
+            Experience our industrial and mining solutions optimized for your handheld device.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center p-8 md:p-12">
+          <div class="mb-8 rounded-xl border-4 border-primary bg-white p-4 shadow-inner">
+            <div
+              class="h-48 w-48 bg-cover bg-center bg-no-repeat"
+              data-alt="Large QR code for mobile app download"
+              style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAiyot6KSn9SBQt4uvWM302qNhbkcprUi8a8tleOz1RLYseRL850BHKHiTO28l2Vk8X_kOIXFR1hhzE9baydvZt-8Z8tEe3mL4-TYZvJhv_RCQCLoGc5VfRVC3p3NqLEUOcoqZPJabq-QmSA3uhnBPj5wrQGcQmAqGbrVvbWwjYIdjd2zRbcDvvSIoRngEtiPOLVMCGLves0SROCQZA-BDJPrudduk62nJmmzOpNL54ybFlkZ5GV5ytHo5pB1Z6ASqQwd7V8ZVvWvQ');"
+            ></div>
+          </div>
+
+          <div class="space-y-4 text-center">
+            <h3 class="text-xl font-bold">Scan to start exploring</h3>
+            <p class="mx-auto max-w-md text-slate-600 dark:text-slate-400">
+              Open your phone camera or QR scanner to open <span class="font-semibold text-primary">Discover TG</span> instantly. No installation required for the web preview.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

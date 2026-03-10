@@ -3,54 +3,765 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Historical Building</title>
-    <link rel="stylesheet" href="embeds.css" />
+    <title>Historical Site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      .desc {
-        white-space: pre-wrap;
-        line-height: 1.5;
+      :root {
+        color-scheme: light;
+        --poi-accent: #f9d006;
+        --poi-accent-strong: #f1be00;
+        --poi-ink: #171717;
+        --poi-subtle: #5f5f5f;
+        --poi-surface: #ffffff;
+        --poi-surface-muted: #faf8ef;
+        --poi-border: rgba(23, 23, 23, 0.1);
+        --poi-shadow: 0 24px 48px rgba(35, 31, 15, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Public Sans", sans-serif;
+        color: var(--poi-ink);
+        background:
+          radial-gradient(circle at top right, rgba(249, 208, 6, 0.22), transparent 30%),
+          linear-gradient(180deg, #fff9d6 0%, #fffef7 18%, #ffffff 45%);
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 0 16px 24px;
+      }
+
+      .page-header {
+        position: relative;
+        z-index: 2;
+        margin: 0 -16px;
+        padding: 16px 16px 0;
+        background: linear-gradient(180deg, rgba(249, 208, 6, 0.92), rgba(249, 208, 6, 0));
+      }
+
+      .page-header-bar {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 14px 10px;
+        border-bottom: 1px solid rgba(23, 23, 23, 0.08);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(14px);
+      }
+
+      .page-header-title {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--poi-ink);
+        cursor: pointer;
+      }
+
+      .icon-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .hero {
+        position: relative;
+        margin: 0 -16px;
+        padding: 0 16px 0;
+      }
+
+      .hero-image {
+        position: relative;
+        min-height: 320px;
+        border: 1px solid rgba(249, 208, 6, 0.24);
+        border-bottom-left-radius: 22px;
+        border-bottom-right-radius: 22px;
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgba(249, 208, 6, 0.22), rgba(255, 255, 255, 0.1)),
+          linear-gradient(160deg, #323232, #181818);
+        box-shadow: var(--poi-shadow);
+      }
+
+      .hero-image.has-image {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(249, 208, 6, 0.08), rgba(249, 208, 6, 0.02)),
+          linear-gradient(180deg, rgba(23, 23, 23, 0.06), rgba(23, 23, 23, 0.32));
+      }
+
+      .hero-image-fallback {
+        position: absolute;
+        inset: auto 20px 20px 20px;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        max-width: calc(100% - 40px);
+        padding: 12px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        color: var(--poi-ink);
+        backdrop-filter: blur(12px);
+      }
+
+      .hero-image-fallback[hidden] {
+        display: none;
+      }
+
+      .hero-image-fallback-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(249, 208, 6, 0.18);
+        font-size: 20px;
+      }
+
+      .content {
+        max-width: 760px;
+        margin: 0 auto;
+        padding-top: 28px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(249, 208, 6, 0.18);
+        color: rgba(23, 23, 23, 0.8);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 16px 0 10px;
+        font-size: clamp(2rem, 6vw, 2.75rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .lede {
+        margin: 0;
+        color: var(--poi-subtle);
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin: 28px 0;
+        padding: 20px 0;
+        border-top: 1px solid var(--poi-border);
+        border-bottom: 1px solid var(--poi-border);
+      }
+
+      .detail-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .detail-card[hidden] {
+        display: none;
+      }
+
+      .detail-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: rgba(249, 208, 6, 0.14);
+        font-size: 20px;
+      }
+
+      .detail-meta {
+        min-width: 0;
+      }
+
+      .detail-label {
+        margin: 0 0 3px;
+        color: #6a6a6a;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .detail-value {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .section-title {
+        margin: 0 0 14px;
+        font-size: 1.25rem;
+        line-height: 1.2;
+      }
+
+      .markdown {
+        display: grid;
+        gap: 16px;
+        color: #333;
+        line-height: 1.75;
+      }
+
+      .markdown > :first-child {
+        margin-top: 0;
+      }
+
+      .markdown > :last-child {
+        margin-bottom: 0;
+      }
+
+      .markdown h2,
+      .markdown h3,
+      .markdown h4 {
+        color: var(--poi-ink);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      .markdown h2 {
+        margin: 12px 0 0;
+        font-size: 1.65rem;
+      }
+
+      .markdown h3 {
+        margin: 10px 0 0;
+        font-size: 1.3rem;
+      }
+
+      .markdown h4 {
+        margin: 8px 0 0;
+        font-size: 1.05rem;
+      }
+
+      .markdown p,
+      .markdown ul,
+      .markdown ol,
+      .markdown blockquote {
+        margin: 0;
+      }
+
+      .markdown ul,
+      .markdown ol {
+        padding-left: 1.4rem;
+      }
+
+      .markdown li + li {
+        margin-top: 0.35rem;
+      }
+
+      .markdown a {
+        color: #7b5f00;
+        font-weight: 600;
+        text-decoration-thickness: 2px;
+      }
+
+      .markdown strong {
+        color: var(--poi-ink);
+      }
+
+      .markdown blockquote {
+        padding: 14px 16px;
+        border-left: 4px solid var(--poi-accent);
+        border-radius: 0 14px 14px 0;
+        background: var(--poi-surface-muted);
+        color: #434343;
+      }
+
+      .status {
+        margin: 32px 0 0;
+        padding: 18px 20px;
+        border: 1px solid var(--poi-border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.75);
+        color: #4a4a4a;
+        box-shadow: 0 12px 28px rgba(23, 23, 23, 0.06);
+      }
+
+      .status strong {
+        color: var(--poi-ink);
+      }
+
+      .complete-row {
+        display: flex;
+        margin-top: 22px;
+      }
+
+      .complete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--poi-accent);
+        color: #fff;
+        font: inherit;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 12px 22px rgba(249, 208, 6, 0.34);
+      }
+
+      .complete-btn:hover {
+        background: var(--poi-accent-strong);
+      }
+
+      .complete-btn.is-complete {
+        background: #171717;
+        box-shadow: 0 12px 22px rgba(23, 23, 23, 0.22);
+      }
+
+      .complete-btn-icon {
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      @media (max-width: 640px) {
+        .hero-image {
+          min-height: 250px;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="card">
-      <h1 id="buildingTitle">Historical Building</h1>
-      <p class="muted desc" id="buildingDesc">Loading building information...</p>
-    </div>
+    <main class="page">
+      <header class="page-header">
+        <div class="page-header-bar">
+          <button class="icon-btn" id="backButton" type="button" aria-label="Back">
+            &#x2190;
+          </button>
+          <p class="page-header-title" id="headerTitle">Historical Site</p>
+          <div aria-hidden="true"></div>
+        </div>
+      </header>
+
+      <div class="hero">
+        <div class="hero-image" id="heroImage" role="img" aria-label="Historical site image">
+          <div class="hero-image-fallback" id="heroFallback">
+            <span class="hero-image-fallback-icon" aria-hidden="true">&#x1F3DB;</span>
+            <span id="heroFallbackText">No illustration provided for this location.</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="content">
+        <div class="eyebrow">Historical Site</div>
+        <h1 id="pageTitle">Historical Site</h1>
+        <p class="lede" id="pageLead">Loading location information...</p>
+        <div class="complete-row">
+          <button class="complete-btn" id="completeButton" type="button" aria-pressed="false">
+            <span class="complete-btn-icon" id="completeButtonIcon">&#x2713;</span>
+            <span id="completeButtonLabel">Zakończ</span>
+          </button>
+        </div>
+
+        <div class="details-grid" id="detailsGrid">
+          <article class="detail-card" id="hoursCard">
+            <div class="detail-icon" aria-hidden="true">&#x1F558;</div>
+            <div class="detail-meta">
+              <p class="detail-label">Hours</p>
+              <p class="detail-value" id="hoursValue"></p>
+            </div>
+          </article>
+
+          <article class="detail-card" id="locationCard">
+            <div class="detail-icon" aria-hidden="true">&#x1F4CD;</div>
+            <div class="detail-meta">
+              <p class="detail-label">Location</p>
+              <p class="detail-value" id="locationValue"></p>
+            </div>
+          </article>
+        </div>
+
+        <section id="bodySection" hidden>
+          <h2 class="section-title" id="bodyHeading">About This Site</h2>
+          <div class="markdown" id="pageBody"></div>
+        </section>
+
+        <div class="status" id="statusBox">Loading content...</div>
+      </section>
+    </main>
 
     <script type="module">
-      const titleEl = document.getElementById("buildingTitle");
-      const descEl = document.getElementById("buildingDesc");
+      const DEFAULT_LOCATION = "Tarnowskie Gory";
+      const DEFAULT_TITLE = "Historical Site";
       const params = new URLSearchParams(window.location.search);
       const poiId = params.get("poiId");
 
+      const elements = {
+        heroImage: document.getElementById("heroImage"),
+        heroFallback: document.getElementById("heroFallback"),
+        heroFallbackText: document.getElementById("heroFallbackText"),
+        pageTitle: document.getElementById("pageTitle"),
+        headerTitle: document.getElementById("headerTitle"),
+        pageLead: document.getElementById("pageLead"),
+        backButton: document.getElementById("backButton"),
+        completeButton: document.getElementById("completeButton"),
+        completeButtonLabel: document.getElementById("completeButtonLabel"),
+        hoursCard: document.getElementById("hoursCard"),
+        hoursValue: document.getElementById("hoursValue"),
+        locationCard: document.getElementById("locationCard"),
+        locationValue: document.getElementById("locationValue"),
+        detailsGrid: document.getElementById("detailsGrid"),
+        bodySection: document.getElementById("bodySection"),
+        bodyHeading: document.getElementById("bodyHeading"),
+        pageBody: document.getElementById("pageBody"),
+        statusBox: document.getElementById("statusBox")
+      };
+
+      function escapeHtml(text) {
+        return text
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function slugToTitle(value) {
+        return value
+          .split("-")
+          .filter(Boolean)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(" ");
+      }
+
+      function renderInlineMarkdown(text) {
+        let output = escapeHtml(text);
+        output = output.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+        output = output.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+        output = output.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+        output = output.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+        output = output.replace(/_([^_]+)_/g, "<em>$1</em>");
+        output = output.replace(/`([^`]+)`/g, "<code>$1</code>");
+        return output;
+      }
+
+      function parseMarkdown(markdown) {
+        const lines = markdown.replace(/\r\n?/g, "\n").split("\n");
+        const blocks = [];
+        let paragraph = [];
+        let list = null;
+        let blockquote = [];
+
+        function flushParagraph() {
+          if (!paragraph.length) return;
+          blocks.push(`<p>${renderInlineMarkdown(paragraph.join("<br />"))}</p>`);
+          paragraph = [];
+        }
+
+        function flushList() {
+          if (!list) return;
+          const tag = list.ordered ? "ol" : "ul";
+          blocks.push(`<${tag}>${list.items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</${tag}>`);
+          list = null;
+        }
+
+        function flushBlockquote() {
+          if (!blockquote.length) return;
+          blocks.push(`<blockquote>${renderInlineMarkdown(blockquote.join("<br />"))}</blockquote>`);
+          blockquote = [];
+        }
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+
+          if (!trimmed) {
+            flushParagraph();
+            flushList();
+            flushBlockquote();
+            continue;
+          }
+
+          const headingMatch = trimmed.match(/^(#{1,4})\s+(.*)$/);
+          if (headingMatch) {
+            flushParagraph();
+            flushList();
+            flushBlockquote();
+            const level = headingMatch[1].length;
+            blocks.push(`<h${level + 1}>${renderInlineMarkdown(headingMatch[2])}</h${level + 1}>`);
+            continue;
+          }
+
+          const quoteMatch = trimmed.match(/^>\s?(.*)$/);
+          if (quoteMatch) {
+            flushParagraph();
+            flushList();
+            blockquote.push(quoteMatch[1]);
+            continue;
+          }
+
+          const orderedMatch = trimmed.match(/^\d+\.\s+(.*)$/);
+          if (orderedMatch) {
+            flushParagraph();
+            flushBlockquote();
+            if (!list || !list.ordered) list = { ordered: true, items: [] };
+            list.items.push(orderedMatch[1]);
+            continue;
+          }
+
+          const unorderedMatch = trimmed.match(/^[-*]\s+(.*)$/);
+          if (unorderedMatch) {
+            flushParagraph();
+            flushBlockquote();
+            if (!list || list.ordered) list = { ordered: false, items: [] };
+            list.items.push(unorderedMatch[1]);
+            continue;
+          }
+
+          flushList();
+          flushBlockquote();
+          paragraph.push(trimmed);
+        }
+
+        flushParagraph();
+        flushList();
+        flushBlockquote();
+        return blocks.join("");
+      }
+
+      function parseFrontMatter(rawText) {
+        const normalized = rawText.replace(/\r\n?/g, "\n");
+        if (!normalized.startsWith("---\n")) {
+          return { attributes: {}, body: normalized.trim() };
+        }
+
+        const closingIndex = normalized.indexOf("\n---\n", 4);
+        if (closingIndex === -1) {
+          return { attributes: {}, body: normalized.trim() };
+        }
+
+        const header = normalized.slice(4, closingIndex);
+        const body = normalized.slice(closingIndex + 5).trim();
+        const attributes = {};
+
+        for (const line of header.split("\n")) {
+          const separatorIndex = line.indexOf(":");
+          if (separatorIndex === -1) continue;
+          const key = line.slice(0, separatorIndex).trim();
+          const value = line.slice(separatorIndex + 1).trim();
+          if (!key) continue;
+          attributes[key] = value.replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+        }
+
+        return { attributes, body };
+      }
+
+      async function fetchJsonRecord(id) {
+        const response = await fetch("../data/historical-buildings.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        const items = Array.isArray(payload?.data) ? payload.data : [];
+        return items.find((item) => item?.id === id) ?? null;
+      }
+
+      async function fetchMarkdownRecord(id) {
+        const response = await fetch(`../content/historical-buildings/${encodeURIComponent(id)}.md`, {
+          cache: "no-store"
+        });
+
+        if (response.status === 404) return null;
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const rawText = await response.text();
+        const { attributes, body } = parseFrontMatter(rawText);
+        return {
+          title: attributes.title || null,
+          lead: attributes.lead || null,
+          hours: attributes.hours || null,
+          location: attributes.location || null,
+          image: attributes.image || null,
+          imageAlt: attributes.imageAlt || attributes.image_alt || null,
+          sectionTitle: attributes.sectionTitle || attributes.section_title || null,
+          body
+        };
+      }
+
+      function extractLeadFromText(text) {
+        const clean = (text || "").trim();
+        if (!clean) return "";
+        const [firstBlock] = clean.split(/\n\s*\n/);
+        return firstBlock.replace(/\n+/g, " ").trim();
+      }
+
+      function applyViewModel(model) {
+        elements.pageTitle.textContent = model.title || DEFAULT_TITLE;
+        elements.headerTitle.textContent = model.title || DEFAULT_TITLE;
+        elements.pageLead.textContent = model.lead || "Explore the story behind this location.";
+
+        if (model.image) {
+          elements.heroImage.classList.add("has-image");
+          elements.heroImage.style.backgroundImage = `url("${model.image.replaceAll('"', '\\"')}")`;
+          elements.heroImage.setAttribute("aria-label", model.imageAlt || model.title || DEFAULT_TITLE);
+          elements.heroFallback.hidden = true;
+        } else {
+          elements.heroImage.classList.remove("has-image");
+          elements.heroImage.style.backgroundImage = "";
+          elements.heroImage.setAttribute("aria-label", model.imageAlt || model.title || DEFAULT_TITLE);
+          elements.heroFallback.hidden = false;
+          elements.heroFallbackText.textContent = model.imageAlt || "No illustration provided for this location.";
+        }
+
+        const hours = (model.hours || "").trim();
+        elements.hoursCard.hidden = !hours;
+        elements.hoursValue.textContent = hours;
+
+        const location = (model.location || DEFAULT_LOCATION).trim();
+        elements.locationCard.hidden = !location;
+        elements.locationValue.textContent = location;
+
+        const showDetailsGrid = !elements.hoursCard.hidden || !elements.locationCard.hidden;
+        elements.detailsGrid.hidden = !showDetailsGrid;
+
+        const body = (model.body || "").trim();
+        if (body) {
+          elements.bodySection.hidden = false;
+          elements.bodyHeading.textContent = model.sectionTitle || "About This Site";
+          elements.pageBody.innerHTML = parseMarkdown(body);
+        } else {
+          elements.bodySection.hidden = true;
+          elements.pageBody.innerHTML = "";
+        }
+
+        elements.statusBox.hidden = true;
+      }
+
+      function postToParent(message) {
+        if (window.parent === window) return;
+        window.parent.postMessage(message, window.location.origin);
+      }
+
+      function syncCompleteButton(isComplete) {
+        elements.completeButton.classList.toggle("is-complete", isComplete);
+        elements.completeButton.setAttribute("aria-pressed", isComplete ? "true" : "false");
+        elements.completeButtonLabel.textContent = isComplete ? "Ukończono" : "Zakończ";
+      }
+
+      elements.backButton.addEventListener("click", () => {
+        postToParent({ type: "poi-overlay-close" });
+      });
+
+      elements.completeButton.addEventListener("click", () => {
+        postToParent({ type: "poi-overlay-toggle-complete" });
+      });
+
+      window.addEventListener("message", (event) => {
+        if (event.origin !== window.location.origin) return;
+        const { data } = event;
+        if (!data || data.type !== "poi-overlay-state") return;
+        syncCompleteButton(Boolean(data.isComplete));
+      });
+
       async function init() {
+        postToParent({ type: "poi-overlay-request-state" });
         if (!poiId) {
-          titleEl.textContent = "Historical Building";
-          descEl.textContent = "Building details are not available for this marker.";
+          applyViewModel({
+            title: DEFAULT_TITLE,
+            lead: "This embedded page was opened without a POI identifier.",
+            location: DEFAULT_LOCATION,
+            body: "Building details are not available for this marker."
+          });
           return;
         }
 
         try {
-          const response = await fetch("../data/historical-buildings.json", { cache: "no-store" });
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const payload = await response.json();
-          const items = Array.isArray(payload?.data) ? payload.data : [];
-          const building = items.find((item) => item?.id === poiId);
+          const [markdownRecord, jsonRecord] = await Promise.all([
+            fetchMarkdownRecord(poiId),
+            fetchJsonRecord(poiId).catch(() => null)
+          ]);
 
-          if (!building) {
-            titleEl.textContent = "Historical Building";
-            descEl.textContent = "Building details are not available for this marker.";
+          if (!markdownRecord && !jsonRecord) {
+            applyViewModel({
+              title: slugToTitle(poiId),
+              lead: "No page content has been created for this marker yet.",
+              location: DEFAULT_LOCATION,
+              body: "Add a Markdown file in `content/historical-buildings/` to author this page."
+            });
             return;
           }
 
-          titleEl.textContent = building.label || "Historical Building";
-          descEl.textContent =
-            building.description || "No description provided for this building.";
+          const fallbackText = jsonRecord?.description || "";
+          applyViewModel({
+            title: markdownRecord?.title || jsonRecord?.label || slugToTitle(poiId),
+            lead: markdownRecord?.lead || extractLeadFromText(markdownRecord?.body || fallbackText) || "Explore the story behind this location.",
+            hours: markdownRecord?.hours || "",
+            location: markdownRecord?.location || DEFAULT_LOCATION,
+            image: markdownRecord?.image || "",
+            imageAlt: markdownRecord?.imageAlt || "",
+            sectionTitle: markdownRecord?.sectionTitle || "About This Site",
+            body: markdownRecord?.body || fallbackText || "No description provided for this location."
+          });
         } catch (error) {
           console.error(error);
-          titleEl.textContent = "Historical Building";
-          descEl.textContent = "Could not load historical building data.";
+          applyViewModel({
+            title: DEFAULT_TITLE,
+            lead: "Could not load this historical site.",
+            location: DEFAULT_LOCATION,
+            body: "Check the console for the fetch error and confirm the related Markdown or JSON source exists."
+          });
         }
       }
 
