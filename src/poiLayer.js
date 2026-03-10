@@ -3,7 +3,7 @@ import { POI_THEME } from "./poiTheme.js";
 export function createPoiLayer({
   map,
   overlay,
-  labelZoomThreshold = 19,
+  labelZoomThreshold = 21,
   dotZoomThreshold = 18
 }) {
   if (!map) throw new Error("createPoiLayer requires map");

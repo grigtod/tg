@@ -3,13 +3,13 @@
                  {
                      "id":  "hb-ratusz-w-tarnowskich-g-rach",
                      "lat":  50.44415,
-                     "lon":  18.8554849,
+                     "lon":  18.8555849,
                      "label":  "Ratusz w Tarnowskich Górach",
                      "description":  "Town Hall (Ratusz), Rynek\nLandmark Neo Renaissance town hall built 1896 to 1898 on the Market Square."
                  },
                  {
                      "id":  "hb-tarnowskie-g-ry-museum",
-                     "lat":  50.4442598,
+                     "lat":  50.4442198,
                      "lon":  18.8549129,
                      "label":  "Tarnowskie Góry Museum",
                      "description":  "Museum of Tarnowskie Góry in the Petrasch Tenement House (Kamienica Petrascha), Rynek 1\nThe museum is housed in a historic building with origins likely in the 16th century, later reshaped including an 1864 rebuilding."
@@ -65,7 +65,7 @@
                  },
                  {
                      "id":  "hb-dom-cochlera-rynek-5",
-                     "lat":  50.4442038,
+                     "lat":  50.4442138,
                      "lon":  18.8560139,
                      "label":  "Dom Cochlera",
                      "description":  "Dom Cochlera (Rynek 5)\nWybudowany w XVII w., przebudowany w XIX w. Obecnie mieści się tu najstarsza w mieście apteka „Pod Aniołem”, założona około 1790 r. przez burmistrza Cochlera. W pomieszczeniach apteki zachowały się sklepienia krzyżowe. W latach 1839-1855 w budynku mieściła się Szkoła Górnicza. W zewnętrznej elewacji frontowej znajduje się figura aniołka."
@@ -85,15 +85,15 @@
                      "description":  "Dzwonnica Gwarków\nPoczątki tarnogórskiej dzwonnicy sięgają już XVI w. Późniejszą z XIX w. przeniesiono na plac Gwarków w 1955 r. dzięki inicjatywie Stowarzyszenia Miłośników Historii i Zabytków Ziemi Tarnogórskiej z kamieniołomu w Bobrownikach Śląskich. Ustawiono ją na miejscu dawnego domu zbornego gwarków. Wykonana w całości z drewna stoi na podmurowaniu z kamienia wapiennego. Pod namiotowym dachem, który pokryty jest gontem, umieszczono dzwonek szychtowy."
                  },
                  {
-                     "id":  "hb-dom-petrascha-rynek-2",
-                     "lat":  50.4442503,
-                     "lon":  18.8551646,
+                     "id":  "hb-dom-petrascha-rynek-2", 
+                     "lat":  50.4441503,
+                     "lon":  18.8551573,
                      "label":  "Dom Petrascha",
                      "description":  "Z wybudowanego w XVI w. domu pozostały piwnice posiadające sklepienia kolebkowe. Przebudowany w II poł. XIX w. W pierwszej poł. XVIII w. właścicielem budynku był mistrz pocztowy Ferdynand Petrasch, który założył w nim w 1713 r. pierwszą tarnogórską księgarnię."
                  },
                  {
                      "id":  "hb-dom-wieprzowskiego-rynek-3",
-                     "lat":  50.44427,
+                     "lat":  50.44428,
                      "lon":  18.8552244,
                      "label":  "Dom Wieprzowskiego",
                      "description":  "Wybudowany w XVII w., powiększony w XVIII w., a przebudowany w 1890. W dolnej części sieni zachowały się sklepienia krzyżowo-kolebkowe"
@@ -184,7 +184,7 @@
                  },
                  {
                      "id":  "hb-galeria-pod-nad",
-                     "lat":  50.4442277,
+                     "lat":  50.4443000,
                      "lon":  18.8546282,
                      "label":  "Galeria Pod-Nad",
                      "description":  ""
