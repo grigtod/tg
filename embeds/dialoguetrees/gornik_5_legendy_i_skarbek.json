@@ -1,0 +1,221 @@
+{
+  "start": {
+    "text": "Właśnie wyszedłem z dołu, ale nie wszystko, co tam zostało, da się tak łatwo zostawić za sobą. Pod ziemią bali się nie tylko ciemności. Czasem bardziej bali się tego, czego nie dało się zobaczyć. Chcesz posłuchać o Skarbku i tajemnicach podziemi?",
+    "options": [
+      {
+        "text": "Kim był Skarbek?",
+        "next": "l1_1"
+      },
+      {
+        "text": "Czy górnicy wierzyli w duchy kopalni?",
+        "next": "l1_2"
+      },
+      {
+        "text": "Po co im były takie opowieści?",
+        "next": "l1_3"
+      }
+    ],
+    "uuid": "e38891d0-037b-4743-a864-e0ce387e2c77",
+    "audio_file": "start_e38891d0-037b-4743-a864-e0ce387e2c77.mp3"
+  },
+  "l1_1": {
+    "text": "Skarbek, zwany też Skarbnikiem, był w śląskich opowieściach strażnikiem podziemi. Mógł ostrzegać górników, pomagać tym, którzy zachowywali pokorę, albo karać tych, którzy byli pazerni i lekkomyślni. W takich legendach nie chodziło tylko o strach, ale też o przypomnienie, że kopalnia jest miejscem, które wymaga szacunku.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "bc168916-efd0-4f59-ae74-cbddc733a64b",
+    "audio_file": "l1_1_bc168916-efd0-4f59-ae74-cbddc733a64b.mp3"
+  },
+  "l1_2": {
+    "text": "Wielu wierzyło, bo pod ziemią łatwo było poczuć, że człowiek nie jest sam. Ciemność, echo, wilgoć, dziwne odgłosy i nagłe niebezpieczeństwa działały na wyobraźnię mocniej niż cokolwiek na powierzchni. Legendy wyrastały więc z prawdziwego doświadczenia lęku i z potrzeby nadania mu sensu.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "66f1dd52-3773-4ecb-b7a9-da567fb67e09",
+    "audio_file": "l1_2_66f1dd52-3773-4ecb-b7a9-da567fb67e09.mp3"
+  },
+  "l1_3": {
+    "text": "Bo legenda pomagała oswoić strach i uporządkować to, czego nie dało się łatwo wytłumaczyć. Dawała język do mówienia o niebezpieczeństwie, pokorze i odpowiedzialności za własne zachowanie. W świecie, gdzie codziennie schodziło się w mrok i wilgoć, takie opowieści miały wielką siłę.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "c91e3fd0-0fc7-424e-8c65-bdbc676d2bdb",
+    "audio_file": "l1_3_c91e3fd0-0fc7-424e-8c65-bdbc676d2bdb.mp3"
+  },
+  "prompt_2": {
+    "text": "Skarbek nie był tylko straszakiem. Czasem traktowano go jak opiekuna porządku pod ziemią.",
+    "options": [
+      {
+        "text": "Jak Skarbek pomagał?",
+        "next": "l2_1"
+      },
+      {
+        "text": "Kiedy mógł zaszkodzić?",
+        "next": "l2_2"
+      },
+      {
+        "text": "Czy to były tylko bajki dla dzieci?",
+        "next": "l2_3"
+      }
+    ],
+    "uuid": "5ae1f6bf-226d-4d1e-8f44-7920da05cccf",
+    "audio_file": "prompt_2_5ae1f6bf-226d-4d1e-8f44-7920da05cccf.mp3"
+  },
+  "l2_1": {
+    "text": "W opowieściach ostrzegał przed zagrożeniem, dawał znaki i podpowiadał, kiedy lepiej się wycofać albo zachować większą ostrożność. Bywał przedstawiany nie jako wróg człowieka, ale jako ktoś, kto pilnuje porządku pod ziemią. Dzięki temu legenda miała w sobie nie tylko grozę, ale też poczucie opieki.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "53871e44-4d95-4c7d-b90c-0153330ac73b",
+    "audio_file": "l2_1_53871e44-4d95-4c7d-b90c-0153330ac73b.mp3"
+  },
+  "l2_2": {
+    "text": "Najczęściej wtedy, gdy ktoś był pazerny, zuchwały albo nie szanował miejsca pracy i innych ludzi. W legendzie Skarbek przypominał, że pod ziemią nie ma miejsca na pychę i lekkomyślność. To była forma moralnej przestrogi, która mówiła górnikom, jak powinni się zachowywać.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "f22ec519-b4b0-4880-90db-60ed8c413535",
+    "audio_file": "l2_2_f22ec519-b4b0-4880-90db-60ed8c413535.mp3"
+  },
+  "l2_3": {
+    "text": "Nie tylko. Dzieci oczywiście słuchały tych historii, ale legendy działały też na dorosłych, bo mówiły o bardzo realnych lękach i zagrożeniach. To były opowieści, które pomagały zrozumieć kopalnię jako miejsce pełne tajemnicy, ale też wymagające rozsądku i pokory.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "5fd831ae-ffad-432b-9844-1c675dcd4bf7",
+    "audio_file": "l2_3_5fd831ae-ffad-432b-9844-1c675dcd4bf7.mp3"
+  },
+  "prompt_3": {
+    "text": "W kopalni, gdzie było ciemno, mokro i niebezpiecznie, legenda miała większą siłę niż na powierzchni.",
+    "options": [
+      {
+        "text": "Czy legendy miały związek z wodą i ciemnością?",
+        "next": "l3_1"
+      },
+      {
+        "text": "Czy dzieci też je znały?",
+        "next": "l3_2"
+      },
+      {
+        "text": "Czy obok Skarbka ważna była też święta Barbara?",
+        "next": "l3_3"
+      }
+    ],
+    "uuid": "b6107437-c9c6-44e5-948f-f83994802e10",
+    "audio_file": "prompt_3_b6107437-c9c6-44e5-948f-f83994802e10.mp3"
+  },
+  "l3_1": {
+    "text": "Oczywiście. Dziwne odgłosy, cień, echo, wilgoć i wszechobecna woda potrafiły zmienić zwykły strach w poczucie, że w kopalni działa coś nadprzyrodzonego. Im trudniejsze i bardziej nieprzewidywalne było miejsce pracy, tym łatwiej rodziły się historie o niewidzialnych siłach czuwających pod ziemią.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "09455815-7fa2-4bbe-9b0a-2f8df8c3b065",
+    "audio_file": "l3_1_09455815-7fa2-4bbe-9b0a-2f8df8c3b065.mp3"
+  },
+  "l3_2": {
+    "text": "Tak, legendy przechodziły z pokolenia na pokolenie i były częścią wychowania w rodzinach związanych z kopalnią. Dzięki nim dzieci poznawały świat górników jeszcze zanim zrozumiały technikę i ciężar tej pracy. Opowieści budowały wyobraźnię, ale też szacunek do miejsca, które dla dorosłych było codziennością.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "50aa3eab-a521-47aa-a7e7-0270d5870322",
+    "audio_file": "l3_2_50aa3eab-a521-47aa-a7e7-0270d5870322.mp3"
+  },
+  "l3_3": {
+    "text": "Tak. Skarbek należał do świata ludowych wierzeń i opowieści, a święta Barbara do religijnej opieki i górniczej tradycji. Jedno i drugie współistniało, bo człowiek pracujący w niebezpiecznym miejscu potrzebował zarówno legend, które tłumaczyły lęk, jak i wiary, która dawała nadzieję na bezpieczny powrót.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "787fedd5-739c-441c-b097-9b5b4818b2a2",
+    "audio_file": "l3_3_787fedd5-739c-441c-b097-9b5b4818b2a2.mp3"
+  },
+  "prompt_4": {
+    "text": "Najciekawsze w tych legendach jest to, że nie mówiły tylko o strachu. One też uczyły, jak zachować się pod ziemią.",
+    "options": [
+      {
+        "text": "Czego legenda o Skarbku uczyła górników?",
+        "next": "l4_1"
+      },
+      {
+        "text": "Dlaczego takie opowieści przetrwały tak długo?",
+        "next": "l4_2"
+      },
+      {
+        "text": "Czy legendy mogły wpływać na prawdziwe zachowanie ludzi?",
+        "next": "l4_3"
+      }
+    ],
+    "uuid": "e2233329-a19b-4b31-a9d4-4d0df95fa833",
+    "audio_file": "prompt_4_e2233329-a19b-4b31-a9d4-4d0df95fa833.mp3"
+  },
+  "l4_1": {
+    "text": "Przede wszystkim pokory, ostrożności i szacunku do kopalni. Przypominała, że pod ziemią nie wolno być pysznym, lekkomyślnym ani zachłannym, bo takie zachowanie może źle się skończyć. Nawet jeśli ktoś traktował tę historię bardziej jako opowieść niż dosłowną prawdę, jej sens pozostawał bardzo praktyczny.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "9e6cb9cb-96de-4ded-9df8-cff315409b78",
+    "audio_file": "l4_1_9e6cb9cb-96de-4ded-9df8-cff315409b78.mp3"
+  },
+  "l4_2": {
+    "text": "Bo wyrastały z doświadczeń, które przez wieki pozostawały podobne. Ciemność, wilgoć, zagrożenie i niepewność towarzyszyły górnikom niezależnie od epoki, więc opowieści o Skarbku ciągle znajdowały w tym świecie swoje miejsce. Przetrwały, bo mówiły o czymś, co ludzie naprawdę czuli.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "d483033a-f4bc-478a-9e9d-6e8f7141010e",
+    "audio_file": "l4_2_d483033a-f4bc-478a-9e9d-6e8f7141010e.mp3"
+  },
+  "l4_3": {
+    "text": "Tak, nawet jeśli ktoś nie wierzył w nie dosłownie. Takie historie wpływały na sposób myślenia o pracy, niebezpieczeństwie i odpowiedzialności za własne decyzje. Mogły wzmacniać ostrożność, uczyć szacunku do kopalni i przypominać, że pod ziemią człowiek nigdy nie powinien czuć się zbyt pewnie.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "4f4b815d-deb1-4ed2-b45e-9de793378494",
+    "audio_file": "l4_3_4f4b815d-deb1-4ed2-b45e-9de793378494.mp3"
+  },
+  "end": {
+    "text": "Ode mnie to już wszystko. Muszę wracać do roboty, a legendy niech zostaną tu, pod ziemią. Idź do kolejnego górnika, bo każdy z nos opowiado po swojemu.",
+    "options": [
+      {
+        "text": "Rozpocznij rozmowę od nowa",
+        "next": "start"
+      }
+    ],
+    "uuid": "bfd406c3-6f6a-4e19-88cf-f52a7d844774",
+    "audio_file": "end_bfd406c3-6f6a-4e19-88cf-f52a7d844774.mp3"
+  }
+}

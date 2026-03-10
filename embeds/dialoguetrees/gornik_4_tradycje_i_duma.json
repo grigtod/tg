@@ -1,0 +1,221 @@
+{
+  "start": {
+    "text": "Żech już po robocie, to mogę ci powiedzieć, że górnik nie żyje samą pracą. Górnik bez tradycji jest jak szyb bez liny. Niby stoi, ale czegoś mu brakuje. Chcesz posłuchać o honorze, zwyczajach i górniczej dumie?",
+    "options": [
+      {
+        "text": "Po co górnikom były tradycje?",
+        "next": "l1_1"
+      },
+      {
+        "text": "Po co noszono galowe mundury?",
+        "next": "l1_2"
+      },
+      {
+        "text": "Kim była święta Barbara?",
+        "next": "l1_3"
+      }
+    ],
+    "uuid": "ef0b2c07-3684-4a1f-9c95-5311dd139ffa",
+    "audio_file": "start_ef0b2c07-3684-4a1f-9c95-5311dd139ffa.mp3"
+  },
+  "l1_1": {
+    "text": "Tradycje spajały ludzi i przypominały im, że należą do większej wspólnoty. W świecie ciężkiej pracy, ryzyka i zmęczenia dawały poczucie sensu, ciągłości i dumy z zawodu. Dzięki nim górnik nie był tylko człowiekiem od roboty pod ziemią, ale częścią świata z własnymi znakami, świętami i pamięcią.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "b179f889-8ffa-4bc2-9a2c-0a6c5b7b62ed",
+    "audio_file": "l1_1_b179f889-8ffa-4bc2-9a2c-0a6c5b7b62ed.mp3"
+  },
+  "l1_2": {
+    "text": "Galowy mundur nie był zwykłym strojem, tylko znakiem godności zawodu i przynależności do górniczego stanu. Kiedy górnik go zakładał, pokazywał, że reprezentuje coś większego niż własną osobę. To był sposób na okazanie szacunku wobec uroczystości, wspólnoty i całej tradycji związanej z tą pracą.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "1ff737e9-5ef9-4922-a1ff-10b75ffedfa9",
+    "audio_file": "l1_2_1ff737e9-5ef9-4922-a1ff-10b75ffedfa9.mp3"
+  },
+  "l1_3": {
+    "text": "Święta Barbara była patronką górników i symbolem opieki nad tymi, którzy schodzili pod ziemię. Dla wielu ludzi nie była tylko postacią z religijnej tradycji, ale źródłem nadziei, że człowiek wróci bezpiecznie z dołu. W świecie pełnym zagrożeń taka opieka miała wielkie znaczenie psychiczne i wspólnotowe.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "014fb4b4-6a4e-453a-87d9-5a6178680283",
+    "audio_file": "l1_3_014fb4b4-6a4e-453a-87d9-5a6178680283.mp3"
+  },
+  "prompt_2": {
+    "text": "Im cięższa robota, tym bardziej człowiek potrzebuje znaków, że nie jest w tym sam.",
+    "options": [
+      {
+        "text": "Czy dzieci znały te zwyczaje?",
+        "next": "l2_1"
+      },
+      {
+        "text": "Czy tradycje pomagały znosić trud pracy?",
+        "next": "l2_2"
+      },
+      {
+        "text": "Czy wspólnota górników była naprawdę silna?",
+        "next": "l2_3"
+      }
+    ],
+    "uuid": "d82c0e50-2ac5-48f2-a705-b6d2c20fcc40",
+    "audio_file": "prompt_2_d82c0e50-2ac5-48f2-a705-b6d2c20fcc40.mp3"
+  },
+  "l2_1": {
+    "text": "Tak, dzieci dorastały pośród tych świąt, opowieści, mundurów i znaków, więc od małego wiedziały, czym jest górniczy świat. Tradycja nie zaczynała się dopiero wtedy, gdy człowiek schodził do pracy, ale dużo wcześniej, w domu i w lokalnej wspólnocie. Dzięki temu pamięć o zawodzie przechodziła z pokolenia na pokolenie.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "b35b4f08-efab-4b5e-b459-d8b9d8de6b65",
+    "audio_file": "l2_1_b35b4f08-efab-4b5e-b459-d8b9d8de6b65.mp3"
+  },
+  "l2_2": {
+    "text": "Bardzo. Dawały ludziom sens, oparcie i przekonanie, że ich trud nie jest anonimowy ani pozbawiony znaczenia. Uroczystości, znaki i wspólne obrzędy przypominały, że za codziennym zmęczeniem stoi zawód, z którego można być dumnym i który ma swoje miejsce w historii.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "308085df-8b0f-4efa-9e46-c7e94eb49adc",
+    "audio_file": "l2_2_308085df-8b0f-4efa-9e46-c7e94eb49adc.mp3"
+  },
+  "l2_3": {
+    "text": "Tak, bo wspólne ryzyko i wspólna praca bardzo zbliżały ludzi do siebie. Górnicy wiedzieli, że pod ziemią zależą od siebie nawzajem, a to budowało więź trudną do porównania z innymi zawodami. Tradycje tylko wzmacniały tę bliskość i dawały jej bardziej widoczny kształt.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "0d751c4a-739e-45ce-887a-e4d1c89681b4",
+    "audio_file": "l2_3_0d751c4a-739e-45ce-887a-e4d1c89681b4.mp3"
+  },
+  "prompt_3": {
+    "text": "W tradycjach chodziło nie tylko o święto, ale o pamięć, że ten zawód coś znaczy.",
+    "options": [
+      {
+        "text": "Czy mundur był powodem do dumy?",
+        "next": "l3_1"
+      },
+      {
+        "text": "Czy kobiety też były częścią tej kultury?",
+        "next": "l3_2"
+      },
+      {
+        "text": "Czy te zwyczaje przetrwały długo?",
+        "next": "l3_3"
+      }
+    ],
+    "uuid": "dfee8912-7729-41c8-be58-7d0fffece6ec",
+    "audio_file": "prompt_3_dfee8912-7729-41c8-be58-7d0fffece6ec.mp3"
+  },
+  "l3_1": {
+    "text": "Oczywiście. Mundur mówił, że człowiek należy do zawodu z własnym honorem, historią i znaczeniem społecznym. To był znak, że górnik nie jest tylko robotnikiem od ciężkiej pracy, ale reprezentuje wspólnotę, która przez pokolenia budowała swoją tożsamość i własny sposób bycia.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "6f72db78-ee5b-40c5-884b-d4cf50dcae0f",
+    "audio_file": "l3_1_6f72db78-ee5b-40c5-884b-d4cf50dcae0f.mp3"
+  },
+  "l3_2": {
+    "text": "Tak, i to bardzo ważną. Kobiety z rodzin górniczych podtrzymywały dom, rytm codzienności, pamięć o zwyczajach i poczucie wspólnoty. Choć nie schodziły do szybu jak górnicy, to bez nich ten świat nie miałby tego samego kształtu ani tej samej siły trwania przez pokolenia.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "a05d1281-50da-4f70-baa3-507097906bef",
+    "audio_file": "l3_2_a05d1281-50da-4f70-baa3-507097906bef.mp3"
+  },
+  "l3_3": {
+    "text": "Tak, bo kultura górnicza nie kończyła się wraz z jedną zmianą, jednym pokoleniem czy jedną kopalnią. Przechodziła dalej w rodzinach, świętach, lokalnej pamięci i wspólnych opowieściach. Właśnie dlatego do dziś wiele osób kojarzy górnictwo nie tylko z pracą, ale też z bardzo silną tradycją.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "188319fe-50d1-4bfa-9e9d-be109b4abc68",
+    "audio_file": "l3_3_188319fe-50d1-4bfa-9e9d-be109b4abc68.mp3"
+  },
+  "prompt_4": {
+    "text": "Najmocniejsze w tych tradycjach było to, że przypominały górnikowi, kim jest, nawet wtedy, gdy robota była ciężka i niewdzięczna.",
+    "options": [
+      {
+        "text": "Czy tradycje pomagały górnikom przetrwać trudne chwile?",
+        "next": "l4_1"
+      },
+      {
+        "text": "Dlaczego święta i uroczystości były aż tak ważne?",
+        "next": "l4_2"
+      },
+      {
+        "text": "Czy górnicza duma była naprawdę tak silna?",
+        "next": "l4_3"
+      }
+    ],
+    "uuid": "f2ed4f03-23c6-4f3c-bcde-9cbf30d13f34",
+    "audio_file": "prompt_4_f2ed4f03-23c6-4f3c-bcde-9cbf30d13f34.mp3"
+  },
+  "l4_1": {
+    "text": "Tak, bo dawały człowiekowi oparcie wtedy, gdy sama siła fizyczna nie wystarczała. Przypominały, że jego trud jest zrozumiany, że należy do wspólnoty i że nie niesie ciężaru samotnie. W zawodzie pełnym ryzyka to miało ogromne znaczenie, nawet jeśli nie dało się tego zmierzyć ani zważyć.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "692bb2b5-dc51-44ac-a565-d059f50ad32b",
+    "audio_file": "l4_1_692bb2b5-dc51-44ac-a565-d059f50ad32b.mp3"
+  },
+  "l4_2": {
+    "text": "Bo pozwalały oderwać się od codzienności kopalni i spojrzeć na własną pracę z innej perspektywy. W czasie świąt górnik widział, że jego zawód ma honor, miejsce w pamięci i szacunek wspólnoty. To była chwila, w której ciężka robota przestawała być tylko wysiłkiem, a stawała się częścią większej historii.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "e1cb1f4b-14f1-4a23-b01c-6a09a9c56ca1",
+    "audio_file": "l4_2_e1cb1f4b-14f1-4a23-b01c-6a09a9c56ca1.mp3"
+  },
+  "l4_3": {
+    "text": "Tak, bo wyrastała z czegoś więcej niż zwykłej pracy. Brała się z ryzyka, odpowiedzialności, wspólnoty i świadomości, że ten zawód wymagał charakteru. Dlatego dla wielu ludzi górnik był nie tylko pracownikiem, ale człowiekiem niosącym ze sobą własną godność, pamięć i znaczenie.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "043e5a19-a992-43ec-a766-0a7d0e4187e5",
+    "audio_file": "l4_3_043e5a19-a992-43ec-a766-0a7d0e4187e5.mp3"
+  },
+  "end": {
+    "text": "Ode mnie to już wszystko. Muszę wracać do swoich zajęć. Idź do kolejnego górnika, bo nie wszystkie tajemnice pod ziemią da się opowiedzieć naroz.",
+    "options": [
+      {
+        "text": "Rozpocznij rozmowę od nowa",
+        "next": "start"
+      }
+    ],
+    "uuid": "7f5bb2e2-7cb7-47ab-9a2e-e101ef4bf2ce",
+    "audio_file": "end_7f5bb2e2-7cb7-47ab-9a2e-e101ef4bf2ce.mp3"
+  }
+}

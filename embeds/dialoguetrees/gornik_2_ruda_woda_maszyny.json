@@ -1,0 +1,221 @@
+{
+  "start": {
+    "text": "Witoj. Dopiyro co wyjechoł żech na powierzchnię i jeszcze mom w uszach huk z dołu. Myślisz, że największym skarbem kopalni było srebro? Nieroz. Czasem największym wrogiem była woda. Chcesz wiedzieć, jak to wszystko działało?",
+    "options": [
+      {
+        "text": "Co wydobywaliście najczęściej?",
+        "next": "l1_1"
+      },
+      {
+        "text": "Czym była galena?",
+        "next": "l1_2"
+      },
+      {
+        "text": "Dlaczego woda była takim problemem?",
+        "next": "l1_3"
+      }
+    ],
+    "uuid": "b437f421-78ee-48e6-ac88-731991dc0edf",
+    "audio_file": "start_b437f421-78ee-48e6-ac88-731991dc0edf.mp3"
+  },
+  "l1_1": {
+    "text": "Najważniejsza była galena, czyli ruda ołowiu z domieszką srebra. To ona dawała Tarnowskim Górom prawdziwe bogactwo i to wokół niej kręciła się znaczna część pracy pod ziemią. Ludzie najczęściej pamiętają samo srebro, ale bez galeny cała ta historia wyglądałaby zupełnie inaczej, bo to właśnie ona była podstawą wydobycia.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "27e5f12e-7d47-4742-b6aa-8d4a986a7dff",
+    "audio_file": "l1_1_27e5f12e-7d47-4742-b6aa-8d4a986a7dff.mp3"
+  },
+  "l1_2": {
+    "text": "Galena to minerał, z którego pozyskiwano przede wszystkim ołów, a przy okazji także srebro. Dla górników nie była tylko kamieniem, ale znakiem, że pod ziemią kryje się wartość, dla której opłaca się fedrować głębiej. Jej znaczenie było ogromne, bo łączyła w sobie surowiec użytkowy i ten, który dawał największą sławę.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "10e8badc-8d21-4dff-ad4b-53009d3d5ac6",
+    "audio_file": "l1_2_10e8badc-8d21-4dff-ad4b-53009d3d5ac6.mp3"
+  },
+  "l1_3": {
+    "text": "Bo woda potrafiła zalać wyrobiska, utrudnić dojście do złoża i całkiem zatrzymać pracę. Nawet najbogatsza kopalnia nie była wiele warta, jeśli nie umiano utrzymać jej w stanie, który pozwalał bezpiecznie schodzić pod ziemię. W Tarnowskich Górach właśnie walka z wodą stała się jednym z najważniejszych wyzwań i zarazem największych osiągnięć technicznych.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "21affa05-4a01-4729-b029-85b389293dda",
+    "audio_file": "l1_3_21affa05-4a01-4729-b029-85b389293dda.mp3"
+  },
+  "prompt_2": {
+    "text": "Srebro błyszczało, ale to inżynieria decydowała, czy da się po nie w ogóle zejść.",
+    "options": [
+      {
+        "text": "Po co była maszyna parowa?",
+        "next": "l2_1"
+      },
+      {
+        "text": "Czy szyby były tylko wejściami do kopalni?",
+        "next": "l2_2"
+      },
+      {
+        "text": "Czy ołów też był ważny?",
+        "next": "l2_3"
+      }
+    ],
+    "uuid": "881bec74-0dd5-4e29-a7b0-aa89da5e2e42",
+    "audio_file": "prompt_2_881bec74-0dd5-4e29-a7b0-aa89da5e2e42.mp3"
+  },
+  "l2_1": {
+    "text": "Maszyna parowa służyła przede wszystkim do odwadniania wyrobisk. Dzięki niej można było szybciej usuwać wodę i utrzymywać kopalnię w ruchu tam, gdzie sama siła ludzi i zwierząt przestawała wystarczać. To był prawdziwy przełom, bo pokazywał, że o powodzeniu kopalni decyduje nie tylko bogactwo złoża, ale także nowoczesna technika.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "5f8b18ab-a064-464e-b2fc-e81023046dd5",
+    "audio_file": "l2_1_5f8b18ab-a064-464e-b2fc-e81023046dd5.mp3"
+  },
+  "l2_2": {
+    "text": "Nie, szyb był tylko jednym z elementów dużo większego układu. Łączył się z chodnikami, wyrobiskami, urządzeniami transportowymi i systemami odwadniania, które razem tworzyły skomplikowany organizm. Kiedy patrzy się na kopalnię w ten sposób, widać, że nie była ona pojedynczym miejscem pracy, ale całą infrastrukturą rozciągniętą pod ziemią i na powierzchni.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "5b6f572c-7281-4067-8bb1-d3722f0c60b1",
+    "audio_file": "l2_2_5b6f572c-7281-4067-8bb1-d3722f0c60b1.mp3"
+  },
+  "l2_3": {
+    "text": "Bardzo ważny. Srebro przyciągało uwagę, bo kojarzyło się z bogactwem i prestiżem, ale ołów miał ogromne znaczenie użytkowe i handlowe. To właśnie połączenie jednego i drugiego czyniło tutejsze złoża tak cennymi i sprawiało, że wydobycie miało sens nie tylko symboliczny, ale przede wszystkim gospodarczy.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "c528b17a-1dd2-4ad5-b04e-042cd95d8fee",
+    "audio_file": "l2_3_c528b17a-1dd2-4ad5-b04e-042cd95d8fee.mp3"
+  },
+  "prompt_3": {
+    "text": "Najciekawsze jest to, że kopalnia nie była jedną dziurą w ziemi, tylko całym światem pod i nad powierzchnią.",
+    "options": [
+      {
+        "text": "Czy szybów było dużo?",
+        "next": "l3_1"
+      },
+      {
+        "text": "Czy szyby miały własne nazwy?",
+        "next": "l3_2"
+      },
+      {
+        "text": "Czy kopalnia była nowoczesna jak na swoje czasy?",
+        "next": "l3_3"
+      }
+    ],
+    "uuid": "f3961fea-0158-410d-9f8b-e21a826e3b5b",
+    "audio_file": "prompt_3_f3961fea-0158-410d-9f8b-e21a826e3b5b.mp3"
+  },
+  "l3_1": {
+    "text": "Tak, i to bardzo dużo. Przez stulecia powstały ich tysiące, bo wydobycie rozwijało się na wielką skalę i obejmowało rozległy obszar. To właśnie skala tego krajobrazu górniczego robi dziś takie wrażenie, bo pokazuje, że nie mieliśmy tu do czynienia z jedną kopalnią, lecz z całym systemem pracy, techniki i organizacji.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "e99c5da0-8067-4705-ae2c-e9b3e43fc9d5",
+    "audio_file": "l3_1_e99c5da0-8067-4705-ae2c-e9b3e43fc9d5.mp3"
+  },
+  "l3_2": {
+    "text": "Tak, każdy szyb trzeba było jakoś odróżnić, więc nadawano im nazwy. Czasem były one poważne, czasem osobliwe, a czasem nawet zabawne, co świetnie pokazuje, że górnicy mieli nie tylko ciężką robotę, ale też własne poczucie humoru i sposób porządkowania świata. Przy takiej liczbie miejsc pracy nazwy były po prostu niezbędne.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "1b2762cf-ed88-4808-a7e0-45adb705eb81",
+    "audio_file": "l3_2_1b2762cf-ed88-4808-a7e0-45adb705eb81.mp3"
+  },
+  "l3_3": {
+    "text": "Tak, i to bardzo. Połączenie wydobycia, sztolni odwadniających, maszyn oraz rozbudowanego systemu szybów sprawiało, że Tarnowskie Góry wyróżniały się na tle wielu innych ośrodków. To miejsce było ważne nie tylko przez sam kruszec, ale także przez rozwiązania techniczne, które pozwalały go skutecznie wydobywać.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "4ed0dd90-a139-4096-9bd3-d4eae68b58b2",
+    "audio_file": "l3_3_4ed0dd90-a139-4096-9bd3-d4eae68b58b2.mp3"
+  },
+  "prompt_4": {
+    "text": "Ludzie często myślą, że kopalnia to tylko fedrowanie. A przecież trzeba było jeszcze umieć utrzymać ją przy życiu.",
+    "options": [
+      {
+        "text": "Co było trudniejsze, wydobycie rudy czy walka z wodą?",
+        "next": "l4_1"
+      },
+      {
+        "text": "Czy bez maszyn kopalnia mogła dalej działać?",
+        "next": "l4_2"
+      },
+      {
+        "text": "Dlaczego właśnie ten temat jest taki ważny?",
+        "next": "l4_3"
+      }
+    ],
+    "uuid": "c565e539-636a-40f0-965f-ad7a87a48feb",
+    "audio_file": "prompt_4_c565e539-636a-40f0-965f-ad7a87a48feb.mp3"
+  },
+  "l4_1": {
+    "text": "Jedno i drugie było trudne, ale bez walki z wodą nie dałoby się nawet zacząć myśleć o spokojnym wydobyciu. Najpierw trzeba było utrzymać wyrobiska w stanie, który pozwalał pracować, a dopiero potem fedrować. To właśnie dlatego w Tarnowskich Górach tyle mówi się nie tylko o rudzie, ale także o sztolniach, odwadnianiu i całej inżynierii wodnej.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "facbab3c-f6b5-4d27-a7e1-223f5858b425",
+    "audio_file": "l4_1_facbab3c-f6b5-4d27-a7e1-223f5858b425.mp3"
+  },
+  "l4_2": {
+    "text": "Przez jakiś czas tak, ale wraz z rozwojem kopalń i schodzeniem coraz głębiej maszyny stawały się coraz bardziej potrzebne. Sama praca ręczna miała swoje granice, zwłaszcza gdy chodziło o usuwanie dużych ilości wody. Technika nie zastąpiła całkowicie człowieka, ale pozwoliła kopalni funkcjonować na dużo większą skalę.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "a7a5ddb1-5f6a-412f-8c54-d851e53d0f9c",
+    "audio_file": "l4_2_a7a5ddb1-5f6a-412f-8c54-d851e53d0f9c.mp3"
+  },
+  "l4_3": {
+    "text": "Bo pokazuje, że Tarnowskie Góry były czymś więcej niż miejscem, gdzie po prostu wybierano rudę z ziemi. To był ogromny system techniczny, organizacyjny i krajobrazowy, w którym trzeba było jednocześnie wydobywać, odwadniać, budować i planować. Dzięki temu to miejsce zapisało się w historii nie tylko jako kopalnia, ale jako wyjątkowe osiągnięcie inżynierii.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "83cb858c-5c57-4504-ad89-c1cdb886ea31",
+    "audio_file": "l4_3_83cb858c-5c57-4504-ad89-c1cdb886ea31.mp3"
+  },
+  "end": {
+    "text": "Ode mnie to już wszystko. Muszę wracać do roboty, bo woda i kamień nie będą czekać. Idź do kolejnego górnika, a usłyszysz, jak żyło się tym, co tu pracowali.",
+    "options": [
+      {
+        "text": "Rozpocznij rozmowę od nowa",
+        "next": "start"
+      }
+    ],
+    "uuid": "466b89a2-954a-461e-86dd-33430f1eacd5",
+    "audio_file": "end_466b89a2-954a-461e-86dd-33430f1eacd5.mp3"
+  }
+}

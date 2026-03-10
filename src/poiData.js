@@ -20,6 +20,14 @@ export async function loadAllPois() {
     pois.push({ id, lat, lon, label, emoji, embedUrl });
   }
 
+  function buildGwarekEmbedUrl(dialogueJson) {
+    const baseUrl = new URL("./embeds/pomnik-gwarka.html", window.location.href);
+    if (typeof dialogueJson === "string" && dialogueJson.trim()) {
+      baseUrl.searchParams.set("dialogue", dialogueJson.trim());
+    }
+    return baseUrl.toString();
+  }
+
   /*const loadedPOI = await loadOptionalJson("./data/poi.json");
   loadedPOI?.data?.forEach((el) =>
     // Temporarily hide the generic "info" POI and museum marker.
@@ -30,7 +38,15 @@ export async function loadAllPois() {
 
   const loadedGwarek = await loadOptionalJson("./data/gwarek.json");
   loadedGwarek?.data?.forEach((el) =>
-    addToPois(el.id, el.lat, el.lon, el.label, "miner", "./embeds/pomnik-gwarka.html")
+    el.enabled !== false &&
+    addToPois(
+      el.id,
+      el.lat,
+      el.lon,
+      el.label,
+      "miner",
+      buildGwarekEmbedUrl(el.json)
+    )
   );
 
   // Temporarily hide photo POIs from photo.json.

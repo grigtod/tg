@@ -1,0 +1,221 @@
+{
+  "start": {
+    "text": "Witoj. Właśnie żech wyszoł z kopalni, ale o początkach tego miejsca mogę godać bez końca. Jedno błyszczenie w ziemi wystarczyło, żeby z pola zrobić miejsce znane daleko poza Śląskiem. Chcesz posłuchać, jak to wszystko się zaczęło?",
+    "options": [
+      {
+        "text": "Kto odkrył pierwszą rudę?",
+        "next": "l1_1"
+      },
+      {
+        "text": "Czy to naprawdę był przypadek?",
+        "next": "l1_2"
+      },
+      {
+        "text": "Skąd się wzięła nazwa Tarnowskie Góry?",
+        "next": "l1_3"
+      }
+    ],
+    "uuid": "71f98c74-6a9f-489b-9be1-de4c02f2eaba",
+    "audio_file": "start_71f98c74-6a9f-489b-9be1-de4c02f2eaba.mp3"
+  },
+  "l1_1": {
+    "text": "Za odkrywcę tutejszych złóż uważa się Jana Rybkę z Tarnowic. Według przekazu natrafił on na rudę srebra i ołowiu podczas zwykłej pracy, a to znalezisko uruchomiło całą lawinę wydarzeń. Wieść rozeszła się szybko, zaczęła przyciągać kopaczy, handlarzy i ludzi szukających zarobku, a spokojna okolica zaczęła zmieniać się w miejsce o coraz większym znaczeniu górniczym.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "79c2fdc8-1426-4ddd-a749-4ee656ba6d4c",
+    "audio_file": "l1_1_79c2fdc8-1426-4ddd-a749-4ee656ba6d4c.mp3"
+  },
+  "l1_2": {
+    "text": "Tak mówi miejscowy przekaz. Opowiada się, że błyszczącą rudę odsłoniły korzenie powalonego drzewa albo zwykła praca w polu. Właśnie dlatego ta historia tak dobrze zapada w pamięć, bo pokazuje, że wielkie przemiany czasem zaczynają się od jednej niepozornej chwili i od człowieka, który wcale nie szukał sławy.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "0d918da0-3af7-4db7-8979-0db0da497945",
+    "audio_file": "l1_2_0d918da0-3af7-4db7-8979-0db0da497945.mp3"
+  },
+  "l1_3": {
+    "text": "Dawne słowo „gory” oznaczało kopalnie albo szyby. Gdy w okolicy zaczęły pojawiać się wyrobiska i rozwijało się wydobycie, nazwa związała się właśnie z górniczym charakterem tego miejsca. To dobry przykład na to, jak mocno kopalnia wpisała się tu w codzienne życie i nawet w samo brzmienie nazwy miasta.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "4614ffc5-9c85-45f4-97a6-6df1e7c39b25",
+    "audio_file": "l1_3_4614ffc5-9c85-45f4-97a6-6df1e7c39b25.mp3"
+  },
+  "prompt_2": {
+    "text": "Najciekawsze jest to, że po tym jednym odkryciu wszystko ruszyło jak lawina. Chcesz iść dalej?",
+    "options": [
+      {
+        "text": "Co stało się potem?",
+        "next": "l2_1"
+      },
+      {
+        "text": "Czy od razu zjechali się tu ludzie?",
+        "next": "l2_2"
+      },
+      {
+        "text": "Dlaczego to miejsce tak szybko urosło?",
+        "next": "l2_3"
+      }
+    ],
+    "uuid": "affba8ca-d28e-4cfd-a1f6-9302b16596c7",
+    "audio_file": "prompt_2_affba8ca-d28e-4cfd-a1f6-9302b16596c7.mp3"
+  },
+  "l2_1": {
+    "text": "Potem zaczęła się prawdziwa gorączka poszukiwań. Do okolicy zjeżdżali ludzie gotowi szukać srebra i ołowiu, powstawały pierwsze szyby i wyrobiska, a teren coraz szybciej nabierał górniczego charakteru. To był moment, w którym zwykły krajobraz zaczął zamieniać się w żywy organizm związany z wydobyciem.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "e3a7f47c-130a-48e9-ab04-d0284edda92e",
+    "audio_file": "l2_1_e3a7f47c-130a-48e9-ab04-d0284edda92e.mp3"
+  },
+  "l2_2": {
+    "text": "Bardzo szybko zrobiło się tu tłoczniej. Gdy pojawiła się wieść o rudzie, przyciągnęła ludzi liczących na pracę, zarobek i udział w nowym przedsięwzięciu. W takich miejscach rozchodziła się nie tylko plotka o bogactwie, ale też nadzieja, że można odmienić własny los.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "97034e60-9520-462e-a44b-e13e360e0665",
+    "audio_file": "l2_2_97034e60-9520-462e-a44b-e13e360e0665.mp3"
+  },
+  "l2_3": {
+    "text": "Bo pod ziemią kryło się bogactwo, które mogło dawać pracę i pieniądze przez długi czas. Kiedy ludzie zrozumieli, że to nie jest pojedyncza ciekawostka, tylko obiecujące złoże, zaczęli budować wokół niego całe życie gospodarcze. Właśnie tak rodzą się miasta, które wyrastają z jednego ważnego zasobu.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "abfe1be5-5ecf-4653-9103-33e0ecc5be76",
+    "audio_file": "l2_3_abfe1be5-5ecf-4653-9103-33e0ecc5be76.mp3"
+  },
+  "prompt_3": {
+    "text": "Niektórzy myślą, że to była tylko miejscowa historia. A to miejsce miało dużo większą skalę.",
+    "options": [
+      {
+        "text": "Czy Tarnowskie Góry były ważne poza Śląskiem?",
+        "next": "l3_1"
+      },
+      {
+        "text": "Co było tu najcenniejsze?",
+        "next": "l3_2"
+      },
+      {
+        "text": "Czy odkrycie zmieniło życie zwykłych ludzi?",
+        "next": "l3_3"
+      }
+    ],
+    "uuid": "c272413b-c247-44c5-bb32-6c2c9ed290ff",
+    "audio_file": "prompt_3_c272413b-c247-44c5-bb32-6c2c9ed290ff.mp3"
+  },
+  "l3_1": {
+    "text": "Tak, i to jest jedna z najciekawszych rzeczy w tej historii. Z czasem Tarnowskie Góry przestały być tylko lokalnym ośrodkiem i zaczęły mieć znaczenie znacznie szersze, także gospodarcze. Tutejsze wydobycie i rozwój techniki sprawiły, że o tym miejscu mówiono nie tylko na Śląsku, ale w dużo szerszym europejskim kontekście.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "d90280a4-83bc-4383-a465-c06ac6342516",
+    "audio_file": "l3_1_d90280a4-83bc-4383-a465-c06ac6342516.mp3"
+  },
+  "l3_2": {
+    "text": "Największą sławę miało oczywiście srebro, bo działało na wyobraźnię i kojarzyło się z bogactwem. Ale równie ważne były rudy ołowiu, bo to właśnie one stanowiły podstawę tutejszego wydobycia i handlu. W praktyce kopalnia żyła nie tylko legendą srebra, lecz także konkretną wartością gospodarczą ołowiu.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "20f0226a-2cbf-4462-bc06-6ffc108a6aa1",
+    "audio_file": "l3_2_20f0226a-2cbf-4462-bc06-6ffc108a6aa1.mp3"
+  },
+  "l3_3": {
+    "text": "Jak najbardziej. Takie znalezisko mogło przyciągnąć robotników, kupców, rzemieślników i ludzi szukających nowej szansy. Wokół kopalni zaczynał działać handel, transport i usługi, więc zmieniał się nie tylko krajobraz, ale całe życie okolicy. To nie była tylko historia kruszcu, ale także ludzi, którzy z nim związali swoją przyszłość.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "cec281ac-8bc1-489d-806d-5d9ee104b1fc",
+    "audio_file": "l3_3_cec281ac-8bc1-489d-806d-5d9ee104b1fc.mp3"
+  },
+  "prompt_4": {
+    "text": "A wiesz, co w tym wszystkim jest najważniejsze? Od jednego odkrycia zaczęło się nie tylko wydobycie, ale całe nowe życie tego miejsca.",
+    "options": [
+      {
+        "text": "Czy bez tego odkrycia miasto by nie powstało?",
+        "next": "l4_1"
+      },
+      {
+        "text": "Czy ludzie od razu wiedzieli, jak cenne są te złoża?",
+        "next": "l4_2"
+      },
+      {
+        "text": "Czy takie odkrycie zdarzało się często?",
+        "next": "l4_3"
+      }
+    ],
+    "uuid": "bdb9c039-2574-4a4e-885b-4868f99c0bda",
+    "audio_file": "prompt_4_bdb9c039-2574-4a4e-885b-4868f99c0bda.mp3"
+  },
+  "l4_1": {
+    "text": "To odkrycie dało impuls do rozwoju Tarnowskich Gór jako miasta górniczego. Pewnie bez niego okolica nadal by istniała, ale nie rozwinęłaby się w taki sposób ani w takim tempie. Wydobycie sprawiło, że miejsce zyskało własny rytm, własną rangę i historię, którą pamięta się do dziś.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "c06746ae-9168-4759-8763-d996f0bf30db",
+    "audio_file": "l4_1_c06746ae-9168-4759-8763-d996f0bf30db.mp3"
+  },
+  "l4_2": {
+    "text": "Zapewne nie od razu znali pełną skalę ich wartości, ale szybko pojęli, że mają do czynienia z czymś wyjątkowym. Gdy tylko pojawiły się pierwsze oznaki bogactwa pod ziemią, ruszyły kolejne prace i zainteresowanie wzrosło. Tak zwykle rodzi się pewność, że przypadkowe znalezisko może zmienić bieg historii.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "b0b4168a-44ac-4c7f-a2a7-bed53157941b",
+    "audio_file": "l4_2_b0b4168a-44ac-4c7f-a2a7-bed53157941b.mp3"
+  },
+  "l4_3": {
+    "text": "Nie, właśnie dlatego robiło takie wrażenie. Jedno ważne znalezisko mogło uruchomić cały łańcuch zmian, których wcześniej nikt się nie spodziewał. W tym tkwi siła tej opowieści, bo pokazuje, że czasem wystarczy jeden moment, żeby zwykłe miejsce trafiło na mapę wielkiej historii.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "814562cd-6f9f-4b1d-9de4-3a37b53e625b",
+    "audio_file": "l4_3_814562cd-6f9f-4b1d-9de4-3a37b53e625b.mp3"
+  },
+  "end": {
+    "text": "Ode mnie to już wszystko. Muszę wracać do roboty. Idź do kolejnego górnika, bo każdy z nos pilnuje innej części tej historii.",
+    "options": [
+      {
+        "text": "Rozpocznij rozmowę od nowa",
+        "next": "start"
+      }
+    ],
+    "uuid": "121d6845-dc02-4ec2-81d5-3a4fc6d0ac00",
+    "audio_file": "end_121d6845-dc02-4ec2-81d5-3a4fc6d0ac00.mp3"
+  }
+}

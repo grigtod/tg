@@ -395,7 +395,7 @@
 
       .choice-btn {
         display: grid;
-        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 14px;
         width: 100%;
@@ -411,18 +411,6 @@
       .choice-btn:hover {
         border-color: rgba(249, 208, 6, 0.5);
         box-shadow: 0 16px 28px rgba(249, 208, 6, 0.14);
-      }
-
-      .choice-index {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: rgba(249, 208, 6, 0.18);
-        font-size: 0.9rem;
-        font-weight: 800;
       }
 
       .choice-copy strong {
@@ -584,11 +572,16 @@
     </div>
 
     <script type="module">
-      const DIALOGUE_URL = "dialoguetrees/test.json";
-      const DIALOGUE_AUDIO_DIR = "dialoguetrees/audio";
-
       const params = new URLSearchParams(window.location.search);
       const poiId = params.get("poiId");
+      const dialogueFile = (params.get("dialogue") || "").trim();
+      const dialogueBaseName = dialogueFile.replace(/\.json$/i, "");
+      const DIALOGUE_URL = dialogueFile
+        ? new URL(`dialoguetrees/${dialogueFile}`, window.location.href).toString()
+        : "";
+      const DIALOGUE_AUDIO_DIR = dialogueBaseName
+        ? new URL(`dialoguetrees/${dialogueBaseName}/`, window.location.href).toString()
+        : "";
       const minerImageUrl = poiId ? new URL(`./assets/statues/${poiId}.jpg`, window.location.href).toString() : "";
 
       const elements = {
@@ -665,12 +658,12 @@
 
       function playNodeAudio(nodeId, node, { forceReplay = false } = {}) {
         const audioFile = resolveAudioFile(node);
-        if (!audioFile) {
+        if (!audioFile || !DIALOGUE_AUDIO_DIR) {
           stopCurrentAudio();
           return;
         }
 
-        const audioSrc = new URL(`${DIALOGUE_AUDIO_DIR}/${audioFile}`, window.location.href).toString();
+        const audioSrc = new URL(audioFile, DIALOGUE_AUDIO_DIR).toString();
         if (!currentAudio || currentAudioSource !== audioSrc) {
           stopCurrentAudio();
           currentAudio = new Audio(audioSrc);
@@ -716,7 +709,6 @@
         btn.type = "button";
         btn.className = "choice-btn";
         btn.innerHTML = `
-          <span class="choice-index" aria-hidden="true">${index + 1}</span>
           <span class="choice-copy">
             <strong>${option.text}</strong>
           </span>
@@ -765,6 +757,10 @@
         postToParent({ type: "poi-overlay-request-state" });
 
         try {
+          if (!DIALOGUE_URL) {
+            throw new Error("Missing dialogue JSON parameter.");
+          }
+
           const response = await fetch(DIALOGUE_URL, { cache: "no-store" });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           dialogue = await response.json();

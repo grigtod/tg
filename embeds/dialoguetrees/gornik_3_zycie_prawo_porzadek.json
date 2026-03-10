@@ -1,0 +1,221 @@
+{
+  "start": {
+    "text": "Witoj. Ja dopiero po szychcie, zmęczony jak koń, ale coś ci jeszcze opowiem. W kopalni nie wystarczała odwaga. Trzeba było jeszcze wstać o czasie, słuchać zasad i mieć siłę wrócić do domu. Chcesz wiedzieć, jak naprawdę żył górnik?",
+    "options": [
+      {
+        "text": "W jakim wieku zaczynało się pracę?",
+        "next": "l1_1"
+      },
+      {
+        "text": "Jak wyglądał zwykły dzień?",
+        "next": "l1_2"
+      },
+      {
+        "text": "Po co w kopalni było tyle zasad?",
+        "next": "l1_3"
+      }
+    ],
+    "uuid": "7d053a1b-7c89-4508-aac5-6f0ce64be6d9",
+    "audio_file": "start_7d053a1b-7c89-4508-aac5-6f0ce64be6d9.mp3"
+  },
+  "l1_1": {
+    "text": "To zależało od epoki i rodzaju zajęcia, ale z górniczym światem człowiek stykał się wcześnie. Najpierw były prostsze prace i pomoc przy lżejszych obowiązkach, a dopiero potem przychodziła pora na poważniejszą robotę. Dla wielu rodzin kopalnia była czymś tak naturalnym, że dzieci od początku dorastały w cieniu szybu i górniczego rytmu dnia.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "bb5c8fac-be61-4e0e-a329-774e31663a3d",
+    "audio_file": "l1_1_bb5c8fac-be61-4e0e-a329-774e31663a3d.mp3"
+  },
+  "l1_2": {
+    "text": "Dzień był podporządkowany szychcie i nie zostawiał zbyt wiele miejsca na wygodę. Trzeba było stawić się punktualnie, wykonać swoje zadania pod ziemią, znosić zmęczenie, wilgoć i niepewność, a potem wrócić do domu z resztką sił. To była praca, która brała nie tylko ręce, ale całe życie człowieka.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "ec971a0e-3d3b-4a1d-86ed-889029960bf6",
+    "audio_file": "l1_2_ec971a0e-3d3b-4a1d-86ed-889029960bf6.mp3"
+  },
+  "l1_3": {
+    "text": "Bo pod ziemią nie było miejsca na chaos ani lekkomyślność. Jeden błąd, spóźnienie albo nieostrożność mogły zagrozić nie tylko jednej osobie, ale całej załodze. Zasady nie brały się więc z samej chęci rządzenia ludźmi, tylko z potrzeby utrzymania porządku w miejscu, gdzie ryzyko było codziennością.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_2"
+      }
+    ],
+    "uuid": "69fa8ac1-83ec-473f-80a1-18b017b316cf",
+    "audio_file": "l1_3_69fa8ac1-83ec-473f-80a1-18b017b316cf.mp3"
+  },
+  "prompt_2": {
+    "text": "Ale górnik nie kończył życia przy szybie. W doma też nosił na sobie ciężar tej roboty.",
+    "options": [
+      {
+        "text": "Jak wyglądało życie poza kopalnią?",
+        "next": "l2_1"
+      },
+      {
+        "text": "Czy rodzina też żyła kopalnią?",
+        "next": "l2_2"
+      },
+      {
+        "text": "Za co karano górników?",
+        "next": "l2_3"
+      }
+    ],
+    "uuid": "8ada0eb4-dea7-428e-8d98-c59d7731c66a",
+    "audio_file": "prompt_2_8ada0eb4-dea7-428e-8d98-c59d7731c66a.mp3"
+  },
+  "l2_1": {
+    "text": "Po szychcie czekał dom, rodzina i zwykłe obowiązki, ale zmęczenie wcale nie znikało z chwilą wyjścia na powierzchnię. Życie było skromne, oszczędne i mocno podporządkowane pracy. Górnik niósł kopalnię ze sobą także do domu, bo od niej zależały pieniądze, bezpieczeństwo rodziny i cały rytm codzienności.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "30e7d744-afea-4d5f-80c8-368fc086c707",
+    "audio_file": "l2_1_30e7d744-afea-4d5f-80c8-368fc086c707.mp3"
+  },
+  "l2_2": {
+    "text": "Bardzo mocno. Rodzina czekała na powrót górnika, dzieliła z nim zmęczenie i niepewność, a dom był podporządkowany godzinom pracy i ryzyku, które niosła każda szychta. Kopalnia wpływała więc nie tylko na samego robotnika, lecz na cały dom, na wychowanie dzieci i na sposób, w jaki ludzie planowali życie.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "f529111f-917c-4251-8273-d04f0d96cacc",
+    "audio_file": "l2_2_f529111f-917c-4251-8273-d04f0d96cacc.mp3"
+  },
+  "l2_3": {
+    "text": "Za spóźnienia, łamanie zasad, przeszkadzanie innym w pracy i brak dyscypliny. W takim miejscu porządek nie był pustym słowem, tylko podstawą bezpieczeństwa i sprawnego działania całej kopalni. Kara miała więc przypominać, że pod ziemią każdy odpowiada nie tylko za siebie, ale też za wspólną robotę.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_3"
+      }
+    ],
+    "uuid": "89bb6a84-69b2-42fb-a865-77ea1c8f0785",
+    "audio_file": "l2_3_89bb6a84-69b2-42fb-a865-77ea1c8f0785.mp3"
+  },
+  "prompt_3": {
+    "text": "Niektórzy pamiętają tylko kilof i lampę. A przecież był jeszcze cały porządek prawny.",
+    "options": [
+      {
+        "text": "Co to był Ordunek Górny?",
+        "next": "l3_1"
+      },
+      {
+        "text": "Czy prawo regulowało też płace?",
+        "next": "l3_2"
+      },
+      {
+        "text": "Czy to prawda, że urzędnicy musieli znać kilka języków?",
+        "next": "l3_3"
+      }
+    ],
+    "uuid": "496b4bb5-6d31-4641-bd6f-a9efab098e51",
+    "audio_file": "prompt_3_496b4bb5-6d31-4641-bd6f-a9efab098e51.mp3"
+  },
+  "l3_1": {
+    "text": "Ordunek Górny był ważnym prawem górniczym, które porządkowało działanie kopalń i władz związanych z wydobyciem. To pokazuje, że Tarnowskie Góry nie były tylko miejscem ciężkiej pracy, ale też miejscem dobrze zorganizowanym, gdzie próbowano regulować obowiązki, relacje i zasady funkcjonowania całego górniczego świata.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "528b28c1-29a9-4f86-8e84-1fb0329773cb",
+    "audio_file": "l3_1_528b28c1-29a9-4f86-8e84-1fb0329773cb.mp3"
+  },
+  "l3_2": {
+    "text": "Tak, takie przepisy dotyczyły nie tylko samej pracy, ale także organizacji, obowiązków i kwestii wynagrodzeń. Dzięki temu kopalnia nie działała wyłącznie na podstawie siły i zwyczaju, lecz miała także określone ramy prawne. Dla zwykłego człowieka mogło to mieć duże znaczenie, bo dawało chociaż częściowe oparcie w jasno opisanych zasadach.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "e3a4a55d-c633-4d8f-a353-ebcafc743655",
+    "audio_file": "l3_2_e3a4a55d-c633-4d8f-a353-ebcafc743655.mp3"
+  },
+  "l3_3": {
+    "text": "Tak, i to jest jedna z najbardziej zaskakujących ciekawostek. Władze i urzędnicy musieli funkcjonować w wielojęzycznym otoczeniu, bo w tym świecie spotykały się różne tradycje i języki. To świetnie pokazuje, że Tarnowskie Góry były miejscem ważnym, otwartym na ludzi z różnych stron i lepiej zorganizowanym, niż wielu osobom dziś się wydaje.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "prompt_4"
+      }
+    ],
+    "uuid": "8769a4de-eaa9-4e71-a8be-a1dec97c8ff6",
+    "audio_file": "l3_3_8769a4de-eaa9-4e71-a8be-a1dec97c8ff6.mp3"
+  },
+  "prompt_4": {
+    "text": "Najłatwiej zapamiętać bogactwo kopalni, ale bez dyscypliny i porządku to wszystko by się szybko rozpadło.",
+    "options": [
+      {
+        "text": "Czy górnicy godzili się zawsze na takie zasady?",
+        "next": "l4_1"
+      },
+      {
+        "text": "Czy prawo pomagało tylko właścicielom, czy też górnikom?",
+        "next": "l4_2"
+      },
+      {
+        "text": "Czy zawód często przechodził z ojca na syna?",
+        "next": "l4_3"
+      }
+    ],
+    "uuid": "4845d12d-75d3-4fc8-b4af-622f473f35b6",
+    "audio_file": "prompt_4_4845d12d-75d3-4fc8-b4af-622f473f35b6.mp3"
+  },
+  "l4_1": {
+    "text": "Nie zawsze. Gdy czuli się źle traktowani albo gdy naruszano to, co uważali za sprawiedliwe, potrafili się buntować. To też ważna część tej historii, bo pokazuje, że górnicy nie byli tylko cichymi wykonawcami poleceń, ale ludźmi, którzy mieli własne poczucie godności i granice wytrzymałości.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "a456bb94-72f5-41ae-a261-b8ea41a10766",
+    "audio_file": "l4_1_a456bb94-72f5-41ae-a261-b8ea41a10766.mp3"
+  },
+  "l4_2": {
+    "text": "Prawo miało pilnować porządku całego systemu, więc w dużej mierze chroniło interes kopalni, ale równocześnie dawało pewne ramy, które mogły mieć znaczenie także dla pracowników. Bez jasno ustalonych zasad zwykły górnik byłby jeszcze bardziej zależny od cudzej woli. Dlatego nawet niedoskonałe przepisy mogły dawać trochę oparcia.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "3596d453-a393-4085-9494-7a6e3de15762",
+    "audio_file": "l4_2_3596d453-a393-4085-9494-7a6e3de15762.mp3"
+  },
+  "l4_3": {
+    "text": "Bardzo często tak bywało. Synowie dorastali obok kopalni, obserwowali pracę ojców i wcześnie oswajali się z tym światem, więc nieraz szli tą samą drogą. To sprawiało, że górnictwo było nie tylko zawodem, ale częścią rodzinnej pamięci, codzienności i lokalnej tożsamości.",
+    "options": [
+      {
+        "text": "Dalej",
+        "next": "end"
+      }
+    ],
+    "uuid": "ae91ad6b-1bdd-4538-bba1-c43c98559174",
+    "audio_file": "l4_3_ae91ad6b-1bdd-4538-bba1-c43c98559174.mp3"
+  },
+  "end": {
+    "text": "Ode mnie to już wszystko. Trza wracać do roboty, bo porządek sam się nie przypilnuje. Idź do kolejnego górnika, bo jeszcze niejedna opowieść tu na ciebie czeka.",
+    "options": [
+      {
+        "text": "Rozpocznij rozmowę od nowa",
+        "next": "start"
+      }
+    ],
+    "uuid": "9bc9d9b1-e431-4bcb-8c99-d590bcc9a675",
+    "audio_file": "end_9bc9d9b1-e431-4bcb-8c99-d590bcc9a675.mp3"
+  }
+}
