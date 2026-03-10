@@ -444,7 +444,7 @@ body::before {
 }
 
 .poi-emoji {
-  font-size: 26px;
+  font-size: 32px;
   line-height: 1;
 }
 
@@ -455,8 +455,8 @@ body::before {
 }
 
 .poi-image-miner {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 
 .poi-dot {
@@ -486,7 +486,7 @@ body::before {
   z-index: 2;
   height: 34px;
   margin-left: -2px;
-  padding: 6px 10px;
+  padding: 4px 10px;
   box-sizing: border-box;
   align-items: center;
   border-radius: 2px;
@@ -834,18 +834,23 @@ body::before {
   }
 
   .poi-emoji {
-    font-size: 34px;
+    font-size: 40px;
   }
 
   .poi-visual-frame {
-    width: 42px;
-    height: 42px;
-    flex-basis: 42px;
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
   }
 
   .poi-image {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .poi-image-miner {
+    width: 26px;
+    height: 26px;
   }
 
   .poi-dot {
@@ -854,9 +859,9 @@ body::before {
   }
 
   .poi-label {
-    height: 42px;
-    font-size: 15px;
-    padding: 7px 12px;
+    height: 34px;
+    font-size: 13px;
+    padding: 4px 10px;
   }
 
   .poi-overlay-bar {

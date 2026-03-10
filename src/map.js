@@ -434,14 +434,14 @@ export function createMap({ mapElId = "map", ui } = {}) {
 
     ui.myLocationBtn.setAttribute("aria-label", "My location");
     ui.centerBtn.setAttribute("aria-label", "Center city");
-    ui.infoBtn.setAttribute("aria-label", "Information");
+    ui.infoBtn?.setAttribute("aria-label", "Information");
 
     updateLayerSubtitles();
     refreshLocationBanner();
     overlay.syncCompleteUi();
   }
 
-  ui.infoBtn.addEventListener("click", () => {
+  ui.infoBtn?.addEventListener("click", () => {
     tryHideLayers();
     navigateToInfo(activeInfoPage);
   });

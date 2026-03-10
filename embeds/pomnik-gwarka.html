@@ -1,9 +1,14 @@
-<!doctype html>
-<html lang="en">
+﻿<!doctype html>
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Talk to Gwarek</title>
+    <title>Porozmawiaj z Gwarkiem</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,13 +19,14 @@
       :root {
         color-scheme: light;
         --gwarek-accent: #f9d006;
-        --gwarek-ink: #17130a;
-        --gwarek-subtle: #655c45;
-        --gwarek-panel: rgba(255, 255, 255, 0.88);
-        --gwarek-panel-strong: #fffdf4;
-        --gwarek-border: rgba(23, 19, 10, 0.1);
-        --gwarek-shadow: 0 24px 54px rgba(46, 35, 7, 0.16);
-        --gwarek-shadow-soft: 0 18px 32px rgba(46, 35, 7, 0.1);
+        --gwarek-accent-strong: #f1be00;
+        --gwarek-ink: #171717;
+        --gwarek-subtle: #5f5f5f;
+        --gwarek-surface: #ffffff;
+        --gwarek-surface-muted: #faf8ef;
+        --gwarek-border: rgba(23, 23, 23, 0.1);
+        --gwarek-shadow: 0 24px 48px rgba(35, 31, 15, 0.12);
+        --gwarek-shadow-soft: 0 12px 28px rgba(23, 23, 23, 0.06);
       }
 
       * {
@@ -37,9 +43,8 @@
         font-family: "Public Sans", sans-serif;
         color: var(--gwarek-ink);
         background:
-          radial-gradient(circle at top left, rgba(249, 208, 6, 0.25), transparent 30%),
-          radial-gradient(circle at 85% 15%, rgba(255, 232, 142, 0.5), transparent 25%),
-          linear-gradient(180deg, #2c2410 0%, #3e3110 18%, #f7f0d8 18%, #fffdf7 48%, #f8f4e6 100%);
+          radial-gradient(circle at top right, rgba(249, 208, 6, 0.22), transparent 30%),
+          linear-gradient(180deg, #fff9d6 0%, #fffef7 18%, #ffffff 45%);
       }
 
       button {
@@ -48,36 +53,44 @@
 
       .page {
         min-height: 100vh;
-        padding: 0 16px 28px;
+        padding: 0 16px 24px;
       }
 
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 5;
+      .page-header {
+        position: relative;
+        z-index: 2;
         margin: 0 -16px;
-        padding: 16px 16px 10px;
-        background: linear-gradient(180deg, rgba(249, 208, 6, 0.82), rgba(249, 208, 6, 0));
+        padding: 16px 16px 0;
+        background: linear-gradient(180deg, rgba(249, 208, 6, 0.92), rgba(249, 208, 6, 0));
       }
 
-      .header-bar {
+      .page-header-bar {
         display: grid;
-        grid-template-columns: 44px minmax(0, 1fr) auto;
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
         align-items: center;
         gap: 10px;
-        padding: 12px;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.48);
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(18px);
-        box-shadow: 0 12px 24px rgba(46, 35, 7, 0.08);
+        padding: 14px 14px 10px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(14px);
+      }
+
+      .page-header-title {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 800;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .icon-btn,
-      .pill-btn,
       .choice-btn,
       .secondary-btn,
-      .hero-audio-btn {
+      .hero-audio-btn,
+      .complete-btn {
         border: 0;
         cursor: pointer;
       }
@@ -95,7 +108,7 @@
 
       .icon-btn:hover,
       .secondary-btn:hover {
-        background: rgba(23, 19, 10, 0.06);
+        background: rgba(0, 0, 0, 0.05);
       }
 
       .icon-btn svg,
@@ -104,100 +117,37 @@
         height: 20px;
       }
 
-      .header-title {
-        min-width: 0;
-      }
-
-      .header-title p {
-        margin: 0;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(23, 19, 10, 0.55);
-      }
-
-      .header-title h1 {
-        margin: 2px 0 0;
-        font-size: 1.08rem;
-        line-height: 1.2;
-        font-weight: 800;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .pill-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        min-height: 44px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        background: linear-gradient(180deg, #fff6b5, #f9d006);
-        color: var(--gwarek-ink);
-        box-shadow: 0 12px 24px rgba(249, 208, 6, 0.34);
-        transition: transform 140ms ease, box-shadow 140ms ease;
-      }
-
-      .pill-btn:hover,
-      .choice-btn:hover,
-      .hero-audio-btn:hover {
-        transform: translateY(-1px);
-      }
-
-      .pill-btn[aria-pressed="true"] {
-        background: linear-gradient(180deg, #322609, #574211);
-        color: #fff8dc;
-        box-shadow: 0 12px 24px rgba(50, 38, 9, 0.22);
-      }
-
-      .pill-btn[aria-pressed="true"] .pill-check::before,
-      .secondary-btn[aria-pressed="true"] .pill-check::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: currentColor;
-      }
-
-      .pill-check {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        border: 2px solid currentColor;
-        font-size: 12px;
-        line-height: 1;
-      }
-
       .main {
-        max-width: 780px;
+        max-width: 760px;
         margin: 0 auto;
       }
 
       .hero {
         position: relative;
-        margin-top: 8px;
-        padding: 18px;
-        border-radius: 28px;
+        margin: 0 -16px;
+        padding: 0 16px;
+      }
+
+      .hero-image {
+        position: relative;
+        min-height: 320px;
+        border-left: 1px solid rgba(249, 208, 6, 0.24);
+        border-right: 1px solid rgba(249, 208, 6, 0.24);
+        border-bottom: 1px solid rgba(249, 208, 6, 0.24);
+        border-bottom-left-radius: 22px;
+        border-bottom-right-radius: 22px;
         overflow: hidden;
-        background:
-          radial-gradient(circle at 20% 20%, rgba(249, 208, 6, 0.28), transparent 26%),
-          linear-gradient(160deg, rgba(25, 22, 17, 0.96), rgba(67, 48, 15, 0.88));
+        background: #ffffff;
         box-shadow: var(--gwarek-shadow);
       }
 
-      .hero::after {
+      .hero-image::after {
         content: "";
         position: absolute;
-        inset: auto -80px -80px auto;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(249, 208, 6, 0.24), transparent 68%);
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(249, 208, 6, 0.08), rgba(249, 208, 6, 0.02)),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.18));
         pointer-events: none;
       }
 
@@ -205,28 +155,30 @@
         position: relative;
         z-index: 1;
         display: grid;
-        gap: 18px;
+        gap: 20px;
+        min-height: 320px;
+        padding: 28px 24px 24px;
       }
 
       .portrait-shell {
         position: relative;
-        width: min(100%, 320px);
+        width: min(100%, 280px);
         justify-self: center;
       }
 
       .portrait-shell::before {
         content: "";
         position: absolute;
-        inset: -12px;
-        border-radius: 32px;
+        inset: -10px;
+        border-radius: 28px;
         border: 1px solid rgba(249, 208, 6, 0.24);
-        opacity: 0.9;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
       }
 
       .portrait {
         aspect-ratio: 1 / 1;
         width: 100%;
-        border-radius: 28px;
+        border-radius: 24px;
         overflow: hidden;
         border: 1px solid rgba(249, 208, 6, 0.28);
         background:
@@ -251,128 +203,111 @@
         border-radius: 50%;
         background: rgba(255, 248, 220, 0.94);
         color: var(--gwarek-ink);
-        box-shadow: var(--gwarek-shadow-soft);
+        box-shadow: 0 12px 24px rgba(23, 23, 23, 0.18);
+        transition: transform 140ms ease;
+      }
+
+      .hero-audio-btn:hover,
+      .choice-btn:hover,
+      .complete-btn:hover {
+        transform: translateY(-1px);
       }
 
       .hero-copy {
-        color: #fff7e1;
-      }
-
-      .hero-copy h2 {
-        margin: 0;
-        font-size: clamp(2rem, 6vw, 3rem);
-        line-height: 0.98;
-        letter-spacing: -0.05em;
+        align-self: end;
+        color: var(--gwarek-ink);
       }
 
       .hero-copy p {
-        margin: 12px 0 0;
+        margin: 16px 0 0;
         max-width: 48ch;
-        color: rgba(255, 247, 225, 0.78);
+        color: var(--gwarek-subtle);
         line-height: 1.6;
       }
 
-      .status-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
+      .content {
+        max-width: 760px;
+        margin: 0 auto;
+        padding-top: 28px;
       }
 
-      .status-chip {
+      .eyebrow {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 9px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 248, 220, 0.16);
-        background: rgba(255, 255, 255, 0.08);
-        color: rgba(255, 247, 225, 0.96);
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-
-      .status-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: var(--gwarek-accent);
-        box-shadow: 0 0 0 0 rgba(249, 208, 6, 0.66);
-        animation: dot-pulse 1.8s infinite;
-      }
-
-      .shell {
-        margin-top: -26px;
-        position: relative;
-        z-index: 2;
-        display: grid;
-        gap: 18px;
-      }
-
-      .panel {
-        border: 1px solid var(--gwarek-border);
-        border-radius: 24px;
-        background: var(--gwarek-panel);
-        backdrop-filter: blur(16px);
-        box-shadow: var(--gwarek-shadow-soft);
-      }
-
-      .progress-panel {
-        display: grid;
-        gap: 14px;
-        padding: 18px;
-      }
-
-      .progress-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-      }
-
-      .progress-head strong {
-        display: block;
-        font-size: 1rem;
-      }
-
-      .progress-head span {
-        display: block;
-        margin-top: 3px;
-        color: var(--gwarek-subtle);
-        font-size: 0.92rem;
-      }
-
-      .progress-badge {
-        flex: 0 0 auto;
-        padding: 7px 11px;
+        padding: 7px 12px;
         border-radius: 999px;
         background: rgba(249, 208, 6, 0.18);
+        color: rgba(23, 23, 23, 0.8);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .content h1 {
+        margin: 16px 0 10px;
+        font-size: clamp(2rem, 6vw, 2.75rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .lede {
+        margin: 0;
+        color: var(--gwarek-subtle);
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .complete-row {
+        display: flex;
+        margin-top: 22px;
+      }
+
+      .complete-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: var(--gwarek-accent);
+        color: #fff;
+        font: inherit;
         font-size: 0.82rem;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        box-shadow: 0 12px 22px rgba(249, 208, 6, 0.34);
       }
 
-      .progress-track {
-        width: 100%;
-        height: 10px;
-        border-radius: 999px;
-        background: rgba(23, 19, 10, 0.08);
-        overflow: hidden;
+      .complete-btn.is-complete {
+        background: #171717;
+        box-shadow: 0 12px 22px rgba(23, 23, 23, 0.22);
       }
 
-      .progress-fill {
-        width: 0%;
-        height: 100%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, #ffea8d, #f9d006);
-        transition: width 200ms ease;
+      .complete-btn-icon {
+        font-size: 1rem;
+        line-height: 1;
+      }
+
+      .shell {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .panel {
+        border: 1px solid var(--gwarek-border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: var(--gwarek-shadow-soft);
       }
 
       .transcript {
         display: grid;
         gap: 16px;
-        padding: 18px;
+        padding: 18px 20px;
       }
 
       .transcript-top {
@@ -382,18 +317,9 @@
         gap: 12px;
       }
 
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+      .transcript-top .eyebrow {
         padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(249, 208, 6, 0.16);
-        color: rgba(23, 19, 10, 0.78);
         font-size: 0.76rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
       }
 
       .typing {
@@ -424,19 +350,15 @@
         min-height: 42px;
         padding: 10px 14px;
         border-radius: 999px;
-        background: rgba(23, 19, 10, 0.04);
+        background: rgba(23, 23, 23, 0.04);
         color: var(--gwarek-ink);
-      }
-
-      .secondary-btn[aria-pressed="true"] {
-        background: rgba(249, 208, 6, 0.18);
       }
 
       .speech {
         position: relative;
         padding: 20px;
-        border-radius: 22px;
-        background: var(--gwarek-panel-strong);
+        border-radius: 18px;
+        background: var(--gwarek-surface-muted);
         border: 1px solid rgba(249, 208, 6, 0.2);
       }
 
@@ -450,7 +372,7 @@
         rotate: 45deg;
         border-top: 1px solid rgba(249, 208, 6, 0.2);
         border-left: 1px solid rgba(249, 208, 6, 0.2);
-        background: var(--gwarek-panel-strong);
+        background: var(--gwarek-surface-muted);
       }
 
       .speech p {
@@ -478,7 +400,7 @@
         gap: 14px;
         width: 100%;
         padding: 16px 18px;
-        border-radius: 20px;
+        border-radius: 16px;
         text-align: left;
         background: #ffffff;
         border: 1px solid rgba(23, 19, 10, 0.1);
@@ -509,39 +431,9 @@
         line-height: 1.35;
       }
 
-      .choice-copy span {
-        display: block;
-        margin-top: 4px;
-        color: var(--gwarek-subtle);
-        font-size: 0.9rem;
-      }
-
       .choice-arrow {
         color: rgba(23, 19, 10, 0.42);
         font-size: 1.2rem;
-      }
-
-      .footer-tools {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .tool-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .node-label {
-        color: var(--gwarek-subtle);
-        font-size: 0.92rem;
-      }
-
-      .node-label strong {
-        color: var(--gwarek-ink);
       }
 
       @keyframes glow-pulse {
@@ -562,18 +454,6 @@
         }
       }
 
-      @keyframes dot-pulse {
-        0% {
-          box-shadow: 0 0 0 0 rgba(249, 208, 6, 0.66);
-        }
-        70% {
-          box-shadow: 0 0 0 10px rgba(249, 208, 6, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(249, 208, 6, 0);
-        }
-      }
-
       @keyframes typing-dot {
         0%,
         60%,
@@ -589,7 +469,7 @@
 
       @media (min-width: 760px) {
         .hero-grid {
-          grid-template-columns: 320px minmax(0, 1fr);
+          grid-template-columns: 280px minmax(0, 1fr);
           align-items: center;
         }
       }
@@ -599,32 +479,30 @@
           padding: 0 12px 22px;
         }
 
-        .header {
+        .page-header {
           margin: 0 -12px;
+          padding: 12px 12px 0;
+        }
+
+        .page-header-bar {
           padding: 12px 12px 8px;
         }
 
-        .header-bar {
-          grid-template-columns: 44px minmax(0, 1fr);
-        }
-
-        .pill-btn {
-          grid-column: 1 / -1;
-          justify-content: center;
-        }
-
         .hero {
-          padding: 16px;
-          border-radius: 24px;
+          margin: 0 -12px;
+          padding: 0 12px;
         }
 
-        .shell {
-          margin-top: -18px;
+        .hero-image,
+        .hero-grid {
+          min-height: 250px;
         }
 
-        .progress-head,
-        .transcript-top,
-        .footer-tools {
+        .hero-grid {
+          padding: 20px 16px 18px;
+        }
+
+        .transcript-top {
           align-items: flex-start;
           flex-direction: column;
         }
@@ -633,112 +511,75 @@
   </head>
   <body>
     <div class="page">
-      <header class="header">
-        <div class="header-bar">
-          <button class="icon-btn" id="backButton" type="button" aria-label="Back to map">
+      <header class="page-header">
+        <div class="page-header-bar">
+          <button class="icon-btn" id="backButton" type="button" aria-label="Powrót do mapy">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
-
-          <div class="header-title">
-            <p>Conversation</p>
-            <h1>Talk with Gwarek</h1>
-          </div>
-
-          <button class="pill-btn" id="completeButton" type="button" aria-pressed="false">
-            <span class="pill-check" aria-hidden="true"></span>
-            <span id="completeButtonLabel">Zakończ</span>
-          </button>
+          <p class="page-header-title">Porozmawiaj z Gwarkiem</p>
+          <div aria-hidden="true"></div>
         </div>
       </header>
 
       <main class="main">
         <section class="hero">
-          <div class="hero-grid">
-            <div class="portrait-shell">
-              <div class="portrait" id="portrait" aria-label="Portrait of Gwarek"></div>
-              <button class="hero-audio-btn" id="replayButton" type="button" aria-label="Replay current voice line">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  <path d="M8 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  <path d="M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  <path d="M16 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  <path d="M20 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-              </button>
-            </div>
+          <div class="hero-image">
+            <div class="hero-grid">
+              <div class="portrait-shell">
+                <div class="portrait" id="portrait" aria-label="Portret Gwarka"></div>
+                <button class="hero-audio-btn" id="replayButton" type="button" aria-label="Odtwórz ponownie aktualną kwestię">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M8 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M16 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M20 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </button>
+              </div>
 
-            <div class="hero-copy">
-              <h2>Old mining stories, told face to face.</h2>
-              <p>
-                Choose a path through Gwarek's memories of work, danger, family, and the growth of Tarnowskie Gory.
-              </p>
-
-              <div class="status-row">
-                <div class="status-chip">
-                  <span class="status-dot" aria-hidden="true"></span>
-                  <span id="speakingStateLabel">Speaking now</span>
-                </div>
-                <div class="status-chip" id="branchStateChip">Three paths open</div>
+              <div class="hero-copy">
               </div>
             </div>
           </div>
         </section>
 
-        <div class="shell">
-          <section class="panel progress-panel" aria-label="Conversation progress">
-            <div class="progress-head">
-              <div>
-                <strong id="progressTitle">Start the exchange</strong>
-                <span id="progressMeta">Node 1 of 1</span>
-              </div>
-              <div class="progress-badge" id="progressBadge">Opening</div>
-            </div>
-            <div class="progress-track" aria-hidden="true">
-              <div class="progress-fill" id="progressFill"></div>
-            </div>
-          </section>
+        <section class="content">
+          <div class="complete-row">
+            <button class="complete-btn" id="completeButton" type="button" aria-pressed="false">
+              <span class="complete-btn-icon" id="completeButtonIcon">&#x2713;</span>
+              <span id="completeButtonLabel">Zako&#324;cz</span>
+            </button>
+          </div>
 
-          <section class="panel transcript" aria-label="Dialogue">
-            <div class="transcript-top">
-              <div class="eyebrow">
-                <span class="typing" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-                <span id="eyebrowLabel">Gwarek is speaking</span>
+          <div class="shell">
+            <section class="panel transcript" aria-label="Dialog">
+              <div class="transcript-top">
+                <div class="eyebrow">
+                  <span class="typing" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                  <span id="eyebrowLabel">Gwarek mówi</span>
+                </div>
               </div>
 
-              <button class="secondary-btn" id="restartButton" type="button">Restart</button>
-            </div>
-
-            <div class="speech">
-              <p id="minerText">Loading dialogue...</p>
-              <div class="speech-quote" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                  <path d="M7.4 18C4.98 18 3 16.02 3 13.6c0-2.22 1.64-4.06 3.78-4.36.26-2.76 2.54-4.94 5.36-4.94v2c-2.04 0-3.7 1.66-3.7 3.7v.6h1.16c1.87 0 3.4 1.53 3.4 3.4S9.27 18 7.4 18Zm9 0c-2.42 0-4.4-1.98-4.4-4.4 0-2.22 1.64-4.06 3.78-4.36.26-2.76 2.54-4.94 5.36-4.94v2c-2.04 0-3.7 1.66-3.7 3.7v.6h1.16c1.87 0 3.4 1.53 3.4 3.4S18.27 18 16.4 18Z" />
-                </svg>
-              </div>
-            </div>
-
-            <div class="choices" id="options" aria-live="polite"></div>
-
-            <div class="footer-tools">
-              <div class="node-label">
-                Active node: <strong id="debugNode">start</strong>
+              <div class="speech">
+                <p id="minerText">Ładowanie dialogu...</p>
+                <div class="speech-quote" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M7.4 18C4.98 18 3 16.02 3 13.6c0-2.22 1.64-4.06 3.78-4.36.26-2.76 2.54-4.94 5.36-4.94v2c-2.04 0-3.7 1.66-3.7 3.7v.6h1.16c1.87 0 3.4 1.53 3.4 3.4S9.27 18 7.4 18Zm9 0c-2.42 0-4.4-1.98-4.4-4.4 0-2.22 1.64-4.06 3.78-4.36.26-2.76 2.54-4.94 5.36-4.94v2c-2.04 0-3.7 1.66-3.7 3.7v.6h1.16c1.87 0 3.4 1.53 3.4 3.4S18.27 18 16.4 18Z" />
+                  </svg>
+                </div>
               </div>
 
-              <div class="tool-group">
-                <button class="secondary-btn" id="completeInlineButton" type="button" aria-pressed="false">
-                  <span class="pill-check" aria-hidden="true"></span>
-                  <span id="completeInlineLabel">Zakończ</span>
-                </button>
-              </div>
-            </div>
-          </section>
-        </div>
+              <div class="choices" id="options" aria-live="polite"></div>
+            </section>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -754,21 +595,11 @@
         backButton: document.getElementById("backButton"),
         completeButton: document.getElementById("completeButton"),
         completeButtonLabel: document.getElementById("completeButtonLabel"),
-        completeInlineButton: document.getElementById("completeInlineButton"),
-        completeInlineLabel: document.getElementById("completeInlineLabel"),
         replayButton: document.getElementById("replayButton"),
         portrait: document.getElementById("portrait"),
-        speakingStateLabel: document.getElementById("speakingStateLabel"),
-        branchStateChip: document.getElementById("branchStateChip"),
-        progressTitle: document.getElementById("progressTitle"),
-        progressMeta: document.getElementById("progressMeta"),
-        progressBadge: document.getElementById("progressBadge"),
-        progressFill: document.getElementById("progressFill"),
         eyebrowLabel: document.getElementById("eyebrowLabel"),
         minerText: document.getElementById("minerText"),
-        options: document.getElementById("options"),
-        restartButton: document.getElementById("restartButton"),
-        debugNode: document.getElementById("debugNode")
+        options: document.getElementById("options")
       };
 
       let dialogue = null;
@@ -779,14 +610,9 @@
       let overlayState = { isComplete: false };
 
       function postToParent(message) {
-        if (window.parent === window) return;
+        if (window.parent === window) return false;
         window.parent.postMessage(message, window.location.origin);
-      }
-
-      function normalizeText(text) {
-        return String(text || "")
-          .replaceAll("Tarnowskie GÃ³ry", "Tarnowskie Gory")
-          .replaceAll("Ordunek GÃ³rny", "Ordunek Gorny");
+        return true;
       }
 
       function safeGetNode(id) {
@@ -816,8 +642,7 @@
 
       function setSpeaking(isSpeaking) {
         elements.portrait.classList.toggle("is-speaking", isSpeaking);
-        elements.speakingStateLabel.textContent = isSpeaking ? "Speaking now" : "Waiting for your choice";
-        elements.eyebrowLabel.textContent = isSpeaking ? "Gwarek is speaking" : "Choose the next reply";
+        elements.eyebrowLabel.textContent = isSpeaking ? "Gwarek mówi" : "Wybierz kolejną odpowiedź";
       }
 
       function stopCurrentAudio() {
@@ -869,52 +694,11 @@
         });
       }
 
-      function formatOptionHint(index, total) {
-        if (total <= 1) return "Follow this thread";
-        if (index === 0) return "A direct opening";
-        if (index === total - 1) return "A wider detour";
-        return "Another way forward";
-      }
-
-      function estimateProgress(nodeId) {
-        const position = orderedNodeIds.indexOf(nodeId);
-        if (position < 0 || orderedNodeIds.length === 0) return 0;
-        return Math.max(8, Math.round(((position + 1) / orderedNodeIds.length) * 100));
-      }
-
-      function syncCompleteButtons(isComplete) {
-        const label = isComplete ? "Ukończono" : "Zakończ";
+      function syncCompleteButton(isComplete) {
+        const label = isComplete ? "Uko\u0144czono" : "Zako\u0144cz";
+        elements.completeButton.classList.toggle("is-complete", isComplete);
         elements.completeButton.setAttribute("aria-pressed", isComplete ? "true" : "false");
         elements.completeButtonLabel.textContent = label;
-        elements.completeInlineButton.setAttribute("aria-pressed", isComplete ? "true" : "false");
-        elements.completeInlineLabel.textContent = label;
-      }
-
-      function updateProgress(optionsCount) {
-        const progress = currentNodeId === "end" ? 100 : estimateProgress(currentNodeId);
-        const nodeIndex = orderedNodeIds.indexOf(currentNodeId);
-        elements.progressFill.style.width = `${progress}%`;
-        elements.progressMeta.textContent = `Node ${Math.max(1, nodeIndex + 1)} of ${Math.max(1, orderedNodeIds.length)}`;
-
-        if (currentNodeId === "start") {
-          elements.progressTitle.textContent = "Start the exchange";
-          elements.progressBadge.textContent = "Opening";
-        } else if (currentNodeId === "end") {
-          elements.progressTitle.textContent = "Conversation complete";
-          elements.progressBadge.textContent = overlayState.isComplete ? "Marked done" : "Final line";
-        } else {
-          elements.progressTitle.textContent = optionsCount > 1 ? "Choose the next path" : "One thread remains";
-          elements.progressBadge.textContent = optionsCount > 1 ? `${optionsCount} choices` : "Single path";
-        }
-
-        elements.branchStateChip.textContent =
-          currentNodeId === "end"
-            ? "Final reflection"
-            : optionsCount > 1
-              ? `${optionsCount} paths open`
-              : optionsCount === 1
-                ? "Last step in this branch"
-                : "No further branches";
       }
 
       function clearOptions() {
@@ -935,7 +719,6 @@
           <span class="choice-index" aria-hidden="true">${index + 1}</span>
           <span class="choice-copy">
             <strong>${option.text}</strong>
-            <span>${formatOptionHint(index, total)}</span>
           </span>
           <span class="choice-arrow" aria-hidden="true">&rsaquo;</span>
         `;
@@ -949,14 +732,8 @@
       function renderMissingState() {
         stopCurrentAudio();
         clearOptions();
-        elements.minerText.textContent = "Dialogue node not found. Restart the conversation to begin again.";
-        elements.debugNode.textContent = currentNodeId;
-        elements.progressTitle.textContent = "Dialogue error";
-        elements.progressMeta.textContent = "Node not found";
-        elements.progressBadge.textContent = "Check path";
-        elements.progressFill.style.width = "0%";
-        elements.branchStateChip.textContent = "Conversation interrupted";
-        addOptionButton({ text: "Restart conversation", next: "start" }, 0, 1);
+        elements.minerText.textContent = "Nie znaleziono węzła dialogu. Rozpocznij rozmowę od nowa.";
+        addOptionButton({ text: "Rozpocznij rozmowę od nowa", next: "start" }, 0, 1);
       }
 
       function render() {
@@ -967,21 +744,19 @@
         }
 
         elements.minerText.textContent = normalizeText(node.text);
-        elements.debugNode.textContent = currentNodeId;
 
         clearOptions();
         const rawOptions = Array.isArray(node.options) ? node.options : [];
         const validOptions = rawOptions.filter((option) => option && typeof option.text === "string" && typeof option.next === "string");
 
         if (validOptions.length === 0) {
-          addOptionButton({ text: "Restart conversation", next: "start" }, 0, 1);
+          addOptionButton({ text: "Rozpocznij rozmowę od nowa", next: "start" }, 0, 1);
         } else {
           validOptions.forEach((option, index) => {
             addOptionButton({ text: normalizeText(option.text), next: option.next }, index, validOptions.length);
           });
         }
 
-        updateProgress(validOptions.length);
         playNodeAudio(currentNodeId, node);
       }
 
@@ -999,32 +774,22 @@
         } catch (error) {
           console.error(error);
           stopCurrentAudio();
-          elements.minerText.textContent = "Could not load the Gwarek dialogue. Check that the JSON file is present and served correctly.";
+          elements.minerText.textContent = "Nie udało się wczytać dialogu Gwarka. Sprawdź, czy plik JSON jest obecny i poprawnie serwowany.";
           clearOptions();
-          addOptionButton({ text: "Try again", next: "start" }, 0, 1);
-          elements.progressTitle.textContent = "Load failed";
-          elements.progressMeta.textContent = "Dialogue unavailable";
-          elements.progressBadge.textContent = "Retry";
-          elements.progressFill.style.width = "0%";
-          elements.branchStateChip.textContent = "No dialogue loaded";
+          addOptionButton({ text: "Spróbuj ponownie", next: "start" }, 0, 1);
         }
       }
 
       elements.backButton.addEventListener("click", () => {
-        postToParent({ type: "poi-overlay-close" });
+        stopCurrentAudio();
+        const sentToParent = postToParent({ type: "poi-overlay-close" });
+        if (!sentToParent && window.history.length > 1) {
+          window.history.back();
+        }
       });
 
       elements.completeButton.addEventListener("click", () => {
         postToParent({ type: "poi-overlay-toggle-complete" });
-      });
-
-      elements.completeInlineButton.addEventListener("click", () => {
-        postToParent({ type: "poi-overlay-toggle-complete" });
-      });
-
-      elements.restartButton.addEventListener("click", () => {
-        stopCurrentAudio();
-        setNode("start");
       });
 
       elements.replayButton.addEventListener("click", () => {
@@ -1046,7 +811,7 @@
 
         if (data.type === "poi-overlay-state") {
           overlayState = { ...overlayState, isComplete: Boolean(data.isComplete) };
-          syncCompleteButtons(overlayState.isComplete);
+          syncCompleteButton(overlayState.isComplete);
         }
       });
 

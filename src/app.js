@@ -19,6 +19,10 @@ function id(name) {
   return el;
 }
 
+function optionalId(name) {
+  return document.getElementById(name);
+}
+
 function hasSeenLanding() {
   try {
     return localStorage.getItem(LANDING_SEEN_KEY) === "1";
@@ -104,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     centerBtn: id("centerBtn"),
     grantLocationBtn: id("grantLocationBtn"),
     dismissBannerBtn: id("dismissBannerBtn"),
-    infoBtn: id("infoBtn"),
+    infoBtn: optionalId("infoBtn"),
     styleToggleBtn: id("styleToggleBtn")//,
     //toggleImageOverlayBtn: id("toggleImageOverlayBtn")
   };

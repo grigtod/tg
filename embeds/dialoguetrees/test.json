@@ -1,17 +1,17 @@
 {
   "start": {
-    "text": "Greetings, traveler. You've found me, a miner from the days when Tarnowskie Góry's veins ran rich with silver and lead. Do you seek tales from beneath the earth?",
+    "text": "Witaj, wędrowcze. Odnalazłeś mnie, gwarka z czasów, gdy żyły Tarnowskich Gór obfitowały w srebro i ołów. Szukasz opowieści spod ziemi?",
     "options": [
       {
-        "text": "Yes, tell me about your work.",
+        "text": "Tak, opowiedz mi o swojej pracy.",
         "next": "work"
       },
       {
-        "text": "What was life like in your time?",
+        "text": "Jak wyglądało życie w twoich czasach?",
         "next": "life"
       },
       {
-        "text": "How did mining shape this town?",
+        "text": "Jak górnictwo ukształtowało to miasto?",
         "next": "town"
       }
     ],
@@ -19,18 +19,18 @@
     "audio_file": "start_42a3efd5-16f4-42b8-af35-30230e5695c0.mp3"
   },
   "work": {
-    "text": "Our days were long and the depths unforgiving. We extracted galena, the ore of lead and silver. The shafts were damp, and water was our constant adversary. In 1788, a steam engine from England arrived and helped drain the water.",
+    "text": "Nasze dni były długie, a głębiny nie wybaczały błędów. Wydobywaliśmy galenę, rudę ołowiu i srebra. Szyby były wilgotne, a woda była naszym nieustannym przeciwnikiem. W 1788 roku przybyła z Anglii maszyna parowa, która pomogła odwadniać wyrobiska.",
     "options": [
       {
-        "text": "Tell me more about the steam engine.",
+        "text": "Powiedz mi więcej o maszynie parowej.",
         "next": "steam_engine"
       },
       {
-        "text": "What dangers did you face?",
+        "text": "Jakie niebezpieczeństwa wam groziły?",
         "next": "dangers"
       },
       {
-        "text": "How did this affect the town?",
+        "text": "Jak to wpływało na miasto?",
         "next": "town"
       }
     ],
@@ -38,18 +38,18 @@
     "audio_file": "work_e1e25d41-4261-4695-8200-61d11b7024b4.mp3"
   },
   "life": {
-    "text": "Life above ground was modest. Families were tightly connected to the rhythm of the mine. The Ordunek Górny granted miners rights and attracted workers from across Europe.",
+    "text": "Życie na powierzchni było skromne. Rodziny żyły w rytmie wyznaczanym przez kopalnię. Ordunek Górny nadawał górnikom prawa i przyciągał pracowników z całej Europy.",
     "options": [
       {
-        "text": "What was the Ordunek Górny?",
+        "text": "Czym był Ordunek Górny?",
         "next": "ordunek"
       },
       {
-        "text": "Did many come from afar?",
+        "text": "Czy wielu przybywało z daleka?",
         "next": "immigrants"
       },
       {
-        "text": "How did families cope?",
+        "text": "Jak rodziny sobie radziły?",
         "next": "families"
       }
     ],
@@ -57,18 +57,18 @@
     "audio_file": "life_7630ad0a-956b-4ad6-9e5a-87fc0b4e4b92.mp3"
   },
   "town": {
-    "text": "The mine was the heart of Tarnowskie Góry. Its wealth drew scholars, merchants, and nobles. The town prospered when the mines thrived.",
+    "text": "Kopalnia była sercem Tarnowskich Gór. Jej bogactwo przyciągało uczonych, kupców i szlachtę. Miasto rozwijało się wtedy, gdy kopalnie dobrze prosperowały.",
     "options": [
       {
-        "text": "Who visited the town?",
+        "text": "Kto odwiedzał miasto?",
         "next": "visitors"
       },
       {
-        "text": "What innovations emerged?",
+        "text": "Jakie innowacje się pojawiły?",
         "next": "innovations"
       },
       {
-        "text": "Did the town face hardships?",
+        "text": "Czy miasto doświadczało trudności?",
         "next": "hardships"
       }
     ],
@@ -76,18 +76,18 @@
     "audio_file": "town_3b86e4c7-2f72-4fbb-91bc-57f0f94da77c.mp3"
   },
   "steam_engine": {
-    "text": "Before the engine, horses powered drainage. The steam engine allowed deeper mining and reduced flooding risks.",
+    "text": "Zanim pojawiła się maszyna, wodę odprowadzano siłą koni. Maszyna parowa pozwoliła fedrować głębiej i zmniejszyła ryzyko zalania.",
     "options": [
       {
-        "text": "How did it change daily work?",
+        "text": "Jak zmieniło to codzienną pracę?",
         "next": "daily_tasks"
       },
       {
-        "text": "Were there technical challenges?",
+        "text": "Czy były problemy techniczne?",
         "next": "challenges"
       },
       {
-        "text": "What happened to it later?",
+        "text": "Co się z nią później stało?",
         "next": "engine_fate"
       }
     ],
@@ -95,18 +95,18 @@
     "audio_file": "steam_engine_26b7b3cf-d927-45ca-875e-1e2e0e734527.mp3"
   },
   "dangers": {
-    "text": "Cave ins, gas, and flooding were constant threats. Many miners never returned home.",
+    "text": "Obrywy, gaz i zalania były stałym zagrożeniem. Wielu górników nigdy nie wróciło do domu.",
     "options": [
       {
-        "text": "Were there safety measures?",
+        "text": "Czy istniały środki bezpieczeństwa?",
         "next": "safety"
       },
       {
-        "text": "Did families get support?",
+        "text": "Czy rodziny otrzymywały pomoc?",
         "next": "support"
       },
       {
-        "text": "How did you cope mentally?",
+        "text": "Jak radziliście sobie psychicznie?",
         "next": "cope"
       }
     ],
@@ -114,18 +114,18 @@
     "audio_file": "dangers_281e3496-e0d0-414d-95da-8acdd288b208.mp3"
   },
   "ordunek": {
-    "text": "The Ordunek Górny of 1528 established mining law and protected worker rights.",
+    "text": "Ordunek Górny z 1528 roku ustanowił prawo górnicze i chronił prawa pracowników.",
     "options": [
       {
-        "text": "What rights were included?",
+        "text": "Jakie prawa obejmował?",
         "next": "rights"
       },
       {
-        "text": "Did it help town growth?",
+        "text": "Czy pomógł w rozwoju miasta?",
         "next": "growth"
       },
       {
-        "text": "Is it remembered today?",
+        "text": "Czy pamięta się o nim do dziś?",
         "next": "recognition"
       }
     ],
@@ -133,18 +133,18 @@
     "audio_file": "ordunek_326d7fdb-8b2a-44d1-9c5a-a63b416b3478.mp3"
   },
   "immigrants": {
-    "text": "Miners arrived from Franconia, Bohemia, and beyond, bringing skills and traditions.",
+    "text": "Górnicy przybywali z Frankonii, Czech i innych stron, przynosząc ze sobą umiejętności i tradycje.",
     "options": [
       {
-        "text": "Did this cause conflict?",
+        "text": "Czy to prowadziło do konfliktów?",
         "next": "conflicts"
       },
       {
-        "text": "How did cultures blend?",
+        "text": "Jak mieszały się kultury?",
         "next": "blend"
       },
       {
-        "text": "Are traces visible today?",
+        "text": "Czy ich ślady są dziś widoczne?",
         "next": "influences"
       }
     ],
@@ -152,18 +152,18 @@
     "audio_file": "immigrants_bb28fa88-c331-4e8c-9b44-f7ccc1873aff.mp3"
   },
   "families": {
-    "text": "Families supported each other through hardship. Children often followed mining traditions.",
+    "text": "Rodziny wspierały się nawzajem w trudnych chwilach. Dzieci często przejmowały górnicze tradycje.",
     "options": [
       {
-        "text": "Was there education?",
+        "text": "Czy istniała edukacja?",
         "next": "education"
       },
       {
-        "text": "Did families earn income elsewhere?",
+        "text": "Czy rodziny zarabiały też gdzie indziej?",
         "next": "income"
       },
       {
-        "text": "Did traditions matter?",
+        "text": "Czy tradycje miały znaczenie?",
         "next": "traditions"
       }
     ],
@@ -171,18 +171,18 @@
     "audio_file": "families_75c5bc3b-b074-4740-bec6-32f3d42ca38e.mp3"
   },
   "visitors": {
-    "text": "Scholars and famous thinkers visited to study mining methods.",
+    "text": "Uczeni i sławni myśliciele odwiedzali miasto, by badać metody wydobycia.",
     "options": [
       {
-        "text": "What did they learn?",
+        "text": "Czego się uczyli?",
         "next": "goethe"
       },
       {
-        "text": "Did visits improve mining?",
+        "text": "Czy te wizyty usprawniły górnictwo?",
         "next": "influence"
       },
       {
-        "text": "Did visits change the town?",
+        "text": "Czy te wizyty zmieniły miasto?",
         "next": "impacts"
       }
     ],
@@ -190,18 +190,18 @@
     "audio_file": "visitors_9823ea64-4c19-4137-8ee0-92f71daa034c.mp3"
   },
   "innovations": {
-    "text": "Drainage tunnels and engineering solutions helped mines operate longer and safer.",
+    "text": "Sztolnie odwadniające i rozwiązania inżynieryjne pozwalały kopalniom działać dłużej i bezpieczniej.",
     "options": [
       {
-        "text": "How were tunnels built?",
+        "text": "Jak budowano sztolnie?",
         "next": "construction"
       },
       {
-        "text": "Are they still used?",
+        "text": "Czy są nadal używane?",
         "next": "functional"
       },
       {
-        "text": "Did other regions copy this?",
+        "text": "Czy inne regiony to kopiowały?",
         "next": "adoption"
       }
     ],
@@ -209,18 +209,18 @@
     "audio_file": "innovations_967eedf2-2db6-4cc4-8fde-b304e4dac525.mp3"
   },
   "hardships": {
-    "text": "War, disease, and fires tested the town repeatedly.",
+    "text": "Wojny, choroby i pożary niejednokrotnie wystawiały miasto na ciężką próbę.",
     "options": [
       {
-        "text": "How did people rebuild?",
+        "text": "Jak ludzie się po tym podnosili?",
         "next": "recover"
       },
       {
-        "text": "Was there organized help?",
+        "text": "Czy istniała zorganizowana pomoc?",
         "next": "systems"
       },
       {
-        "text": "Did mining change afterward?",
+        "text": "Czy górnictwo później się zmieniło?",
         "next": "change"
       }
     ],
@@ -228,18 +228,18 @@
     "audio_file": "hardships_6e1178be-c940-455b-af9a-245a8b9290f4.mp3"
   },
   "daily_tasks": {
-    "text": "Less time draining water meant more time mining ore efficiently.",
+    "text": "Mniej czasu poświęcano na odwadnianie, a więcej na skuteczne wydobywanie rudy.",
     "options": [
       {
-        "text": "Did output increase?",
+        "text": "Czy wydobycie wzrosło?",
         "next": "production"
       },
       {
-        "text": "Were there downsides?",
+        "text": "Czy były też minusy?",
         "next": "downsides"
       },
       {
-        "text": "How did miners adapt?",
+        "text": "Jak górnicy się dostosowali?",
         "next": "adapt"
       }
     ],
@@ -247,18 +247,18 @@
     "audio_file": "daily_tasks_a8b64084-e2c4-41f9-ad86-f42c43227036.mp3"
   },
   "challenges": {
-    "text": "Engines required fuel, maintenance, and trained operators.",
+    "text": "Maszyny wymagały paliwa, konserwacji i przeszkolonych operatorów.",
     "options": [
       {
-        "text": "Where did coal come from?",
+        "text": "Skąd brano węgiel?",
         "next": "coal"
       },
       {
-        "text": "Were there accidents?",
+        "text": "Czy zdarzały się wypadki?",
         "next": "accidents"
       },
       {
-        "text": "Did this inspire new machines?",
+        "text": "Czy to zainspirowało nowe maszyny?",
         "next": "inspiration"
       }
     ],
@@ -266,18 +266,18 @@
     "audio_file": "challenges_ed7bb123-11c4-4f62-b13f-f5c167ba1dff.mp3"
   },
   "engine_fate": {
-    "text": "Eventually mining slowed, and the engine was retired.",
+    "text": "Z czasem wydobycie osłabło, a maszynę wycofano z użycia.",
     "options": [
       {
-        "text": "Is it commemorated?",
+        "text": "Czy jest dziś upamiętniona?",
         "next": "commemorated"
       },
       {
-        "text": "Did it influence industry?",
+        "text": "Czy wpłynęła na przemysł?",
         "next": "industries"
       },
       {
-        "text": "Do models exist?",
+        "text": "Czy istnieją jej modele?",
         "next": "replicas"
       }
     ],
@@ -285,10 +285,10 @@
     "audio_file": "engine_fate_b533c43a-25a2-4763-85d7-5cfa33cbcfdd.mp3"
   },
   "safety": {
-    "text": "Simple supports and ventilation were used, but risk remained.",
+    "text": "Stosowano proste obudowy i wentylację, ale ryzyko wciąż było wysokie.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -296,10 +296,10 @@
     "audio_file": "safety_77a164dd-51c0-4b28-85eb-9c2d67c7685c.mp3"
   },
   "support": {
-    "text": "Mining guilds and neighbors supported families of injured miners.",
+    "text": "Gwarectwa i sąsiedzi wspierali rodziny rannych górników.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -307,10 +307,10 @@
     "audio_file": "support_6e49624b-3dc0-4604-980a-4e81b6574b70.mp3"
   },
   "cope": {
-    "text": "Faith, brotherhood, and routine helped miners endure fear.",
+    "text": "Wiara, braterstwo i codzienny rytm pomagały górnikom przetrwać strach.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -318,10 +318,10 @@
     "audio_file": "cope_147f5e82-bc7f-4b3f-95f3-49c31881eede.mp3"
   },
   "rights": {
-    "text": "Rights included wages protection and legal structure for disputes.",
+    "text": "Prawa obejmowały ochronę wynagrodzeń i ramy prawne do rozstrzygania sporów.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -329,10 +329,10 @@
     "audio_file": "rights_0c8acc72-b7a2-4f96-9572-c6a6dfe4131b.mp3"
   },
   "growth": {
-    "text": "It attracted skilled labor and investment.",
+    "text": "Przyciągał wykwalifikowanych pracowników i inwestycje.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -340,10 +340,10 @@
     "audio_file": "growth_be8c4c63-1048-4a5b-84e3-fedfe7e250c8.mp3"
   },
   "recognition": {
-    "text": "It is remembered as a milestone in mining law.",
+    "text": "Pamięta się o nim jako o ważnym kroku w rozwoju prawa górniczego.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -351,10 +351,10 @@
     "audio_file": "recognition_a1e1eb65-5550-4452-8e74-64d5a37a9f1d.mp3"
   },
   "conflicts": {
-    "text": "Occasional disputes occurred, but shared work united miners.",
+    "text": "Sporadycznie dochodziło do sporów, ale wspólna praca jednoczyła górników.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -362,10 +362,10 @@
     "audio_file": "conflicts_b7a8b9f8-c062-4dbb-9144-ddec7faaf658.mp3"
   },
   "blend": {
-    "text": "Languages, recipes, and traditions merged over generations.",
+    "text": "Przez pokolenia mieszały się języki, przepisy i zwyczaje.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -373,10 +373,10 @@
     "audio_file": "blend_b1567307-86c6-40ad-9c9d-ffda848fcc3f.mp3"
   },
   "influences": {
-    "text": "Architecture and surnames still reflect this diversity.",
+    "text": "Architektura i nazwiska do dziś odzwierciedlają tę różnorodność.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -384,10 +384,10 @@
     "audio_file": "influences_faed9e18-fad8-4dc0-935e-f107dba90fb5.mp3"
   },
   "education": {
-    "text": "Later, technical mining education appeared in the region.",
+    "text": "Z czasem w regionie pojawiła się techniczna edukacja górnicza.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -395,10 +395,10 @@
     "audio_file": "education_4524bf66-00c2-4824-aebd-3b2841699519.mp3"
   },
   "income": {
-    "text": "Some families farmed or crafted tools.",
+    "text": "Niektóre rodziny utrzymywały się także z rolnictwa albo wyrobu narzędzi.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -406,10 +406,10 @@
     "audio_file": "income_069b85da-c36b-46ba-a687-f1287c5c0e8a.mp3"
   },
   "traditions": {
-    "text": "Mining festivals reinforced identity and unity.",
+    "text": "Górnicze święta umacniały tożsamość i jedność wspólnoty.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -417,10 +417,10 @@
     "audio_file": "traditions_2abf3059-c278-4594-a468-82dc6b191e78.mp3"
   },
   "goethe": {
-    "text": "Visitors studied geology and industrial engineering methods.",
+    "text": "Odwiedzający badali geologię oraz metody inżynierii przemysłowej.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -428,10 +428,10 @@
     "audio_file": "goethe_dc27d607-c9f3-432b-b643-917b892f1e68.mp3"
   },
   "influence": {
-    "text": "Knowledge exchange improved mining efficiency.",
+    "text": "Wymiana wiedzy poprawiała wydajność wydobycia.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -439,10 +439,10 @@
     "audio_file": "influence_d377b89f-879f-40d2-a305-0a646ebabff5.mp3"
   },
   "impacts": {
-    "text": "The town gained prestige and investment.",
+    "text": "Miasto zyskało prestiż i inwestycje.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -450,10 +450,10 @@
     "audio_file": "impacts_7c48c48a-e2b2-498f-a501-7efa34730ae5.mp3"
   },
   "construction": {
-    "text": "Tunnels were hand carved with careful surveying.",
+    "text": "Sztolnie drążono ręcznie, z wielką starannością pomiarów.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -461,10 +461,10 @@
     "audio_file": "construction_6056a7a8-6b14-456c-8879-04ef04d0b569.mp3"
   },
   "functional": {
-    "text": "Some tunnels survive as historical heritage sites.",
+    "text": "Niektóre sztolnie przetrwały jako obiekty historycznego dziedzictwa.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -472,10 +472,10 @@
     "audio_file": "functional_a264a0f7-925c-40d9-90f0-bb3594ec87b2.mp3"
   },
   "adoption": {
-    "text": "Other mining towns studied these drainage solutions.",
+    "text": "Inne miasta górnicze przyglądały się tym rozwiązaniom odwadniającym.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -483,10 +483,10 @@
     "audio_file": "adoption_ffe2acb6-9711-4dba-872e-5ad7f6abebd3.mp3"
   },
   "recover": {
-    "text": "Community labor rebuilt homes and infrastructure.",
+    "text": "Wspólnym wysiłkiem odbudowywano domy i infrastrukturę.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -494,10 +494,10 @@
     "audio_file": "recover_ae2b3c46-8f34-411a-af16-f16b2f1975fc.mp3"
   },
   "systems": {
-    "text": "Guilds and churches organized relief efforts.",
+    "text": "Cechy i kościoły organizowały pomoc dla potrzebujących.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -505,10 +505,10 @@
     "audio_file": "systems_6f1f35cf-43fd-4d7f-8568-41d3ace55448.mp3"
   },
   "change": {
-    "text": "Mining planning improved after disasters.",
+    "text": "Po katastrofach lepiej planowano dalsze wydobycie.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -516,10 +516,10 @@
     "audio_file": "change_c2dac2f4-3b64-4c2b-a407-45ba110981fc.mp3"
   },
   "production": {
-    "text": "Yes, deeper mining expanded silver output.",
+    "text": "Tak, głębsze fedrowanie zwiększyło wydobycie srebra.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -527,10 +527,10 @@
     "audio_file": "production_475d6d8a-f7a4-4fa1-9097-59b55b96828d.mp3"
   },
   "downsides": {
-    "text": "Dependence on fuel and machinery increased costs.",
+    "text": "Zależność od paliwa i maszyn zwiększała koszty.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -538,10 +538,10 @@
     "audio_file": "downsides_40568096-9ede-49a0-b546-0cc1d5211a39.mp3"
   },
   "adapt": {
-    "text": "New technical roles emerged among miners.",
+    "text": "Wśród górników pojawiły się nowe role techniczne.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -549,10 +549,10 @@
     "audio_file": "adapt_f58e97e2-39aa-484d-8b3a-8e440558079a.mp3"
   },
   "coal": {
-    "text": "Coal was transported from regional mines.",
+    "text": "Węgiel sprowadzano z kopalń w regionie.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -560,10 +560,10 @@
     "audio_file": "coal_97253579-416c-4077-ab02-b33541f6e842.mp3"
   },
   "accidents": {
-    "text": "Mechanical failures were rare but dangerous.",
+    "text": "Awarie mechaniczne zdarzały się rzadko, ale bywały groźne.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -571,10 +571,10 @@
     "audio_file": "accidents_7c4a76f1-9de5-450f-806f-8247ae12ac86.mp3"
   },
   "inspiration": {
-    "text": "Steam power spread to other industries.",
+    "text": "Moc pary rozprzestrzeniła się potem na inne gałęzie przemysłu.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -582,10 +582,10 @@
     "audio_file": "inspiration_3c7ba424-76e2-44df-9b37-7c278b4be2fd.mp3"
   },
   "commemorated": {
-    "text": "Historical exhibits remember early mining technology.",
+    "text": "Historyczne ekspozycje przypominają o początkach techniki górniczej.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -593,10 +593,10 @@
     "audio_file": "commemorated_d64c4e66-7db2-41ed-933c-bdbb93f149af.mp3"
   },
   "industries": {
-    "text": "Steam technology accelerated industrial growth.",
+    "text": "Technologia parowa przyspieszyła rozwój przemysłu.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -604,10 +604,10 @@
     "audio_file": "industries_bcfedf10-b852-4150-8c89-1abaaa034d19.mp3"
   },
   "replicas": {
-    "text": "Some museums display scale models.",
+    "text": "Niektóre muzea pokazują modele w skali.",
     "options": [
       {
-        "text": "Continue",
+        "text": "Dalej",
         "next": "end"
       }
     ],
@@ -615,10 +615,10 @@
     "audio_file": "replicas_bbbab13a-1bad-4d6c-8f7c-5a52f5281b2a.mp3"
   },
   "end": {
-    "text": "Thank you for listening to my tales. May the spirit of Tarnowskie Góry's miners live on in your heart.",
+    "text": "Dziękuję, że wysłuchałeś moich opowieści. Niech duch gwarków z Tarnowskich Gór trwa w twoim sercu.",
     "options": [
       {
-        "text": "Restart conversation",
+        "text": "Rozpocznij rozmowę od nowa",
         "next": "start"
       }
     ],

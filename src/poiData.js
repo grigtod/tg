@@ -20,13 +20,13 @@ export async function loadAllPois() {
     pois.push({ id, lat, lon, label, emoji, embedUrl });
   }
 
-  const loadedPOI = await loadOptionalJson("./data/poi.json");
+  /*const loadedPOI = await loadOptionalJson("./data/poi.json");
   loadedPOI?.data?.forEach((el) =>
     // Temporarily hide the generic "info" POI and museum marker.
     el.id !== "info" &&
     el.id !== "museum-tg" &&
     addToPois(el.id, el.lat, el.lon, el.label, el.emoji, el.embedUrl)
-  );
+  );*/
 
   const loadedGwarek = await loadOptionalJson("./data/gwarek.json");
   loadedGwarek?.data?.forEach((el) =>
