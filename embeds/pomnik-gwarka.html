@@ -81,33 +81,26 @@
 
   <body>
     <div class="card">
-      <h1 data-i18n="embeds.gwarek.title">Miner Statue</h1>
-      <p class="muted" data-i18n="embeds.gwarek.subtitle">
+      <h1>Miner Statue</h1>
+      <p class="muted">
         Talk to the old miner. Choose options to follow the story.
       </p>
 
-      <div class="image-slot" id="imageSlot" data-i18n-aria-label="embeds.gwarek.imageHint" aria-label="Image area">
+      <div class="image-slot" id="imageSlot" aria-label="Image area">
         <img id="minerImg" alt="Miner" />
-        <span class="muted" id="imageHint" data-i18n="embeds.gwarek.imageHint">Image area</span>
+        <span class="muted" id="imageHint">Image area</span>
       </div>
 
-      <p class="miner-text" id="minerText" data-i18n="embeds.gwarek.loading">Loading dialogue...</p>
+      <p class="miner-text" id="minerText">Loading dialogue...</p>
       <div class="options" id="options"></div>
 
       <div class="row">
-        <button class="small-btn" id="restartBtn" type="button" data-i18n="embeds.gwarek.restart">Restart</button>
+        <button class="small-btn" id="restartBtn" type="button">Restart</button>
         <span class="muted" id="debugNode"></span>
       </div>
     </div>
 
     <script type="module">
-      import { initEmbedLocalization } from "./embedLocalization.js";
-
-      const { t } = await initEmbedLocalization({
-        titleKey: "embeds.gwarek.title",
-        titleFallback: "Miner Statue"
-      });
-
       const DIALOGUE_URL = "dialoguetrees/test.json";
       const DIALOGUE_AUDIO_DIR = "dialoguetrees/audio";
 
@@ -126,7 +119,7 @@
       const minerImgEl = document.getElementById("minerImg");
       const imageHintEl = document.getElementById("imageHint");
 
-      minerImgEl.alt = t("embeds.gwarek.title", "Miner Statue");
+      minerImgEl.alt = "Miner Statue";
 
       function setupImage() {
         if (minerImageUrl && typeof minerImageUrl === "string") {
@@ -210,9 +203,9 @@
 
         if (!node) {
           stopCurrentAudio();
-          minerTextEl.textContent = t("embeds.gwarek.nodeNotFound", "Dialogue node not found. Restarting.");
+          minerTextEl.textContent = "Dialogue node not found. Restarting.";
           clearOptions();
-          addOptionButton(t("embeds.gwarek.restart", "Restart"), "start");
+          addOptionButton("Restart", "start");
           return;
         }
 
@@ -224,9 +217,9 @@
 
         if (opts.length === 0) {
           if (currentNodeId !== "start") {
-            addOptionButton(t("embeds.gwarek.restartConversation", "Restart conversation"), "start");
+            addOptionButton("Restart conversation", "start");
           } else {
-            addOptionButton(t("embeds.gwarek.continue", "Continue"), "end");
+            addOptionButton("Continue", "end");
           }
         } else {
           for (const opt of opts) {
@@ -235,11 +228,11 @@
           }
 
           if (optionsEl.childElementCount === 0) {
-            addOptionButton(t("embeds.gwarek.restartConversation", "Restart conversation"), "start");
+            addOptionButton("Restart conversation", "start");
           }
         }
 
-        debugNodeEl.textContent = `${t("embeds.gwarek.nodePrefix", "Node")}: ${currentNodeId}`;
+        debugNodeEl.textContent = `Node: ${currentNodeId}`;
       }
 
       async function init() {
@@ -260,12 +253,10 @@
           render();
         } catch (err) {
           stopCurrentAudio();
-          minerTextEl.textContent = t(
-            "embeds.gwarek.loadError",
-            "Could not load dialogue JSON. Make sure the dialogue file exists and is served by your web server."
-          );
+          minerTextEl.textContent =
+            "Could not load dialogue JSON. Make sure the dialogue file exists and is served by your web server.";
           clearOptions();
-          addOptionButton(t("embeds.gwarek.retry", "Retry"), "start");
+          addOptionButton("Retry", "start");
           console.error(err);
         }
       }

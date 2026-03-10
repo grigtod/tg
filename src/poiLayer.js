@@ -1,26 +1,31 @@
-﻿export function createPoiLayer({
+import { POI_THEME } from "./poiTheme.js";
+
+export function createPoiLayer({
   map,
   overlay,
-  labelZoomThreshold = 18,
-  dotZoomThreshold = 16,
-  translate = (_key, fallback) => fallback
+  labelZoomThreshold = 19,
+  dotZoomThreshold = 18
 }) {
   if (!map) throw new Error("createPoiLayer requires map");
   if (!overlay) throw new Error("createPoiLayer requires overlay");
 
   let poiMarkers = [];
+  let previousZoomLevel = map.getZoom();
 
-  function getDotColor(emoji) {
-    const colorsByEmoji = {
-      "📷": "#d9480f",
-      miner: "#495057",
-      "ℹ️": "#1971c2",
-      "🏛️": "#5f3dc4",
-      "⛏️": "#2b8a3e",
-      house: "#e67700"
+  function getEffectiveThresholds() {
+    return {
+      dot: Math.min(dotZoomThreshold, labelZoomThreshold),
+      label: Math.max(dotZoomThreshold, labelZoomThreshold)
     };
+  }
 
-    return colorsByEmoji[emoji] ?? "#0078ff";
+  function getDotStyle(emoji) {
+    return (
+      POI_THEME.dotStylesByEmoji[emoji] ?? {
+        fill: POI_THEME.defaultDotFill,
+        outline: POI_THEME.defaultDotOutline
+      }
+    );
   }
 
   function escapeHtml(input) {
@@ -30,35 +35,51 @@
       .replaceAll(">", "&gt;");
   }
 
-  function translatedLabel(poi) {
-    if (!poi?.labelKey) return poi?.label ?? "";
-    return translate(poi.labelKey, poi.label ?? "");
-  }
-
-  function makePoiIcon(poi, zoomLevel) {
-    const label = translatedLabel(poi);
+  function makePoiIcon(poi, zoomLevel, { animateLabelReveal = false } = {}) {
+    const label = poi?.label ?? "";
     const safeLabel = escapeHtml(label);
 
     const isCompleted = overlay.isCompleted(poi.id);
-    const showLabel = zoomLevel >= labelZoomThreshold;
-    const usesCustomImage = poi.emoji === "miner" || poi.emoji === "house";
-    const showDotOnly = zoomLevel < dotZoomThreshold && !usesCustomImage;
+    const thresholds = getEffectiveThresholds();
+    const showDotOnly = zoomLevel < thresholds.dot;
+    const showLabel = !showDotOnly && zoomLevel >= thresholds.label;
 
     const classNameParts = ["poi-marker"];
     if (showLabel) classNameParts.push("show-label");
+    if (showLabel && animateLabelReveal && POI_THEME.labelRevealAnimationEnabled) {
+      classNameParts.push("animate-label-reveal");
+    }
+    if (showDotOnly) classNameParts.push("dot-only");
     if (isCompleted) classNameParts.push("is-completed");
 
+    const dotStyle = getDotStyle(poi.emoji);
+    const markerThemeStyle = [
+      `--poi-frame-background: ${POI_THEME.markerFrameBackground}`,
+      `--poi-frame-border-color: ${POI_THEME.markerFrameBorder}`,
+      `--poi-label-background: ${POI_THEME.labelBackground}`,
+      `--poi-label-text-color: ${POI_THEME.labelText}`,
+      `--poi-label-border-color: ${POI_THEME.labelBorder}`,
+      `--poi-label-reveal-animation-name: ${POI_THEME.labelRevealAnimationEnabled ? "poi-label-reveal" : "none"}`,
+      `--poi-label-reveal-duration: ${POI_THEME.labelRevealDurationMs}ms`,
+      `--poi-label-reveal-easing: ${POI_THEME.labelRevealEasing}`,
+      `--poi-label-reveal-distance: ${POI_THEME.labelRevealDistancePx}px`,
+      `--poi-dot-color: ${dotStyle.fill}`,
+      `--poi-dot-outline-color: ${dotStyle.outline}`
+    ].join("; ");
+
     const markerVisual = showDotOnly
-      ? `<span class="poi-dot" style="--poi-dot-color: ${getDotColor(poi.emoji)}" aria-hidden="true"></span>`
+      ? `<span class="poi-dot" aria-hidden="true"></span>`
       : poi.emoji === "miner"
-        ? `<img class="poi-image" src="./embeds/assets/miner-marker.svg" alt="" aria-hidden="true" />`
+        ? `<img class="poi-image poi-image-miner" src="./assets/miner.png" alt="" aria-hidden="true" />`
         : poi.emoji === "house"
-          ? `<img class="poi-image" src="./embeds/assets/house-marker.svg" alt="" aria-hidden="true" />`
+          ? `<img class="poi-image" src="./assets/building.png" alt="" aria-hidden="true" />`
           : `<span class="poi-emoji">${poi.emoji}</span>`;
 
     const html = `
-      <div class="${classNameParts.join(" ")}" role="button" aria-label="${safeLabel}">
-        ${markerVisual}
+      <div class="${classNameParts.join(" ")}" style="${markerThemeStyle}" role="button" aria-label="${safeLabel}">
+        <span class="poi-visual-frame">
+          ${markerVisual}
+        </span>
         <span class="poi-label">${safeLabel}</span>
       </div>
     `;
@@ -72,9 +93,12 @@
 
   function updateIcons() {
     const zoomLevel = map.getZoom();
+    const thresholds = getEffectiveThresholds();
+    const animateLabelReveal = previousZoomLevel < thresholds.label && zoomLevel >= thresholds.label;
     for (const { poi, marker } of poiMarkers) {
-      marker.setIcon(makePoiIcon(poi, zoomLevel));
+      marker.setIcon(makePoiIcon(poi, zoomLevel, { animateLabelReveal }));
     }
+    previousZoomLevel = zoomLevel;
   }
 
   function setPois(pois) {

@@ -1,12 +1,11 @@
-﻿import config from "./config.js";
+import config from "./config.js";
 import { createPoiOverlay } from "./overlay.js";
 import { loadAllPois } from "./poiData.js";
 import { createPoiLayer } from "./poiLayer.js";
 import { addKmzPathLayer } from "./pathLayer.js";
 
-export function createMap({ mapElId = "map", ui, i18n } = {}) {
+export function createMap({ mapElId = "map", ui } = {}) {
   if (!ui) throw new Error("createMap requires { ui }");
-  if (!i18n) throw new Error("createMap requires { i18n }");
 
   const center = L.latLng(config.targetLat, config.targetLon);
   const bounds = center.toBounds(config.radiusMeters * 2);
@@ -226,9 +225,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     completeBtnEl: ui.poiCompleteBtn,
     completeLabelEl: ui.poiCompleteLabel,
     onOpen: disableMapInteractions,
-    onClose: enableMapInteractions,
-    translate: (key, fallback, vars) => i18n.t(key, fallback, vars),
-    localizeUrl: (url) => i18n.localizeUrl(url)
+    onClose: enableMapInteractions
   });
 
   const minimalistLayer = L.tileLayer(
@@ -271,18 +268,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   const tunnelsSubtitle = ui.toggleImageOverlayBtn.querySelector(".layer-tile-subtitle");
 
   let layersVisible = false;
-  let languageMenuVisible = false;
-  const hasLanguageControls = Boolean(
-    ui.languageBtn && ui.languageMenu && ui.languageOptions && ui.languageMenuTitle
-  );
-  const LANGUAGE_TO_COUNTRY = {
-    en: "gb",
-    pl: "pl",
-    de: "de",
-    es: "es",
-    fr: "fr",
-    uk: "ua"
-  };
 
   function hideLayers() {
     ui.layersBanner.classList.add("layers-hidden");
@@ -296,82 +281,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     if (!layersVisible) return;
     layersVisible = false;
     hideLayers();
-  }
-
-  function hideLanguageMenu() {
-    if (!ui.languageMenu) return;
-    languageMenuVisible = false;
-    ui.languageMenu.classList.add("language-menu-hidden");
-  }
-
-  function showLanguageMenu() {
-    if (!ui.languageMenu) return;
-    languageMenuVisible = true;
-    ui.languageMenu.classList.remove("language-menu-hidden");
-  }
-
-  function getLanguageFlagUrl(code) {
-    const country = LANGUAGE_TO_COUNTRY[code] || "gb";
-    return `https://flagcdn.com/${country}.svg`;
-  }
-
-  function createLanguageFlagElement(language, className) {
-    const wrapper = document.createElement("span");
-    wrapper.className = className;
-
-    const img = document.createElement("img");
-    img.className = "language-flag-img";
-    img.alt = "";
-    img.setAttribute("aria-hidden", "true");
-    img.src = getLanguageFlagUrl(language.code);
-    img.loading = "lazy";
-
-    img.addEventListener("error", () => {
-      wrapper.textContent = language.flag || language.code.toUpperCase();
-    });
-
-    wrapper.append(img);
-    return wrapper;
-  }
-
-  function setLanguageButtonAppearance() {
-    if (!ui.languageBtn) return;
-    const language = i18n.listLanguages().find((item) => item.code === i18n.getLanguage());
-    const defaultLanguage = i18n.listLanguages().find((item) => item.code === "en");
-    const selectedLanguage = language || defaultLanguage || { code: "en", flag: "\u{1F1EC}\u{1F1E7}" };
-    ui.languageBtn.replaceChildren(createLanguageFlagElement(selectedLanguage, "language-btn-flag"));
-    ui.languageBtn.setAttribute("title", language?.name ?? i18n.getLanguage());
-    ui.languageBtn.setAttribute("aria-label", i18n.t("app.language.openMenu", "Choose language"));
-  }
-
-  async function onLanguageSelected(code) {
-    await i18n.setLanguage(code);
-    hideLanguageMenu();
-  }
-
-  function renderLanguageOptions() {
-    if (!ui.languageOptions) return;
-    ui.languageOptions.textContent = "";
-    const selected = i18n.getLanguage();
-
-    i18n.listLanguages().forEach((language) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "language-option";
-      if (language.code === selected) button.classList.add("is-active");
-      button.setAttribute("role", "option");
-      button.setAttribute("aria-selected", language.code === selected ? "true" : "false");
-      button.addEventListener("click", () => onLanguageSelected(language.code));
-
-      const flag = createLanguageFlagElement(language, "language-option-flag");
-
-      const name = document.createElement("span");
-      name.className = "language-option-name";
-      name.textContent = language.name;
-
-      button.append(flag, name);
-      ui.languageOptions.append(button);
-    });
   }
 
   const infoPages = {
@@ -404,7 +313,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     const nextKey = infoPages[pageKey] ? pageKey : "credits";
     activeInfoPage = nextKey;
     setInfoTab(nextKey);
-    ui.infoOverlayFrame.src = i18n.localizeUrl(infoPages[nextKey]);
+    ui.infoOverlayFrame.src = infoPages[nextKey];
     setInfoHidden(false);
   }
 
@@ -416,68 +325,42 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   function updateLayerSubtitles() {
     if (styleSubtitle) {
       styleSubtitle.textContent =
-        currentBaseLayer === "minimalist"
-          ? i18n.t("app.layers.styleMinimal", "Minimal")
-          : i18n.t("app.layers.styleDetailed", "Detailed");
+        currentBaseLayer === "minimalist" ? "Minimal" : "Detailed";
     }
 
     if (tunnelsSubtitle) {
-      tunnelsSubtitle.textContent = imageOverlayVisible
-        ? i18n.t("app.layers.on", "On")
-        : i18n.t("app.layers.off", "Off");
+      tunnelsSubtitle.textContent = imageOverlayVisible ? "On" : "Off";
     }
   }
 
   function applyStaticTranslations() {
-    if (ui.languageMenuTitle) {
-      ui.languageMenuTitle.textContent = i18n.t("app.language.menuTitle", "Language");
-    }
-    layersTitle.textContent = i18n.t("app.layers.title", "Map Layers");
-    baseMapTitle.textContent = i18n.t("app.layers.baseMap", "Base map");
-    tunnelsTitle.textContent = i18n.t("app.layers.tunnelsOverlay", "Tunnels Overlay");
-    ui.poiOverlayClose.textContent = i18n.t("app.poi.cancel", "Cancel");
-    ui.infoOverlayClose.textContent = i18n.t("app.info.close", "Close");
-    ui.infoCreditsBtn.textContent = i18n.t("app.info.tabs.credits", "Credits");
-    ui.infoAboutBtn.textContent = i18n.t("app.info.tabs.about", "About");
-    ui.infoFeatureBtn.textContent = i18n.t("app.info.tabs.feature", "Contact");
-    ui.dismissBannerBtn.textContent = i18n.t("app.location.dismiss", "Dismiss");
+    layersTitle.textContent = "Map Layers";
+    baseMapTitle.textContent = "Base map";
+    tunnelsTitle.textContent = "Tunnels Overlay";
+    ui.poiOverlayClose.textContent = "Cancel";
+    ui.infoOverlayClose.textContent = "Close";
+    ui.infoCreditsBtn.textContent = "Credits";
+    ui.infoAboutBtn.textContent = "About";
+    ui.infoFeatureBtn.textContent = "Contact";
+    ui.dismissBannerBtn.textContent = "Dismiss";
 
-    ui.myLocationBtn.setAttribute("aria-label", i18n.t("app.controls.myLocation", "My location"));
-    ui.centerBtn.setAttribute("aria-label", i18n.t("app.controls.centerCity", "Center city"));
-    ui.layersShowBtn.setAttribute("aria-label", i18n.t("app.controls.layers", "Map layers"));
-    ui.infoBtn.setAttribute("aria-label", i18n.t("app.controls.info", "Information"));
-    if (ui.languageMenu) {
-      ui.languageMenu.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Language"));
-    }
-    if (ui.languageOptions) {
-      ui.languageOptions.setAttribute("aria-label", i18n.t("app.language.menuTitle", "Languages"));
-    }
+    ui.myLocationBtn.setAttribute("aria-label", "My location");
+    ui.centerBtn.setAttribute("aria-label", "Center city");
+    ui.layersShowBtn.setAttribute("aria-label", "Map layers");
+    ui.infoBtn.setAttribute("aria-label", "Information");
 
-    if (hasLanguageControls) {
-      setLanguageButtonAppearance();
-      renderLanguageOptions();
-    }
     updateLayerSubtitles();
     refreshLocationBanner();
     overlay.syncCompleteUi();
   }
 
   ui.layersShowBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     layersVisible = !layersVisible;
     if (layersVisible) showLayers();
     else hideLayers();
   });
 
-  if (ui.languageBtn) {
-    ui.languageBtn.addEventListener("click", () => {
-      tryHideLayers();
-      languageMenuVisible ? hideLanguageMenu() : showLanguageMenu();
-    });
-  }
-
   ui.infoBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     tryHideLayers();
     overlay.close();
     openInfoPage(activeInfoPage);
@@ -489,7 +372,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   ui.infoFeatureBtn.addEventListener("click", () => openInfoPage("feature"));
 
   ui.toggleImageOverlayBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     if (imageOverlayVisible) {
       map.removeLayer(imageOverlay);
       imageOverlayVisible = false;
@@ -504,7 +386,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   });
 
   ui.styleToggleBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     if (currentBaseLayer === "minimalist") {
       map.removeLayer(minimalistLayer);
       detailedLayer.addTo(map);
@@ -520,26 +401,16 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   });
 
   function onMapBackgroundInteraction() {
-    hideLanguageMenu();
     tryHideLayers();
   }
 
   map.getContainer().addEventListener("mousedown", onMapBackgroundInteraction, { passive: true });
   map.getContainer().addEventListener("touchstart", onMapBackgroundInteraction, { passive: true });
 
-  document.addEventListener("click", (event) => {
-    if (!hasLanguageControls || !languageMenuVisible) return;
-    const target = event.target;
-    if (!(target instanceof Node)) return;
-    if (ui.languageBtn.contains(target) || ui.languageMenu.contains(target)) return;
-    hideLanguageMenu();
-  });
-
   const poiLayer = createPoiLayer({
     map,
     overlay,
-    labelZoomThreshold: 18,
-    translate: (key, fallback, vars) => i18n.t(key, fallback, vars)
+    labelZoomThreshold: 19
   });
 
   loadAllPois()
@@ -549,18 +420,12 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   addKmzPathLayer({
     map,
     url: "data/path/Test1.kmz",
-    style: {
-      color: "#0f172a",
-      weight: 4,
-      opacity: 0.95
-    },
     fitBounds: false
   }).catch((err) => console.error("Path load failed:", err));
 
   document.addEventListener("poi:complete-changed", () => poiLayer.updateIcons());
 
   ui.centerBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     map.setView(center, cityCenterZoom);
     tryHideLayers();
   });
@@ -569,11 +434,11 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   let hasLocationPermission = false;
   let userMarker = null;
   let bannerState = "hidden";
-  let bannerMessageKey = null;
+  let bannerMessage = null;
 
   function hideLocationBanner() {
     bannerState = "hidden";
-    bannerMessageKey = null;
+    bannerMessage = null;
     ui.locationBanner.classList.add("banner-hidden");
     ui.locationBanner.classList.remove("banner-notice");
   }
@@ -581,27 +446,25 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   function refreshLocationBanner() {
     if (bannerState === "hidden") return;
 
-    ui.dismissBannerBtn.textContent = i18n.t("app.location.dismiss", "Dismiss");
+    ui.dismissBannerBtn.textContent = "Dismiss";
     ui.grantLocationBtn.textContent = isRequestInFlight
-      ? i18n.t("app.location.requesting", "Requesting...")
-      : i18n.t("app.location.allow", "Allow location");
+      ? "Requesting..."
+      : "Allow location";
 
     if (bannerState === "prompt") {
-      ui.bannerText.textContent = i18n.t("app.location.prompt", "Allow location access to use My Location.");
+      ui.bannerText.textContent = "Allow location access to use My Location.";
       return;
     }
 
     if (bannerState === "notice") {
-      ui.bannerText.textContent = i18n.t(
-        bannerMessageKey || "app.location.failed",
-        "Location access failed. You can try again from your browser settings."
-      );
+      ui.bannerText.textContent =
+        bannerMessage || "Location access failed. You can try again from your browser settings.";
     }
   }
 
   function showLocationPrompt() {
     bannerState = "prompt";
-    bannerMessageKey = null;
+    bannerMessage = null;
     ui.grantLocationBtn.classList.remove("banner-btn-hidden");
     ui.grantLocationBtn.disabled = isRequestInFlight;
     ui.dismissBannerBtn.classList.remove("banner-btn-hidden");
@@ -609,9 +472,9 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     refreshLocationBanner();
   }
 
-  function showLocationNotice(messageKey) {
+  function showLocationNotice(message) {
     bannerState = "notice";
-    bannerMessageKey = messageKey;
+    bannerMessage = message;
     ui.grantLocationBtn.classList.add("banner-btn-hidden");
     ui.grantLocationBtn.disabled = false;
     ui.dismissBannerBtn.classList.remove("banner-btn-hidden");
@@ -644,12 +507,20 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     userMarker.setLatLng(latlng);
   }
 
-  function permissionErrorKey(error) {
-    if (!error || typeof error.code !== "number") return "app.location.failed";
-    if (error.code === error.PERMISSION_DENIED) return "app.location.denied";
-    if (error.code === error.POSITION_UNAVAILABLE) return "app.location.unavailable";
-    if (error.code === error.TIMEOUT) return "app.location.timeout";
-    return "app.location.failed";
+  function permissionErrorMessage(error) {
+    if (!error || typeof error.code !== "number") {
+      return "Location access failed. You can try again from your browser settings.";
+    }
+    if (error.code === error.PERMISSION_DENIED) {
+      return "Location permission was denied. Enable it in browser settings, then reload.";
+    }
+    if (error.code === error.POSITION_UNAVAILABLE) {
+      return "Your location is unavailable right now. Try again in a moment.";
+    }
+    if (error.code === error.TIMEOUT) {
+      return "Location request timed out. Try again.";
+    }
+    return "Location access failed. You can try again from your browser settings.";
   }
 
   function requestLocationPermission() {
@@ -668,7 +539,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
       (error) => {
         isRequestInFlight = false;
         disableMyLocation();
-        showLocationNotice(permissionErrorKey(error));
+        showLocationNotice(permissionErrorMessage(error));
       },
       {
         enableHighAccuracy: true,
@@ -682,7 +553,6 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
   ui.dismissBannerBtn.addEventListener("click", hideLocationBanner);
 
   ui.myLocationBtn.addEventListener("click", () => {
-    hideLanguageMenu();
     closeInfoOverlay();
     tryHideLayers();
 
@@ -698,7 +568,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
         map.setView(latlng, Math.max(map.getZoom(), 17));
       },
       (error) => {
-        showLocationNotice(permissionErrorKey(error));
+        showLocationNotice(permissionErrorMessage(error));
       },
       {
         enableHighAccuracy: true,
@@ -710,7 +580,7 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
 
   if (!navigator.geolocation) {
     disableMyLocation();
-    showLocationNotice("app.location.notSupported");
+    showLocationNotice("Location is not supported in this browser.");
   } else if (navigator.permissions?.query) {
     navigator.permissions
       .query({ name: "geolocation" })
@@ -742,22 +612,11 @@ export function createMap({ mapElId = "map", ui, i18n } = {}) {
     showLocationPrompt();
   }
 
-  i18n.onChange(() => {
-    applyStaticTranslations();
-    poiLayer.updateIcons();
-    overlay.refreshLanguage();
-
-    if (!ui.infoOverlay.classList.contains("poi-overlay-hidden")) {
-      openInfoPage(activeInfoPage);
-    }
-  });
-
   applyStaticTranslations();
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     if (!ui.infoOverlay.classList.contains("poi-overlay-hidden")) closeInfoOverlay();
-    if (languageMenuVisible) hideLanguageMenu();
   });
 
   return {

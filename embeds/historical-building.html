@@ -19,12 +19,6 @@
     </div>
 
     <script type="module">
-      import { initEmbedLocalization } from "./embedLocalization.js";
-
-      const { t } = await initEmbedLocalization({
-        titleFallback: "Historical Building"
-      });
-
       const titleEl = document.getElementById("buildingTitle");
       const descEl = document.getElementById("buildingDesc");
       const params = new URLSearchParams(window.location.search);
@@ -32,11 +26,8 @@
 
       async function init() {
         if (!poiId) {
-          titleEl.textContent = t("embeds.historicalBuilding.titleFallback", "Historical Building");
-          descEl.textContent = t(
-            "embeds.historicalBuilding.notFound",
-            "Building details are not available for this marker."
-          );
+          titleEl.textContent = "Historical Building";
+          descEl.textContent = "Building details are not available for this marker.";
           return;
         }
 
@@ -48,25 +39,18 @@
           const building = items.find((item) => item?.id === poiId);
 
           if (!building) {
-            titleEl.textContent = t("embeds.historicalBuilding.titleFallback", "Historical Building");
-            descEl.textContent = t(
-              "embeds.historicalBuilding.notFound",
-              "Building details are not available for this marker."
-            );
+            titleEl.textContent = "Historical Building";
+            descEl.textContent = "Building details are not available for this marker.";
             return;
           }
 
-          titleEl.textContent = building.label || t("embeds.historicalBuilding.titleFallback", "Historical Building");
+          titleEl.textContent = building.label || "Historical Building";
           descEl.textContent =
-            building.description ||
-            t("embeds.historicalBuilding.noDescription", "No description provided for this building.");
+            building.description || "No description provided for this building.";
         } catch (error) {
           console.error(error);
-          titleEl.textContent = t("embeds.historicalBuilding.titleFallback", "Historical Building");
-          descEl.textContent = t(
-            "embeds.historicalBuilding.loadError",
-            "Could not load historical building data."
-          );
+          titleEl.textContent = "Historical Building";
+          descEl.textContent = "Could not load historical building data.";
         }
       }
 

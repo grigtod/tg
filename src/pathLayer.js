@@ -59,7 +59,7 @@ function ensureRouteFlowClock(map) {
 export async function addKmzPathLayer({
   map,
   url,
-  style = { color: "#0f172a", weight: 4, opacity: 0.95 },
+  style = { color: "#7c7c7c", weight: 4, opacity: 0.65 },
   fitBounds = true
 } = {}) {
   if (!map) throw new Error("addKmzPathLayer requires { map }");
@@ -96,7 +96,7 @@ export async function addKmzPathLayer({
     const flowLine = L.polyline(latlngs, {
       color: style.color ?? "#0f172a",
       weight: style.weight ?? 4,
-      opacity: style.opacity ?? 0.95,
+      opacity: style.opacity ?? 0.65,
       dashArray: "12 18",
       className: "route-flow-line"
     }).addTo(map);

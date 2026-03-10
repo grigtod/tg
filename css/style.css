@@ -213,12 +213,13 @@ body {
 
 .control-btn {
   pointer-events: auto;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid var(--tg-accent-black, #000000);
+  background: var(--tg-accent-yellow, #f2c94c);
+  color: var(--tg-accent-black, #000000);
   width: 42px;
   height: 42px;
   padding: 0;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -226,7 +227,11 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-size: 14px;
   line-height: 1;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
+.control-btn:hover {
+  background: var(--tg-accent-yellow-hover, #f6d76d);
 }
 
 .control-btn:disabled {
@@ -350,17 +355,36 @@ body {
   pointer-events: auto;
 }
 
+.poi-visual-frame {
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--poi-frame-background, #f2c94c);
+  border: 2px solid var(--poi-frame-border-color, rgba(0, 0, 0, 0.92));
+  border-radius: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
 .poi-emoji {
   font-size: 26px;
   line-height: 1;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
 }
 
 .poi-image {
-  width: 26px;
-  height: 26px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+}
+
+.poi-image-miner {
+  width: 30px;
+  height: 30px;
 }
 
 .poi-dot {
@@ -368,29 +392,67 @@ body {
   height: 10px;
   border-radius: 999px;
   background: var(--poi-dot-color, rgba(0, 120, 255, 0.95));
-  border: 2px solid #fff;
+  border: 2px solid var(--poi-dot-outline-color, #fff);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.poi-marker.dot-only .poi-visual-frame {
+  width: auto;
+  height: auto;
+  flex-basis: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .poi-label {
   display: none;
   position: absolute;
-  left: calc(100% + 8px);
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  left: 100%;
+  z-index: 0;
+  height: 34px;
+  margin-left: -2px;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 2px;
+  background: var(--poi-label-background, rgba(18, 18, 18, 0.96));
+  color: var(--poi-label-text-color, rgba(248, 248, 244, 0.98));
+  border: 2px solid var(--poi-label-border-color, #000000);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-size: 13px;
   line-height: 1;
   white-space: nowrap;
+  opacity: 1;
+  transform: translateX(0);
+  transform-origin: left center;
 }
 
 .poi-marker.show-label .poi-label {
-  display: inline-block;
+  display: inline-flex;
+}
+
+.poi-marker.show-label.animate-label-reveal .poi-label {
+  display: inline-flex;
+  animation: var(--poi-label-reveal-animation-name, poi-label-reveal)
+    var(--poi-label-reveal-duration, 360ms)
+    var(--poi-label-reveal-easing, cubic-bezier(0.22, 1, 0.36, 1))
+    both;
+}
+
+@keyframes poi-label-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-1 * var(--poi-label-reveal-distance, 12px)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Full screen overlay that sits on top of the map */
@@ -523,6 +585,10 @@ body {
 }
 
 .poi-marker.is-completed .poi-label {
+  opacity: 0.85;
+}
+
+.poi-marker.is-completed .poi-visual-frame {
   opacity: 0.85;
 }
 
@@ -668,6 +734,12 @@ body {
     font-size: 34px;
   }
 
+  .poi-visual-frame {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
   .poi-image {
     width: 34px;
     height: 34px;
@@ -679,6 +751,7 @@ body {
   }
 
   .poi-label {
+    height: 42px;
     font-size: 15px;
     padding: 7px 12px;
   }

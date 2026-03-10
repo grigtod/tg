@@ -5,9 +5,7 @@ export function createPoiOverlay({
   completeBtnEl,
   completeLabelEl,
   onOpen,
-  onClose,
-  translate = (_key, fallback) => fallback,
-  localizeUrl = (url) => url
+  onClose
 }) {
   if (!overlayEl || !frameEl) throw new Error("overlayEl and frameEl are required");
 
@@ -62,14 +60,11 @@ export function createPoiOverlay({
     const isDone = completedPois.has(activePoiId);
     completeBtnEl.classList.toggle("is-complete", isDone);
     completeBtnEl.setAttribute("aria-pressed", isDone ? "true" : "false");
-    completeLabelEl.textContent = isDone
-      ? translate("app.poi.completed", "Completed")
-      : translate("app.poi.complete", "Complete");
+    completeLabelEl.textContent = isDone ? "Completed" : "Complete";
   }
 
   function buildTargetUrl(url, poiId) {
-    const localized = localizeUrl(url);
-    const parsed = new URL(localized, window.location.href);
+    const parsed = new URL(url, window.location.href);
     if (poiId) parsed.searchParams.set("poiId", poiId);
     return parsed.toString();
   }
@@ -109,12 +104,6 @@ export function createPoiOverlay({
     setLoading(false);
     frameEl.src = "about:blank";
     setHidden(true);
-  }
-
-  function refreshLanguage() {
-    syncCompleteUi();
-    if (!activeBaseUrl || !isOpen()) return;
-    open({ url: activeBaseUrl, poiId: activePoiId });
   }
 
   function toggleComplete() {
@@ -162,7 +151,6 @@ export function createPoiOverlay({
   return {
     open,
     close,
-    refreshLanguage,
     syncCompleteUi,
     toggleComplete,
     isCompleted,

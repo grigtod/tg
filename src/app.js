@@ -1,11 +1,11 @@
 import { createMap } from "./map.js";
-import { createI18n } from "./i18n.js";
+import { applyPoiTheme } from "./poiTheme.js";
 
 const APP_CONFIG = {
   // Master switch for landing overlay.
   showLanding: true,
   // true: show only on first visit, false: show on every page load.
-  showLandingOnlyOnce: false,
+  showLandingOnlyOnce: true,
   // Allow closing landing with Escape key.
   closeLandingOnEscape: true
 };
@@ -16,10 +16,6 @@ function id(name) {
   const el = document.getElementById(name);
   if (!el) throw new Error(`Missing element with id="${name}"`);
   return el;
-}
-
-function optionalId(name) {
-  return document.getElementById(name);
 }
 
 function hasSeenLanding() {
@@ -69,6 +65,8 @@ function waitForLandingDismiss(ui, config) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  applyPoiTheme();
+
   const ui = {
     // landing
     landingOverlay: id("landingOverlay"),
@@ -91,12 +89,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     locationBanner: id("locationBanner"),
     bannerText: id("bannerText"),
     layersBanner: id("layersBanner"),
-    languageMenu: optionalId("languageMenu"),
-    languageMenuTitle: optionalId("languageMenuTitle"),
-    languageOptions: optionalId("languageOptions"),
 
     // buttons
-    languageBtn: optionalId("languageBtn"),
     myLocationBtn: id("myLocationBtn"),
     centerBtn: id("centerBtn"),
     grantLocationBtn: id("grantLocationBtn"),
@@ -106,9 +100,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     styleToggleBtn: id("styleToggleBtn"),
     toggleImageOverlayBtn: id("toggleImageOverlayBtn")
   };
-
-  const i18n = createI18n();
-  await i18n.init();
 
   if (!APP_CONFIG.showLanding) {
     setLandingHidden(ui, true);
@@ -124,8 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const api = createMap({
     mapElId: "map",
-    ui,
-    i18n
+    ui
   });
 
   // If you ever need access from the console while debugging:
