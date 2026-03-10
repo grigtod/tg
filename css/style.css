@@ -234,6 +234,19 @@ body {
   background: var(--tg-accent-yellow-hover, #f6d76d);
 }
 
+.control-btn-icon {
+  width: 37px;
+  height: 37px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.control-btn-icon-info {
+  width: 43px;
+  height: 43px;
+}
+
 .control-btn:disabled {
   cursor: not-allowed;
   opacity: 0.45;
@@ -680,6 +693,16 @@ body {
     height: 52px;
     border-radius: 14px;
     font-size: 22px;
+  }
+
+  .control-btn-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .control-btn-icon-info {
+    width: 50px;
+    height: 50px;
   }
 
   .language-menu {

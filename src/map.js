@@ -251,21 +251,9 @@ export function createMap({ mapElId = "map", ui } = {}) {
   let currentBaseLayer = "minimalist";
   minimalistLayer.addTo(map);
 
-  const imageOverlay = L.imageOverlay(
-    "overlays/overlayMapTunnels.png",
-    [
-      [50.40126, 18.78499],
-      [50.46909, 18.86915]
-    ],
-    { opacity: 1 }
-  );
-  let imageOverlayVisible = false;
-
   const layersTitle = ui.layersBanner.querySelector(".layers-title");
   const baseMapTitle = ui.styleToggleBtn.querySelector(".layer-tile-title");
   const styleSubtitle = ui.styleToggleBtn.querySelector(".layer-tile-subtitle");
-  const tunnelsTitle = ui.toggleImageOverlayBtn.querySelector(".layer-tile-title");
-  const tunnelsSubtitle = ui.toggleImageOverlayBtn.querySelector(".layer-tile-subtitle");
 
   let layersVisible = false;
 
@@ -327,16 +315,11 @@ export function createMap({ mapElId = "map", ui } = {}) {
       styleSubtitle.textContent =
         currentBaseLayer === "minimalist" ? "Minimal" : "Detailed";
     }
-
-    if (tunnelsSubtitle) {
-      tunnelsSubtitle.textContent = imageOverlayVisible ? "On" : "Off";
-    }
   }
 
   function applyStaticTranslations() {
     layersTitle.textContent = "Map Layers";
     baseMapTitle.textContent = "Base map";
-    tunnelsTitle.textContent = "Tunnels Overlay";
     ui.poiOverlayClose.textContent = "Cancel";
     ui.infoOverlayClose.textContent = "Close";
     ui.infoCreditsBtn.textContent = "Credits";
@@ -370,20 +353,6 @@ export function createMap({ mapElId = "map", ui } = {}) {
   ui.infoCreditsBtn.addEventListener("click", () => openInfoPage("credits"));
   ui.infoAboutBtn.addEventListener("click", () => openInfoPage("about"));
   ui.infoFeatureBtn.addEventListener("click", () => openInfoPage("feature"));
-
-  ui.toggleImageOverlayBtn.addEventListener("click", () => {
-    if (imageOverlayVisible) {
-      map.removeLayer(imageOverlay);
-      imageOverlayVisible = false;
-      ui.toggleImageOverlayBtn.classList.remove("is-active");
-    } else {
-      imageOverlay.addTo(map);
-      map.setZoom(12);
-      imageOverlayVisible = true;
-      ui.toggleImageOverlayBtn.classList.add("is-active");
-    }
-    updateLayerSubtitles();
-  });
 
   ui.styleToggleBtn.addEventListener("click", () => {
     if (currentBaseLayer === "minimalist") {

@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     dismissBannerBtn: id("dismissBannerBtn"),
     layersShowBtn: id("layersShowBtn"),
     infoBtn: id("infoBtn"),
-    styleToggleBtn: id("styleToggleBtn"),
-    toggleImageOverlayBtn: id("toggleImageOverlayBtn")
+    styleToggleBtn: id("styleToggleBtn")//,
+    //toggleImageOverlayBtn: id("toggleImageOverlayBtn")
   };
 
   if (!APP_CONFIG.showLanding) {
