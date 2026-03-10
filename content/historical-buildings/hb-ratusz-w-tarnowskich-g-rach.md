@@ -1,6 +1,6 @@
 ---
 title: Ratusz w Tarnowskich Górach
-lead: Town Hall (Ratusz), Rynek Landmark Neo Renaissance town hall built 1896 to 1898 on the Market Square.
-image: ../assets/building.png
-location: Rynek 13, 42-600 Tarnowskie Góry
-source: https://tarnowskiegory.pl/2018/08/zabytki/
+lead: Ratusz w Tarnowskich Górach to reprezentacyjny gmach miejski położony w centralnej części rynku, wzniesiony w końcu XIX wieku na miejscu wcześniejszego, drewnianego ratusza, który uległ zniszczeniu. Obecny budynek, zaprojektowany w stylu neorenesansowym, wyróżnia się wieżą zegarową oraz bogato opracowaną elewacją, przez co należy do najbardziej rozpoznawalnych obiektów w mieście. Od momentu powstania pełni funkcje administracyjne i do dziś pozostaje siedzibą władz samorządowych, będąc zarazem ważnym symbolem historii, rozwoju i samorządności Tarnowskich Gór.
+image: ../assets/Ratusz.jpg
+location: Rynek 4, 42-600 Tarnowskie Góry
+source: https://pl.wikipedia.org/wiki/Ratusz_w_Tarnowskich_G%C3%B3rach
