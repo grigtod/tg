@@ -4,3 +4,4 @@ lead: Jest 600 metrowym fragmentem najdłuższej sztolni odwadniającej „Fryde
 image: ./assets/poi/hb-black-trout-adit.jpg
 location: darmowy parking, Repecka, 42-600 Tarnowskie Góry
 source: https://tarnowskiegory.pl/2018/08/zabytki/
+audio: ./assets/vo/hb-black-trout-adit.mp3

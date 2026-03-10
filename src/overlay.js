@@ -61,6 +61,7 @@ export function createPoiOverlay({
       pendingFrameToken = null;
       setLoading(false);
       postStateToFrame();
+      postOpenToFrame();
     });
   }
 
@@ -77,6 +78,13 @@ export function createPoiOverlay({
       type: "poi-overlay-state",
       poiId: activePoiId,
       isComplete: activePoiId ? completedPois.has(activePoiId) : false
+    });
+  }
+
+  function postOpenToFrame() {
+    postMessageToFrame({
+      type: "poi-overlay-opened",
+      poiId: activePoiId
     });
   }
 
@@ -128,6 +136,7 @@ export function createPoiOverlay({
       pendingFrameUrl = null;
       pendingFrameToken = null;
       setLoading(false);
+      postOpenToFrame();
       return;
     }
 

@@ -4,3 +4,4 @@ lead: Wybudowany na pocz. XVI w. Od ok. 1562 r. do 1608 r. siedziba magistratu. 
 image: ./assets/poi/hb-dom-bernharda-rynek-13.jpg
 location: Rynek 13, 42-600 Tarnowskie Góry
 source: https://tarnowskiegory.pl/2018/08/zabytki/
+audio: ./assets/vo/hb-dom-bernharda-rynek-13.mp3

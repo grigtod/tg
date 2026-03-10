@@ -573,8 +573,7 @@
         statusBox: document.getElementById("statusBox")
       };
       let currentModel = null;
-      let currentUtterance = null;
-      const speechSynthesisApi = "speechSynthesis" in window ? window.speechSynthesis : null;
+      let currentAudio = null;
 
       function escapeHtml(text) {
         return text
@@ -740,6 +739,7 @@
           source: attributes.source || null,
           image: attributes.image || null,
           imageAlt: attributes.imageAlt || attributes.image_alt || null,
+          audio: attributes.audio || null,
           body
         };
       }
@@ -762,14 +762,32 @@
         elements.audioButton.setAttribute("aria-label", isPlaying ? "Zatrzymaj opis audio" : "Odtwórz opis audio");
       }
 
+      function resolveAudioUrl(audioPath) {
+        if (typeof audioPath !== "string" || !audioPath.trim()) return "";
+        try {
+          return new URL(audioPath.trim(), window.location.href).toString();
+        } catch {
+          return audioPath.trim();
+        }
+      }
+
+      function syncAudioAvailability(model) {
+        const hasAudio = Boolean(resolveAudioUrl(model?.audio));
+        elements.audioButton.hidden = !hasAudio;
+        elements.audioButton.disabled = !hasAudio;
+        if (!hasAudio) syncAudioButton(false);
+      }
+
       function stopAudioPlayback() {
-        if (!speechSynthesisApi) return;
-        speechSynthesisApi.cancel();
-        currentUtterance = null;
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+          currentAudio = null;
+        }
         syncAudioButton(false);
       }
 
-      function buildAudioNarration(model) {
+      function buildAudioNarrationLegacy(model) {
         const parts = [];
         if (model?.title) parts.push(model.title);
         if (model?.lead) parts.push(model.lead);
@@ -779,14 +797,14 @@
         return parts.join(" ");
       }
 
-      function playAudioNarration() {
+      function playAudioNarrationLegacy() {
         if (!speechSynthesisApi || !currentModel) return;
         if (speechSynthesisApi.speaking) {
           stopAudioPlayback();
           return;
         }
 
-        const narration = buildAudioNarration(currentModel).trim();
+        const narration = buildAudioNarrationLegacy(currentModel).trim();
         if (!narration) return;
 
         const utterance = new SpeechSynthesisUtterance(narration);
@@ -807,10 +825,55 @@
         speechSynthesisApi.speak(utterance);
       }
 
+      function createAudioPlayer(audioUrl) {
+        const audio = new Audio(audioUrl);
+        audio.preload = "metadata";
+        audio.addEventListener("ended", () => {
+          currentAudio = null;
+          syncAudioButton(false);
+        });
+        audio.addEventListener("pause", () => {
+          if (currentAudio === audio && !audio.ended) syncAudioButton(false);
+        });
+        audio.addEventListener("play", () => {
+          if (currentAudio === audio) syncAudioButton(true);
+        });
+        return audio;
+      }
+
+      function playAudioNarration({ forceRestart = false } = {}) {
+        if (!currentModel) return;
+        const audioUrl = resolveAudioUrl(currentModel.audio);
+        if (!audioUrl) {
+          stopAudioPlayback();
+          return;
+        }
+
+        if (currentAudio) {
+          if (!forceRestart && !currentAudio.paused) {
+            stopAudioPlayback();
+            return;
+          }
+
+          if (forceRestart) currentAudio.currentTime = 0;
+        } else {
+          currentAudio = createAudioPlayer(audioUrl);
+        }
+
+        syncAudioButton(true);
+        currentAudio.play().catch((error) => {
+          syncAudioButton(false);
+          console.debug("Audio playback blocked or failed.", error);
+        });
+      }
+
       function applyViewModel(model) {
+        stopAudioPlayback();
         currentModel = model;
         elements.headerTitle.textContent = model.title || DEFAULT_TITLE;
         elements.pageLead.textContent = model.lead || "Poznaj historię tego miejsca.";
+
+        syncAudioAvailability(model);
 
         if (model.image) {
           elements.heroImage.classList.add("has-image");
@@ -847,6 +910,10 @@
         }
 
         elements.statusBox.hidden = true;
+
+        if (resolveAudioUrl(model.audio)) {
+          playAudioNarration({ forceRestart: true });
+        }
       }
 
       function postToParent(message) {
@@ -879,9 +946,20 @@
       window.addEventListener("message", (event) => {
         if (event.origin !== window.location.origin) return;
         const { data } = event;
-        if (!data || data.type !== "poi-overlay-state") return;
+        if (!data || typeof data.type !== "string") return;
+        if (data.type === "poi-overlay-opened") {
+          if (resolveAudioUrl(currentModel?.audio) && !currentAudio) playAudioNarration({ forceRestart: true });
+          return;
+        }
+        if (data.type === "poi-overlay-stop-media") {
+          stopAudioPlayback();
+          return;
+        }
+        if (data.type !== "poi-overlay-state") return;
         syncCompleteButton(Boolean(data.isComplete));
       });
+
+      window.addEventListener("pagehide", stopAudioPlayback);
 
       async function init() {
         postToParent({ type: "poi-overlay-request-state" });
@@ -920,6 +998,7 @@
             source: markdownRecord?.source || "",
             image: markdownRecord?.image || "",
             imageAlt: markdownRecord?.imageAlt || "",
+            audio: markdownRecord?.audio || "",
             body: markdownRecord?.body || fallbackText || "Brak opisu dla tej lokalizacji."
           });
         } catch (error) {
