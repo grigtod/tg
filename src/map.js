@@ -516,6 +516,7 @@ export function createMap({ mapElId = "map", ui } = {}) {
   let locationWatchId = null;
   let orientationTrackingStarted = false;
   let isFollowingUser = false;
+  let isZoomGestureActive = false;
   const prefersWebkitCompassHeading = /iphone|ipad|ipod/i.test(navigator.userAgent || "");
   const minGpsHeadingSpeedMps = 1.5;
   let bannerState = "hidden";
@@ -717,7 +718,11 @@ export function createMap({ mapElId = "map", ui } = {}) {
     }
 
     if (isFollowingUser) {
-      map.panTo(latlng, { animate: false });
+      map.panTo(latlng, {
+        animate: true,
+        duration: 0.8,
+        easeLinearity: 0.25
+      });
     }
   }
 
@@ -818,7 +823,18 @@ export function createMap({ mapElId = "map", ui } = {}) {
 
   map.on("dragstart", () => {
     if (!isFollowingUser) return;
+    if (isZoomGestureActive) return;
     setUserTrackingEnabled(false);
+  });
+
+  map.on("zoomstart", () => {
+    isZoomGestureActive = true;
+  });
+
+  map.on("zoomend", () => {
+    isZoomGestureActive = false;
+    if (!isFollowingUser || !userMarker) return;
+    map.panTo(userMarker.getLatLng(), { animate: false });
   });
 
   if (!navigator.geolocation) {
