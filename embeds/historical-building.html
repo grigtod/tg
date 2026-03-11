@@ -482,8 +482,10 @@
     <main class="page">
       <header class="page-header">
         <div class="page-header-bar">
-          <button class="icon-btn" id="backButton" type="button" aria-label="Wstecz">
-            &#x2190;
+          <button class="icon-btn" id="backButton" type="button" aria-label="Powrót do mapy">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 6 9 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </button>
           <p class="page-header-title" id="headerTitle">Obiekt historyczny</p>
           <div aria-hidden="true"></div>
@@ -928,7 +930,10 @@
       }
 
       elements.backButton.addEventListener("click", () => {
-        postToParent({ type: "poi-overlay-close" });
+        const sentToParent = postToParent({ type: "poi-overlay-close" });
+        if (!sentToParent && window.history.length > 1) {
+          window.history.back();
+        }
       });
 
       elements.completeButton.addEventListener("click", () => {
@@ -1014,5 +1019,7 @@
 
       init();
     </script>
+     <script data-goatcounter="https://grigtod.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
