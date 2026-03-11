@@ -100,8 +100,8 @@
                  },
                  {
                      "id":  "hb-dom-bernharda-rynek-13",
-                     "lat":  50.4447276,
-                     "lon":  18.8556566,
+                     "lat":  50.4449549, 
+                     "lon":  18.8552048,
                      "label":  "Dom Bernharda",
                      "description":  "Wybudowany na pocz. XVI w. Od ok. 1562 r. do 1608 r. siedziba magistratu. W 1610 r. nabył go urzędnik Jana Jerzego Hohenzollerna Piotr Bernhard. Od XVII w. prowadzono tu wyszynk i browar, a w XIX w. istniejącą gospodę nazwano „Pod Lipami” (zlikwidowana na początku lat 90-tych XX w.). Parterowy pierwotnie budynek nadbudowano w 1930 r. W sieni zachowały się sklepienia krzyżowe."
                  },
@@ -166,13 +166,6 @@
                      "lat":  50.4439085,
                      "lon":  18.8607778,
                      "label":  "High School No. II them. S. Staszic",
-                     "description":  ""
-                 },
-                 {
-                     "id":  "hb-mural",
-                     "lat":  50.4453749,
-                     "lon":  18.8536794,
-                     "label":  "Mural",
                      "description":  ""
                  },
                  {
