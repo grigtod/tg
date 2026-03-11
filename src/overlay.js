@@ -15,6 +15,7 @@ export function createPoiOverlay({
   let activeFrameEl = frameEl;
   let activeAudio = null;
   let activeAudioUrl = "";
+  let activeAudioBlocked = false;
 
   const COMPLETED_STORAGE_KEY = "tropemgwarkow.completedPois.v1";
 
@@ -95,7 +96,8 @@ export function createPoiOverlay({
     postMessageToFrame({
       type: "poi-overlay-audio-state",
       audioUrl: activeAudioUrl,
-      isPlaying: Boolean(activeAudio && !activeAudio.paused)
+      isPlaying: Boolean(activeAudio && !activeAudio.paused),
+      wasBlocked: activeAudioBlocked
     });
   }
 
@@ -104,11 +106,15 @@ export function createPoiOverlay({
   }
 
   function attachAudioListeners(audio) {
-    audio.addEventListener("play", postAudioStateToFrame);
+    audio.addEventListener("play", () => {
+      activeAudioBlocked = false;
+      postAudioStateToFrame();
+    });
     audio.addEventListener("pause", postAudioStateToFrame);
     audio.addEventListener("ended", () => {
       activeAudio = null;
       activeAudioUrl = "";
+      activeAudioBlocked = false;
       postAudioStateToFrame();
     });
   }
@@ -116,6 +122,7 @@ export function createPoiOverlay({
   function stopManagedAudio() {
     if (!activeAudio) {
       activeAudioUrl = "";
+      activeAudioBlocked = false;
       postAudioStateToFrame();
       return;
     }
@@ -124,6 +131,7 @@ export function createPoiOverlay({
     activeAudio.currentTime = 0;
     activeAudio = null;
     activeAudioUrl = "";
+    activeAudioBlocked = false;
     postAudioStateToFrame();
   }
 
@@ -139,12 +147,14 @@ export function createPoiOverlay({
       activeAudio = new Audio(normalizedUrl);
       activeAudio.preload = "auto";
       activeAudioUrl = normalizedUrl;
+      activeAudioBlocked = false;
       attachAudioListeners(activeAudio);
     } else if (forceReplay) {
       activeAudio.currentTime = 0;
     }
 
     activeAudio.play().catch((error) => {
+      activeAudioBlocked = true;
       console.debug("Managed audio playback blocked or failed.", error);
       postAudioStateToFrame();
     });

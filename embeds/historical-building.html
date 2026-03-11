@@ -212,6 +212,17 @@
         line-height: 1.65;
       }
 
+      .audio-notice {
+        margin: 12px 0 0;
+        color: #7b5f00;
+        font-size: 0.94rem;
+        font-weight: 600;
+      }
+
+      .audio-notice[hidden] {
+        display: none;
+      }
+
       .details-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -518,6 +529,7 @@
 
       <section class="content">
         <p class="lede" id="pageLead">Ładowanie informacji o lokalizacji...</p>
+        <p class="audio-notice" id="audioNotice" hidden>Przegladarka zablokowala automatyczne audio. Uzyj przycisku glosnika.</p>
         <div class="details-grid" id="detailsGrid">
           <article class="detail-card" id="hoursCard">
             <div class="detail-icon" aria-hidden="true">&#x1F558;</div>
@@ -562,6 +574,7 @@
         heroFallbackText: document.getElementById("heroFallbackText"),
         headerTitle: document.getElementById("headerTitle"),
         pageLead: document.getElementById("pageLead"),
+        audioNotice: document.getElementById("audioNotice"),
         audioButton: document.getElementById("audioButton"),
         backButton: document.getElementById("backButton"),
         completeButton: document.getElementById("completeButton"),
@@ -577,7 +590,7 @@
       let currentModel = null;
       let currentAudio = null;
       let currentAudioUrl = "";
-      let parentAudioState = { audioUrl: "", isPlaying: false };
+      let parentAudioState = { audioUrl: "", isPlaying: false, wasBlocked: false };
       const audioAvailabilityCache = new Map();
       let audioAvailabilityRequestId = 0;
 
@@ -768,6 +781,10 @@
         elements.audioButton.setAttribute("aria-label", isPlaying ? "Zatrzymaj opis audio" : "Odtwórz opis audio");
       }
 
+      function setAudioNoticeVisible(visible) {
+        elements.audioNotice.hidden = !visible;
+      }
+
       function isEmbeddedOverlay() {
         return window.parent !== window;
       }
@@ -784,7 +801,10 @@
       function setAudioAvailability(hasAudio) {
         elements.audioButton.hidden = !hasAudio;
         elements.audioButton.disabled = !hasAudio;
-        if (!hasAudio) syncAudioButton(false);
+        if (!hasAudio) {
+          syncAudioButton(false);
+          setAudioNoticeVisible(false);
+        }
       }
 
       async function checkAudioAvailability(audioPath) {
@@ -817,12 +837,15 @@
         return hasAudio;
       }
 
-      function stopAudioPlayback() {
+      function stopAudioPlayback({ notifyParent = true } = {}) {
         if (isEmbeddedOverlay()) {
           currentAudioUrl = "";
-          parentAudioState = { audioUrl: "", isPlaying: false };
-          postToParent({ type: "poi-overlay-stop-audio" });
+          if (notifyParent) {
+            parentAudioState = { audioUrl: "", isPlaying: false, wasBlocked: false };
+            postToParent({ type: "poi-overlay-stop-audio" });
+          }
           syncAudioButton(false);
+          setAudioNoticeVisible(false);
           return;
         }
 
@@ -833,6 +856,7 @@
         }
         currentAudioUrl = "";
         syncAudioButton(false);
+        setAudioNoticeVisible(false);
       }
 
       function buildAudioNarrationLegacy(model) {
@@ -907,6 +931,7 @@
             return;
           }
 
+          setAudioNoticeVisible(false);
           postToParent({
             type: "poi-overlay-play-audio",
             audioUrl,
@@ -927,19 +952,23 @@
         }
 
         syncAudioButton(true);
+        setAudioNoticeVisible(false);
         currentAudio.play().catch((error) => {
           syncAudioButton(false);
+          setAudioNoticeVisible(true);
           console.debug("Audio playback blocked or failed.", error);
         });
       }
 
       async function applyViewModel(model) {
-        stopAudioPlayback();
+        stopAudioPlayback({ notifyParent: false });
         currentModel = model;
         elements.headerTitle.textContent = model.title || DEFAULT_TITLE;
         elements.pageLead.textContent = model.lead || "Poznaj historię tego miejsca.";
 
+        setAudioNoticeVisible(false);
         setAudioAvailability(false);
+        currentAudioUrl = resolveAudioUrl(model.audio);
 
         if (model.image) {
           elements.heroImage.classList.add("has-image");
@@ -978,8 +1007,18 @@
         elements.statusBox.hidden = true;
 
         const hasAudio = await syncAudioAvailability(model);
-        if (hasAudio && currentModel === model) {
+        if (hasAudio && currentModel === model && !isEmbeddedOverlay()) {
           playAudioNarration({ forceRestart: true });
+          return;
+        }
+
+        if (currentModel === model) {
+          syncAudioButton(parentAudioState.isPlaying && parentAudioState.audioUrl === currentAudioUrl);
+          setAudioNoticeVisible(
+            Boolean(currentAudioUrl) &&
+            parentAudioState.audioUrl === currentAudioUrl &&
+            parentAudioState.wasBlocked
+          );
         }
       }
 
@@ -1028,9 +1067,15 @@
         if (data.type === "poi-overlay-audio-state") {
           parentAudioState = {
             audioUrl: typeof data.audioUrl === "string" ? data.audioUrl : "",
-            isPlaying: Boolean(data.isPlaying)
+            isPlaying: Boolean(data.isPlaying),
+            wasBlocked: Boolean(data.wasBlocked)
           };
           syncAudioButton(parentAudioState.isPlaying && parentAudioState.audioUrl === currentAudioUrl);
+          setAudioNoticeVisible(
+            Boolean(currentAudioUrl) &&
+            parentAudioState.audioUrl === currentAudioUrl &&
+            parentAudioState.wasBlocked
+          );
           return;
         }
         if (data.type === "poi-overlay-stop-media") {

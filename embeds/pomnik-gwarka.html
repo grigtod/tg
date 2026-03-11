@@ -612,7 +612,7 @@
       let currentAudio = null;
       let currentAudioSource = "";
       let overlayState = { isComplete: false };
-      let parentAudioState = { audioUrl: "", isPlaying: false };
+      let parentAudioState = { audioUrl: "", isPlaying: false, wasBlocked: false };
 
       function postToParent(message) {
         if (window.parent === window) return false;
@@ -654,10 +654,21 @@
         elements.eyebrowLabel.textContent = isSpeaking ? "Gwarek mówi" : "Wybierz kolejną odpowiedź";
       }
 
+      function syncSpeakingUi() {
+        const isCurrentTrack = Boolean(currentAudioSource) && parentAudioState.audioUrl === currentAudioSource;
+        if (isCurrentTrack && parentAudioState.wasBlocked) {
+          elements.portrait.classList.remove("is-speaking");
+          elements.eyebrowLabel.textContent = "Dotknij, aby odtworzyc audio";
+          return;
+        }
+
+        setSpeaking(parentAudioState.isPlaying && isCurrentTrack);
+      }
+
       function stopCurrentAudio() {
         if (isEmbeddedOverlay()) {
           currentAudioSource = "";
-          parentAudioState = { audioUrl: "", isPlaying: false };
+          parentAudioState = { audioUrl: "", isPlaying: false, wasBlocked: false };
           postToParent({ type: "poi-overlay-stop-audio" });
           setSpeaking(false);
           return;
@@ -680,14 +691,18 @@
         return node.audio_file.trim();
       }
 
-      function playNodeAudio(nodeId, node, { forceReplay = false } = {}) {
+      function resolveAudioSrc(node) {
         const audioFile = resolveAudioFile(node);
-        if (!audioFile || !DIALOGUE_AUDIO_DIR) {
+        if (!audioFile || !DIALOGUE_AUDIO_DIR) return "";
+        return new URL(audioFile, DIALOGUE_AUDIO_DIR).toString();
+      }
+
+      function playNodeAudio(nodeId, node, { forceReplay = false } = {}) {
+        const audioSrc = resolveAudioSrc(node);
+        if (!audioSrc) {
           stopCurrentAudio();
           return;
         }
-
-        const audioSrc = new URL(audioFile, DIALOGUE_AUDIO_DIR).toString();
 
         if (isEmbeddedOverlay()) {
           currentAudioSource = audioSrc;
@@ -733,10 +748,10 @@
         while (elements.options.firstChild) elements.options.removeChild(elements.options.firstChild);
       }
 
-      function setNode(nextId) {
+      function setNode(nextId, { autoplay = true } = {}) {
         const node = safeGetNode(nextId);
         currentNodeId = node ? nextId : dialogue && dialogue.end ? "end" : "start";
-        render();
+        render({ autoplay });
       }
 
       function addOptionButton(option, index, total) {
@@ -751,7 +766,7 @@
         `;
         btn.addEventListener("click", () => {
           stopCurrentAudio();
-          setNode(option.next);
+          setNode(option.next, { autoplay: true });
         });
         elements.options.appendChild(btn);
       }
@@ -763,7 +778,7 @@
         addOptionButton({ text: "Rozpocznij rozmowę od nowa", next: "start" }, 0, 1);
       }
 
-      function render() {
+      function render({ autoplay = true } = {}) {
         const node = safeGetNode(currentNodeId);
         if (!node) {
           renderMissingState();
@@ -784,7 +799,9 @@
           });
         }
 
-        playNodeAudio(currentNodeId, node);
+        currentAudioSource = resolveAudioSrc(node);
+        if (autoplay) playNodeAudio(currentNodeId, node);
+        else syncSpeakingUi();
       }
 
       async function init() {
@@ -801,7 +818,7 @@
           dialogue = await response.json();
           orderedNodeIds = Object.keys(dialogue || {});
           currentNodeId = dialogue.start ? "start" : orderedNodeIds[0] || "start";
-          render();
+          render({ autoplay: !isEmbeddedOverlay() });
         } catch (error) {
           console.error(error);
           stopCurrentAudio();
@@ -846,9 +863,10 @@
         if (data.type === "poi-overlay-audio-state") {
           parentAudioState = {
             audioUrl: typeof data.audioUrl === "string" ? data.audioUrl : "",
-            isPlaying: Boolean(data.isPlaying)
+            isPlaying: Boolean(data.isPlaying),
+            wasBlocked: Boolean(data.wasBlocked)
           };
-          setSpeaking(parentAudioState.isPlaying && parentAudioState.audioUrl === currentAudioSource);
+          syncSpeakingUi();
           return;
         }
 

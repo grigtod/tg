@@ -41,6 +41,25 @@ function parseFrontMatter(rawText) {
   return attributes;
 }
 
+async function resolveGwarekInitialAudioUrl(dialogueJson) {
+  if (typeof dialogueJson !== "string" || !dialogueJson.trim()) return "";
+
+  try {
+    const dialogPath = dialogueJson.trim();
+    const dialogue = await fetchJson(`./embeds/dialoguetrees/${dialogPath}`);
+    const startNode = dialogue?.start;
+    const firstAudioFile = typeof startNode?.audio_file === "string"
+      ? startNode.audio_file.trim()
+      : "";
+    if (!firstAudioFile) return "";
+
+    const dialogueBaseName = dialogPath.replace(/\.json$/i, "");
+    return new URL(`./embeds/dialoguetrees/${dialogueBaseName}/${firstAudioFile}`, window.location.href).toString();
+  } catch {
+    return "";
+  }
+}
+
 async function loadHistoricalBuildingAudioMap(items) {
   const historicalBuildingEmbedUrl = new URL("./embeds/historical-building.html", window.location.href);
   const entries = await Promise.all(items.map(async (item) => {
@@ -86,6 +105,11 @@ export async function loadAllPois() {
 
   const loadedGwarek = await loadOptionalJson("./data/gwarek.json");
   const gwarekItems = Array.isArray(loadedGwarek?.data) ? loadedGwarek.data : [];
+  const gwarekAudioEntries = await Promise.all(gwarekItems.map(async (el) => [
+    el?.id ?? null,
+    await resolveGwarekInitialAudioUrl(el?.json)
+  ]));
+  const gwarekAudioById = new Map(gwarekAudioEntries.filter(([id]) => typeof id === "string"));
 
   gwarekItems.forEach((el) =>
     el.enabled !== false &&
@@ -95,7 +119,8 @@ export async function loadAllPois() {
       el.lon,
       el.label,
       "miner",
-      buildGwarekEmbedUrl(el.json)
+      buildGwarekEmbedUrl(el.json),
+      gwarekAudioById.get(el.id) ?? ""
     )
   );
 
