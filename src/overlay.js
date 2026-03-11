@@ -207,6 +207,7 @@ export function createPoiOverlay({
 
       if (data.type === "poi-overlay-request-state") {
         postStateToFrame();
+        if (isOpen()) postOpenToFrame();
       }
     });
   }

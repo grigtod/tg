@@ -408,9 +408,13 @@
         transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
       }
 
-      .choice-btn:hover {
+      .choice-btn:focus {
+        outline: none;
+      }
+
+      .choice-btn:focus-visible {
         border-color: rgba(246, 211, 0, 0.5);
-        box-shadow: 0 16px 28px rgba(246, 211, 0, 0.14);
+        box-shadow: 0 0 0 3px rgba(246, 211, 0, 0.18), 0 16px 28px rgba(246, 211, 0, 0.14);
       }
 
       .choice-copy strong {
@@ -459,6 +463,13 @@
         .hero-grid {
           grid-template-columns: 280px minmax(0, 1fr);
           align-items: center;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .choice-btn:hover {
+          border-color: rgba(246, 211, 0, 0.5);
+          box-shadow: 0 16px 28px rgba(246, 211, 0, 0.14);
         }
       }
 
@@ -799,6 +810,12 @@
 
         const { data } = event;
         if (!data || typeof data.type !== "string") return;
+
+        if (data.type === "poi-overlay-opened") {
+          const node = safeGetNode(currentNodeId);
+          if (node) playNodeAudio(currentNodeId, node, { forceReplay: true });
+          return;
+        }
 
         if (data.type === "poi-overlay-stop-media") {
           stopCurrentAudio();

@@ -953,7 +953,7 @@
         const { data } = event;
         if (!data || typeof data.type !== "string") return;
         if (data.type === "poi-overlay-opened") {
-          if (resolveAudioUrl(currentModel?.audio) && !currentAudio) playAudioNarration({ forceRestart: true });
+          if (resolveAudioUrl(currentModel?.audio)) playAudioNarration({ forceRestart: true });
           return;
         }
         if (data.type === "poi-overlay-stop-media") {
