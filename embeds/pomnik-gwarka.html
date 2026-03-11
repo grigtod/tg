@@ -612,11 +612,16 @@
       let currentAudio = null;
       let currentAudioSource = "";
       let overlayState = { isComplete: false };
+      let parentAudioState = { audioUrl: "", isPlaying: false };
 
       function postToParent(message) {
         if (window.parent === window) return false;
         window.parent.postMessage(message, window.location.origin);
         return true;
+      }
+
+      function isEmbeddedOverlay() {
+        return window.parent !== window;
       }
 
       function safeGetNode(id) {
@@ -650,6 +655,14 @@
       }
 
       function stopCurrentAudio() {
+        if (isEmbeddedOverlay()) {
+          currentAudioSource = "";
+          parentAudioState = { audioUrl: "", isPlaying: false };
+          postToParent({ type: "poi-overlay-stop-audio" });
+          setSpeaking(false);
+          return;
+        }
+
         if (!currentAudio) {
           setSpeaking(false);
           return;
@@ -675,6 +688,17 @@
         }
 
         const audioSrc = new URL(audioFile, DIALOGUE_AUDIO_DIR).toString();
+
+        if (isEmbeddedOverlay()) {
+          currentAudioSource = audioSrc;
+          postToParent({
+            type: "poi-overlay-play-audio",
+            audioUrl: audioSrc,
+            forceReplay
+          });
+          return;
+        }
+
         if (!currentAudio || currentAudioSource !== audioSrc) {
           stopCurrentAudio();
           currentAudio = new Audio(audioSrc);
@@ -812,8 +836,19 @@
         if (!data || typeof data.type !== "string") return;
 
         if (data.type === "poi-overlay-opened") {
-          const node = safeGetNode(currentNodeId);
-          if (node) playNodeAudio(currentNodeId, node, { forceReplay: true });
+          if (!isEmbeddedOverlay()) {
+            const node = safeGetNode(currentNodeId);
+            if (node) playNodeAudio(currentNodeId, node, { forceReplay: true });
+          }
+          return;
+        }
+
+        if (data.type === "poi-overlay-audio-state") {
+          parentAudioState = {
+            audioUrl: typeof data.audioUrl === "string" ? data.audioUrl : "",
+            isPlaying: Boolean(data.isPlaying)
+          };
+          setSpeaking(parentAudioState.isPlaying && parentAudioState.audioUrl === currentAudioSource);
           return;
         }
 

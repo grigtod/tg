@@ -13,6 +13,8 @@ export function createPoiOverlay({
   let pendingFrameUrl = null;
   let pendingFrameToken = null;
   let activeFrameEl = frameEl;
+  let activeAudio = null;
+  let activeAudioUrl = "";
 
   const COMPLETED_STORAGE_KEY = "tropemgwarkow.completedPois.v1";
 
@@ -62,6 +64,7 @@ export function createPoiOverlay({
       setLoading(false);
       postStateToFrame();
       postOpenToFrame();
+      postAudioStateToFrame();
     });
   }
 
@@ -88,8 +91,63 @@ export function createPoiOverlay({
     });
   }
 
+  function postAudioStateToFrame() {
+    postMessageToFrame({
+      type: "poi-overlay-audio-state",
+      audioUrl: activeAudioUrl,
+      isPlaying: Boolean(activeAudio && !activeAudio.paused)
+    });
+  }
+
   function stopEmbeddedMedia() {
     postMessageToFrame({ type: "poi-overlay-stop-media" });
+  }
+
+  function attachAudioListeners(audio) {
+    audio.addEventListener("play", postAudioStateToFrame);
+    audio.addEventListener("pause", postAudioStateToFrame);
+    audio.addEventListener("ended", () => {
+      activeAudio = null;
+      activeAudioUrl = "";
+      postAudioStateToFrame();
+    });
+  }
+
+  function stopManagedAudio() {
+    if (!activeAudio) {
+      activeAudioUrl = "";
+      postAudioStateToFrame();
+      return;
+    }
+
+    activeAudio.pause();
+    activeAudio.currentTime = 0;
+    activeAudio = null;
+    activeAudioUrl = "";
+    postAudioStateToFrame();
+  }
+
+  function playManagedAudio(url, { forceReplay = false } = {}) {
+    const normalizedUrl = normalizeUrl(url);
+    if (!normalizedUrl) {
+      stopManagedAudio();
+      return;
+    }
+
+    if (!activeAudio || activeAudioUrl !== normalizedUrl) {
+      stopManagedAudio();
+      activeAudio = new Audio(normalizedUrl);
+      activeAudio.preload = "auto";
+      activeAudioUrl = normalizedUrl;
+      attachAudioListeners(activeAudio);
+    } else if (forceReplay) {
+      activeAudio.currentTime = 0;
+    }
+
+    activeAudio.play().catch((error) => {
+      console.debug("Managed audio playback blocked or failed.", error);
+      postAudioStateToFrame();
+    });
   }
 
   function replaceFrame(nextUrl) {
@@ -118,7 +176,7 @@ export function createPoiOverlay({
     return parsed.toString();
   }
 
-  function applyOpenState({ url, poiId }) {
+  function applyOpenState({ url, poiId, initialAudioUrl = "" }) {
     activePoiId = poiId ?? null;
     activeBaseUrl = url ?? null;
 
@@ -130,6 +188,8 @@ export function createPoiOverlay({
     setLoading(true);
     setHidden(false);
     syncCompleteUi();
+    if (initialAudioUrl) playManagedAudio(initialAudioUrl, { forceReplay: true });
+    else stopManagedAudio();
     if (pendingFrameToken !== token) return;
 
     if (normalizeUrl(activeFrameEl.src) === targetUrl) {
@@ -137,18 +197,20 @@ export function createPoiOverlay({
       pendingFrameToken = null;
       setLoading(false);
       postOpenToFrame();
+      postAudioStateToFrame();
       return;
     }
 
     replaceFrame(targetUrl);
   }
 
-  function open({ url, poiId }) {
-    applyOpenState({ url, poiId });
+  function open({ url, poiId, initialAudioUrl }) {
+    applyOpenState({ url, poiId, initialAudioUrl });
   }
 
   function applyCloseState() {
     stopEmbeddedMedia();
+    stopManagedAudio();
     pendingFrameUrl = null;
     pendingFrameToken = null;
     activeBaseUrl = null;
@@ -205,8 +267,23 @@ export function createPoiOverlay({
         return;
       }
 
+      if (data.type === "poi-overlay-play-audio") {
+        if (typeof data.audioUrl === "string" && data.audioUrl.trim()) {
+          playManagedAudio(data.audioUrl, { forceReplay: Boolean(data.forceReplay) });
+        } else {
+          stopManagedAudio();
+        }
+        return;
+      }
+
+      if (data.type === "poi-overlay-stop-audio") {
+        stopManagedAudio();
+        return;
+      }
+
       if (data.type === "poi-overlay-request-state") {
         postStateToFrame();
+        postAudioStateToFrame();
         if (isOpen()) postOpenToFrame();
       }
     });

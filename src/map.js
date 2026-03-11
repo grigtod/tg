@@ -344,12 +344,16 @@ export function createMap({ mapElId = "map", ui } = {}) {
     setInfoHidden(true);
   }
 
-  function showPoiRoute(poiId) {
-    const poi = poiById.get(poiId);
+  function showPoiRoute(targetPoi) {
+    const poi = typeof targetPoi === "string" ? poiById.get(targetPoi) : targetPoi;
     if (!poi) return false;
 
     closeInfoOverlay();
-    overlay.open({ url: poi.embedUrl, poiId: poi.id });
+    overlay.open({
+      url: poi.embedUrl,
+      poiId: poi.id,
+      initialAudioUrl: poi.initialAudioUrl || ""
+    });
     return true;
   }
 
@@ -383,8 +387,9 @@ export function createMap({ mapElId = "map", ui } = {}) {
     showMapRoute();
   }
 
-  function navigateToPoi(poiId) {
-    if (!showPoiRoute(poiId)) {
+  function navigateToPoi(targetPoi) {
+    const poiId = typeof targetPoi === "string" ? targetPoi : targetPoi?.id;
+    if (!poiId || !showPoiRoute(targetPoi)) {
       writeRouteToHistory({ kind: "map" }, { replace: true });
       showMapRoute();
       return;
@@ -477,7 +482,7 @@ export function createMap({ mapElId = "map", ui } = {}) {
   const poiLayer = createPoiLayer({
     map,
     overlay,
-    onPoiSelect: (poi) => navigateToPoi(poi.id),
+    onPoiSelect: (poi) => navigateToPoi(poi),
     labelZoomThreshold: 19
   });
 

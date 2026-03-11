@@ -576,6 +576,8 @@
       };
       let currentModel = null;
       let currentAudio = null;
+      let currentAudioUrl = "";
+      let parentAudioState = { audioUrl: "", isPlaying: false };
 
       function escapeHtml(text) {
         return text
@@ -764,6 +766,10 @@
         elements.audioButton.setAttribute("aria-label", isPlaying ? "Zatrzymaj opis audio" : "Odtwórz opis audio");
       }
 
+      function isEmbeddedOverlay() {
+        return window.parent !== window;
+      }
+
       function resolveAudioUrl(audioPath) {
         if (typeof audioPath !== "string" || !audioPath.trim()) return "";
         try {
@@ -781,11 +787,20 @@
       }
 
       function stopAudioPlayback() {
+        if (isEmbeddedOverlay()) {
+          currentAudioUrl = "";
+          parentAudioState = { audioUrl: "", isPlaying: false };
+          postToParent({ type: "poi-overlay-stop-audio" });
+          syncAudioButton(false);
+          return;
+        }
+
         if (currentAudio) {
           currentAudio.pause();
           currentAudio.currentTime = 0;
           currentAudio = null;
         }
+        currentAudioUrl = "";
         syncAudioButton(false);
       }
 
@@ -848,6 +863,23 @@
         const audioUrl = resolveAudioUrl(currentModel.audio);
         if (!audioUrl) {
           stopAudioPlayback();
+          return;
+        }
+
+        currentAudioUrl = audioUrl;
+
+        if (isEmbeddedOverlay()) {
+          const isSameTrackPlaying = parentAudioState.audioUrl === audioUrl && parentAudioState.isPlaying;
+          if (!forceRestart && isSameTrackPlaying) {
+            stopAudioPlayback();
+            return;
+          }
+
+          postToParent({
+            type: "poi-overlay-play-audio",
+            audioUrl,
+            forceReplay: forceRestart
+          });
           return;
         }
 
@@ -955,7 +987,17 @@
         const { data } = event;
         if (!data || typeof data.type !== "string") return;
         if (data.type === "poi-overlay-opened") {
-          if (resolveAudioUrl(currentModel?.audio)) playAudioNarration({ forceRestart: true });
+          if (!isEmbeddedOverlay() && resolveAudioUrl(currentModel?.audio)) {
+            playAudioNarration({ forceRestart: true });
+          }
+          return;
+        }
+        if (data.type === "poi-overlay-audio-state") {
+          parentAudioState = {
+            audioUrl: typeof data.audioUrl === "string" ? data.audioUrl : "",
+            isPlaying: Boolean(data.isPlaying)
+          };
+          syncAudioButton(parentAudioState.isPlaying && parentAudioState.audioUrl === currentAudioUrl);
           return;
         }
         if (data.type === "poi-overlay-stop-media") {
