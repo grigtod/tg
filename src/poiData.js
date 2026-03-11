@@ -42,6 +42,7 @@ function parseFrontMatter(rawText) {
 }
 
 async function loadHistoricalBuildingAudioMap(items) {
+  const historicalBuildingEmbedUrl = new URL("./embeds/historical-building.html", window.location.href);
   const entries = await Promise.all(items.map(async (item) => {
     if (!item?.id) return [null, ""];
 
@@ -49,7 +50,8 @@ async function loadHistoricalBuildingAudioMap(items) {
       const markdown = await fetchText(`./content/historical-buildings/${encodeURIComponent(item.id)}.md`);
       const attributes = parseFrontMatter(markdown);
       const audioPath = typeof attributes.audio === "string" ? attributes.audio.trim() : "";
-      const audioUrl = audioPath ? new URL(audioPath, window.location.href).toString() : "";
+      // Historical-building frontmatter uses paths relative to the embed document.
+      const audioUrl = audioPath ? new URL(audioPath, historicalBuildingEmbedUrl).toString() : "";
       return [item.id, audioUrl];
     } catch {
       return [item.id, ""];
