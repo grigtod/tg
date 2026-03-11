@@ -919,8 +919,9 @@
       }
 
       function postToParent(message) {
-        if (window.parent === window) return;
+        if (window.parent === window) return false;
         window.parent.postMessage(message, window.location.origin);
+        return true;
       }
 
       function syncCompleteButton(isComplete) {
@@ -930,6 +931,7 @@
       }
 
       elements.backButton.addEventListener("click", () => {
+        stopAudioPlayback();
         const sentToParent = postToParent({ type: "poi-overlay-close" });
         if (!sentToParent && window.history.length > 1) {
           window.history.back();
@@ -1019,7 +1021,9 @@
 
       init();
     </script>
-     <script data-goatcounter="https://tgwip.goatcounter.com/count"
+     <script
+        data-goatcounter="https://tgwip.goatcounter.com/count"
+        data-goatcounter-settings='{"allow_frame":true}'
         async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
